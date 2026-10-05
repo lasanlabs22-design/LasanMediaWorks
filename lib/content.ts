@@ -200,9 +200,9 @@ export const INSIGHT_TYPES: { icon: IconName; label: string; title: string; text
 ];
 
 export const OFFICES = [
-  { city: 'Bangalore, IND', hq: true, address: 'Koramangala, Bangalore – 560038', email: true },
+  { city: 'Tirupati, IND', hq: true, address: 'Tirupati, Andhra Pradesh – 517501', email: true },
+  { city: 'Bangalore, IND', hq: false, address: 'Koramangala, Bangalore – 560038', email: false },
   { city: 'Hyderabad, IND', hq: false, address: 'Amberpet, Telangana – 500013', email: false },
-  { city: 'Tirupati, IND', hq: false, address: 'Tirupati, Andhra Pradesh – 517501', email: false },
 ];
 
 export const SEO_TAGS = ['Best Digital Marketing Company in Tirupati', 'Best Digital Marketing Company in Andhra Pradesh', 'Best Digital Marketing Company in Karnataka', 'Best Digital Marketing Company in Telangana', 'SEO Company in Bangalore', 'PPC Services in Hyderabad', 'Social Media Marketing in Tirupati', 'Growth Agency for Startups', 'Brand Strategy Consultants', 'Website Development & CRM Experts'];

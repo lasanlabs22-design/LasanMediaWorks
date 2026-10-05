@@ -53,7 +53,7 @@ export function ContactList() {
       <li><a href={CONTACT.tel}><span className="ic"><Icon name="phone" /></span><span><small>Call us</small>{CONTACT.phone}</span></a></li>
       <li><a href={`mailto:${CONTACT.email}`}><span className="ic"><Icon name="mail" /></span><span><small>Email us</small>{CONTACT.email}</span></a></li>
       <li><a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer"><span className="ic"><Icon name="chat" /></span><span><small>WhatsApp</small>Chat with the team</span></a></li>
-      <li><div><span className="ic"><Icon name="pin" /></span><span><small>Visit us</small>Bangalore · Hyderabad · Tirupati</span></div></li>
+      <li><div><span className="ic"><Icon name="pin" /></span><span><small>Visit us</small>Tirupati (HQ) · Bangalore · Hyderabad</span></div></li>
     </ul>
   );
 }

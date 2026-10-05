@@ -50,7 +50,7 @@ export default function BookPage() {
             </label>
             <div className="f-row">
               <label className="f-field"><span>Meeting type</span><select name="Meeting type"><option>Phone call</option><option>Video call</option><option>Office visit</option></select></label>
-              <label className="f-field"><span>Office</span><select name="Office"><option>Bangalore (HQ)</option><option>Hyderabad</option><option>Tirupati</option></select></label>
+              <label className="f-field"><span>Office</span><select name="Office"><option>Tirupati (HQ)</option><option>Bangalore</option><option>Hyderabad</option></select></label>
             </div>
             <div className="f-row">
               <label className="f-field"><span>Preferred date *</span><input name="Preferred date" type="date" required /></label>

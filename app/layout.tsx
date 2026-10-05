@@ -10,7 +10,7 @@ const sans = Source_Sans_3({ subsets: ['latin'], weight: ['400', '600', '700'], 
 export const metadata: Metadata = {
   metadataBase: new URL(process.env.SITE_URL || 'https://www.lasanmediaworks.com'),
   title: { default: 'LaSän Media Works — Growth Agency for SMEs & Startups', template: '%s — LaSän Media Works' },
-  description: 'LaSän Media Works is a premium growth agency in Bangalore, Hyderabad and Tirupati — business strategy, branding, digital marketing, technology and offline media for SMEs and startups.',
+  description: 'LaSän Media Works is a premium growth agency headquartered in Tirupati, with offices in Bangalore and Hyderabad — business strategy, branding, digital marketing, technology and offline media for SMEs and startups.',
   icons: { icon: '/img/logo.png', apple: '/img/logo.png' },
   openGraph: { siteName: 'LaSän Media Works', type: 'website', images: ['/img/brand/Unlock_Business.jpg'] },
 };

@@ -42,7 +42,7 @@ export default function Header() {
           <div className="tb-links">
             <a href={CONTACT.tel}><Icon name="phone" /> {CONTACT.phone}</a>
             <a href={`mailto:${CONTACT.email}`}><Icon name="mail" /> {CONTACT.email}</a>
-            <span className="tb-item"><Icon name="pin" /> Bangalore · Hyderabad · Tirupati</span>
+            <span className="tb-item"><Icon name="pin" /> Tirupati · Bangalore · Hyderabad</span>
           </div>
         </div>
       </div>
