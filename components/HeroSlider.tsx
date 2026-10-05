@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useEffect, useRef, useState } from 'react';
+import { Fragment, useEffect, useRef, useState } from 'react';
 import { Arrow } from './Icon';
 import { SLIDES } from '@/lib/content';
 
@@ -10,10 +10,12 @@ const INTERVAL = 6500;
 // Splits a line into words that slide up one after another.
 function Words({ text, offset = 0, accent = false }: { text: string; offset?: number; accent?: boolean }) {
   const words = text.split(' ');
+  // The space must sit between the inline-block boxes: a trailing space inside one is dropped.
   const inner = words.map((w, i) => (
-    <span className="w" key={i}>
-      <span style={{ transitionDelay: `${(offset + i) * 0.06}s` }}>{w}</span>{i < words.length - 1 ? ' ' : ''}
-    </span>
+    <Fragment key={i}>
+      <span className="w"><span style={{ transitionDelay: `${(offset + i) * 0.06}s` }}>{w}</span></span>
+      {i < words.length - 1 ? ' ' : ''}
+    </Fragment>
   ));
   return accent ? <em>{inner}</em> : <>{inner}</>;
 }
