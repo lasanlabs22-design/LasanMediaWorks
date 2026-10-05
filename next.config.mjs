@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
+  agentRules: false,
   // The Studio Console is a static page in /public that talks to /api/admin/*
   async rewrites() {
     return [{ source: '/admin', destination: '/admin.html' }];

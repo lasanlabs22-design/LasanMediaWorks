@@ -1,53 +1,48 @@
 # LaSän Media Works — website + Studio Console
 
-A fresh rebuild of the LaSän Media Works site (purple + yellow), with a password-protected
-admin console. Articles published in the console appear on the live site straight away.
+Next.js 16 (App Router, TypeScript) site for LaSän Media Works, with a password-protected
+Studio Console for publishing articles and reviewing careers submissions.
 
 ## Run it
 
 ```bash
 npm install
-# Windows PowerShell:  $env:ADMIN_PASSWORD="your-strong-password"; npm start
-# macOS / Linux:       ADMIN_PASSWORD="your-strong-password" npm start
+cp .env.example .env   # then set ADMIN_PASSWORD and SESSION_SECRET
+npm run dev            # http://localhost:3000
 ```
 
-- Site: http://localhost:3000
-- Articles: http://localhost:3000/articles
-- Admin console: http://localhost:3000/admin  (default password `lasan-admin` if `ADMIN_PASSWORD` isn't set)
+Production: `npm run build && npm start` (uses `PORT` if set).
+
+- Site: `/` · `/about` · `/services` · `/strategy` · `/careers` · `/book-appointment` · `/articles`
+- Studio Console: `/admin` (articles + careers inbox)
 
 ## Environment variables
 
 | Variable | Purpose |
 |---|---|
-| `ADMIN_PASSWORD` | Password for the admin console. **Set this in production.** |
-| `SESSION_SECRET` | Signs login cookies. If unset, a random one is generated each start (everyone gets logged out on restart). |
-| `PORT` | Port to listen on (default `3000`). |
+| `ADMIN_PASSWORD` | Password for the Studio Console. **Required in production.** |
+| `SESSION_SECRET` | Signs login cookies. Set a long random string so logins survive restarts. |
+| `DATA_DIR` | Folder for `articles.json`, `careers.json`, `uploads/`, `resumes/`. Defaults to `./data`. On Railway, point it at a volume (e.g. `/data`). |
+| `SITE_URL` | Public URL used for social sharing previews. |
 
-## Admin console features
-
-- Write articles in Markdown with a formatting toolbar and Write / Split / Preview modes
-- Save as draft or publish; unpublish anytime
-- Cover image upload (drag & drop) or paste an image URL; inline images in the article body
-- Categories (Tips, Trends, Strategies, Case Studies, News), tags, author, custom URL slug
-- Mark one article as **Featured** — it gets the big hero card on the Articles page
-- Search and filter by status; Ctrl/Cmd + S to save
+On first start, if `DATA_DIR` has no `articles.json`, the seed articles from `data/articles.json` are copied in.
 
 ## Where things live
 
 ```
-server.js              Express server, article API, auth, uploads
-data/articles.json     Article storage (back this file up!)
-public/uploads/        Uploaded images
-public/index.html      Home page
-public/articles.html   Articles listing (filters + search)
-public/article.html    Single article page (/article/<slug>)
-public/admin.html      Studio Console
-public/css, public/js  Styles and scripts
+app/                 Pages (App Router) and API route handlers (app/api/*)
+components/          Header (mega menus), Footer, motion effects, forms, shared blocks
+lib/content.ts       All site copy (nav, services, strategy, team, testimonials, FAQ…)
+lib/store.ts         File storage for articles, careers submissions, uploads, resumes
+lib/auth.ts          Admin session cookie + rate limiting
+public/admin.html    Studio Console (static page using /api/admin/*)
+public/img, video    Photos, team portraits, logo, background videos
 ```
 
-## Deploying
+Contact and enquiry forms (Free Quote, Book Appointment) open WhatsApp or email with the
+details filled in. Careers sign-ups and resumes are saved on the server and shown in the
+console; resumes are private and only downloadable by a signed-in admin.
 
-Needs a host that runs Node and keeps files on disk (a VPS, Render/Railway with a persistent
-disk, etc.), because articles and uploads are stored in `data/` and `public/uploads/`.
-Serverless hosts with read-only filesystems won't keep new articles — swap the JSON store for a
-database if you go that route.
+## Media credits
+
+Stock photos: Unsplash (Unsplash License). Background videos: Mixkit (Mixkit License).
