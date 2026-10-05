@@ -13,7 +13,8 @@ const ARTICLES_FILE = path.join(DATA_DIR, 'articles.json');
 const CAREERS_FILE = path.join(DATA_DIR, 'careers.json');
 const JOBS_FILE = path.join(DATA_DIR, 'jobs.json');
 
-export const CATEGORIES = ['Tips', 'Trends', 'Strategies', 'Case Studies', 'News'] as const;
+// labels used on lasanmediaworks.com first, then general topics
+export const CATEGORIES = ['Our Success Story', 'Client Success Story', 'Healthcare Success Story', 'Artificial Intelligence', 'Startup Journey', 'Women Entrepreneurship', 'Case Studies', 'Tips', 'Trends', 'Strategies', 'News'] as const;
 
 let ready = false;
 function ensure() {

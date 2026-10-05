@@ -38,7 +38,7 @@ export default function ArticlesBrowser({ articles, categories, initialCategory,
     <>
       <div className="mag-bar">
         <div className="filters" role="tablist" aria-label="Categories">
-          {['All', ...categories].map(c => (
+          {['All', ...categories.filter(c => articles.some(a => a.category === c))].map(c => (
             <button key={c} type="button" role="tab" aria-selected={c === category} className={`filter${c === category ? ' active' : ''}`} onClick={() => { setCategory(c); setPage(1); }}>{c}</button>
           ))}
         </div>
