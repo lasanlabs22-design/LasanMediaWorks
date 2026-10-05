@@ -6,6 +6,8 @@ import Icon from './Icon';
 import { ArticleCard, Cover, fmtDate } from './Blocks';
 import type { ArticleSummary } from '@/lib/store';
 
+const href = (a: ArticleSummary) => `/article/${encodeURIComponent(a.slug)}`;
+
 export default function ArticlesBrowser({ articles, categories, initialCategory, initialQuery }: { articles: ArticleSummary[]; categories: readonly string[]; initialCategory: string; initialQuery: string }) {
   const [category, setCategory] = useState(initialCategory);
   const [q, setQ] = useState(initialQuery);
@@ -21,45 +23,66 @@ export default function ArticlesBrowser({ articles, categories, initialCategory,
   const list = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return articles.filter(a => (category === 'All' || a.category === category)
-      && (!needle || [a.title, a.excerpt, (a.tags || []).join(' ')].join(' ').toLowerCase().includes(needle)));
+      && (!needle || [a.title, a.excerpt, a.author, (a.tags || []).join(' ')].join(' ').toLowerCase().includes(needle)));
   }, [articles, category, q]);
 
-  const featured = category === 'All' && !q.trim() && list.length > 3 ? list.find(a => a.featured) || list[0] : null;
-  const rest = featured ? list.filter(a => a !== featured) : list;
+  // front page layout only when browsing everything
+  const front = category === 'All' && !q.trim();
+  const lead = front ? list.find(a => a.featured) || list[0] : undefined;
+  const side = front ? list.filter(a => a !== lead).slice(0, 4) : [];
+  const rest = front ? list.filter(a => a !== lead && !side.includes(a)) : list;
 
   return (
     <>
-      <div className="toolbar">
-        <div className="filters" aria-label="Filter by category">
+      <div className="mag-bar">
+        <div className="filters" role="tablist" aria-label="Categories">
           {['All', ...categories].map(c => (
-            <button key={c} type="button" className={`filter${c === category ? ' active' : ''}`} aria-pressed={c === category} onClick={() => setCategory(c)}>{c}</button>
+            <button key={c} type="button" role="tab" aria-selected={c === category} className={`filter${c === category ? ' active' : ''}`} onClick={() => setCategory(c)}>{c}</button>
           ))}
         </div>
         <label className="search">
           <span className="sr-only">Search articles</span>
           <Icon name="search" className="" />
-          <input type="search" placeholder="Search articles…" value={q} onChange={e => setQ(e.target.value)} autoComplete="off" />
+          <input type="search" placeholder="Search articles" value={q} onChange={e => setQ(e.target.value)} autoComplete="off" />
         </label>
       </div>
-      <p className="count">{list.length} article{list.length === 1 ? '' : 's'}</p>
 
-      {featured && (
-        <Link className="feature reveal" href={`/article/${encodeURIComponent(featured.slug)}`}>
-          <div className="card-cover"><Cover a={featured} big /></div>
-          <div className="feature-body">
-            <span className="label">Featured read</span>
-            <div className="card-meta"><span>{featured.category}</span><i /><span>{fmtDate(featured.publishedAt)}</span><i /><span>{featured.readTime} min</span></div>
-            <h2>{featured.title}</h2>
-            <p>{featured.excerpt}</p>
-            <span className="btn btn-primary">Read the story</span>
-          </div>
-        </Link>
+      {!articles.length && <div className="empty">No articles yet. New stories will appear here as soon as they are published.</div>}
+      {!!articles.length && !list.length && <div className="empty">No articles match{q.trim() ? ` “${q.trim()}”` : ' this category'} yet.</div>}
+
+      {lead && (
+        <div className="mag-front">
+          <Link href={href(lead)} className="mag-lead">
+            <div className="mag-lead-img"><Cover a={lead} big /></div>
+            <span className="kicker">{lead.category}</span>
+            <h2>{lead.title}</h2>
+            {lead.excerpt && <p>{lead.excerpt}</p>}
+            <div className="card-meta"><span>{lead.author}</span><i /><span>{fmtDate(lead.publishedAt)}</span><i /><span>{lead.readTime} min read</span></div>
+          </Link>
+          {!!side.length && (
+            <div className="mag-side">
+              <h3 className="mag-side-title">Latest</h3>
+              {side.map(a => (
+                <Link href={href(a)} className="mag-item" key={a.id}>
+                  <div>
+                    <span className="kicker">{a.category}</span>
+                    <h4>{a.title}</h4>
+                    <div className="card-meta"><span>{fmtDate(a.publishedAt)}</span><i /><span>{a.readTime} min</span></div>
+                  </div>
+                  <div className="mag-thumb"><Cover a={a} /></div>
+                </Link>
+              ))}
+            </div>
+          )}
+        </div>
       )}
 
-      <div className="cards">
-        {rest.length ? rest.map(a => <ArticleCard a={a} key={a.id} />)
-          : !featured && <div className="empty">No articles match{q.trim() ? ` “${q.trim()}”` : ''} yet.</div>}
-      </div>
+      {!!rest.length && (
+        <>
+          {front && <div className="mag-rule"><h2>More stories</h2></div>}
+          <div className="cards">{rest.map(a => <ArticleCard a={a} key={a.id} />)}</div>
+        </>
+      )}
     </>
   );
 }

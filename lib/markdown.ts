@@ -16,12 +16,34 @@ function inline(s: string) {
     .replace(/(^|[^*])\*([^*\s][^*]*)\*/g, '$1<em>$2</em>');
 }
 
+// A paragraph that is only an image becomes a figure; the optional "title" is the caption.
+function figure(line: string) {
+  const m = /^!\[([^\]]*)\]\(([^)\s]+)(?:\s+"([^"]*)")?\)$/.exec(line.trim());
+  if (!m || !safeUrl(m[2])) return null;
+  const cap = m[3] ? `<figcaption>${esc(m[3])}</figcaption>` : '';
+  return `<figure><img src="${esc(m[2])}" alt="${esc(m[1])}" loading="lazy">${cap}</figure>`;
+}
+
 export function renderMarkdown(src: string) {
   const lines = String(src || '').replace(/\r\n?/g, '\n').split('\n');
   const out: string[] = [];
   let i = 0;
   while (i < lines.length) {
     const line = lines[i];
+    // :::stats ... ::: with one "value | label" per line
+    if (/^:::\s*stats\s*$/i.test(line)) {
+      const items: string[] = [];
+      i++;
+      while (i < lines.length && !/^:::\s*$/.test(lines[i])) {
+        const [value, ...label] = lines[i++].split('|');
+        if (value.trim()) items.push(`<div><b>${esc(value.trim())}</b><span>${esc(label.join('|').trim())}</span></div>`);
+      }
+      i++;
+      out.push(`<div class="stat-band">${items.join('')}</div>`);
+      continue;
+    }
+    const fig = figure(line);
+    if (fig) { out.push(fig); i++; continue; }
     if (/^```/.test(line)) {
       const buf: string[] = [];
       i++;
@@ -58,7 +80,7 @@ export function renderMarkdown(src: string) {
     }
     if (!line.trim()) { i++; continue; }
     const buf: string[] = [];
-    while (i < lines.length && lines[i].trim() && !/^(#{1,4}\s|>|```|\s*[-*]\s+|\s*\d+[.)]\s+|-{3,}\s*$)/.test(lines[i])) buf.push(lines[i++]);
+    while (i < lines.length && lines[i].trim() && !/^(#{1,4}\s|>|```|\s*[-*]\s+|\s*\d+[.)]\s+|-{3,}\s*$|:::)/.test(lines[i]) && !figure(lines[i])) buf.push(lines[i++]);
     out.push(`<p>${inline(buf.join(' '))}</p>`);
   }
   return out.join('\n');

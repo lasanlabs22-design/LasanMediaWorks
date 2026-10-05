@@ -1,10 +1,10 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { ArticleCard, Cover, CtaBand, fmtDate, SectionHead } from '@/components/Blocks';
+import { ArticleCard, CtaBand, fmtDate } from '@/components/Blocks';
 import ShareBar from '@/components/ShareBar';
 import { renderMarkdown } from '@/lib/markdown';
-import { publishedArticle } from '@/lib/store';
+import { publishedArticle, type ArticleSummary } from '@/lib/store';
 
 export const dynamic = 'force-dynamic';
 
@@ -17,6 +17,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return { title: a.title, description: a.excerpt, openGraph: { title: a.title, description: a.excerpt, type: 'article', images: a.cover ? [a.cover] : undefined } };
 }
 
+function Avatar({ a, size = 48 }: { a: ArticleSummary; size?: number }) {
+  // eslint-disable-next-line @next/next/no-img-element
+  if (a.authorPhoto) return <img className="avatar-img" src={a.authorPhoto} alt="" width={size} height={size} />;
+  return <span className="avatar-img initials" style={{ width: size, height: size }} aria-hidden="true">{a.author.charAt(0)}</span>;
+}
+
 export default async function ArticlePage({ params }: Props) {
   const found = publishedArticle(decodeURIComponent((await params).slug));
   if (!found) notFound();
@@ -24,29 +30,48 @@ export default async function ArticlePage({ params }: Props) {
 
   return (
     <>
-      <section className="page-hero article-hero">
-        <div className="ph-media" aria-hidden="true">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={a.cover || '/img/stock/h-articles.jpg'} alt="" />
-        </div>
-        <div className="wrap" style={{ maxWidth: 900 }}>
-          <Link href="/articles" className="back">← All articles</Link><br />
-          <span className="chip">{a.category}</span>
-          <h1>{a.title}</h1>
-          <div className="card-meta"><span>{a.author}</span><i /><span>{fmtDate(a.publishedAt)}</span><i /><span>{a.readTime} min read</span></div>
-        </div>
-      </section>
+      <article className="story">
+        <header className="story-head">
+          <nav className="crumbs" aria-label="Breadcrumb">
+            <Link href="/articles">Articles</Link><span>/</span>
+            <Link href={`/articles?category=${encodeURIComponent(a.category)}`}>{a.category}</Link>
+          </nav>
+          <span className="kicker">{a.category}</span>
+          <h1 className="story-title">{a.title}</h1>
+          {a.excerpt && <p className="story-dek">{a.excerpt}</p>}
+          <div className="byline">
+            <Avatar a={a} />
+            <div className="byline-who"><b>{a.author}</b>{a.authorRole && <span>{a.authorRole}</span>}</div>
+            <div className="byline-meta"><time dateTime={a.publishedAt || undefined}>{fmtDate(a.publishedAt)}</time><i />{a.readTime} min read</div>
+          </div>
+        </header>
 
-      <div className="article-cover"><div><Cover a={a} big /></div></div>
+        {a.cover && (
+          <figure className="story-cover">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src={a.cover} alt={a.coverCaption || ''} />
+            {a.coverCaption && <figcaption>{a.coverCaption}</figcaption>}
+          </figure>
+        )}
 
-      <article className="prose" dangerouslySetInnerHTML={{ __html: renderMarkdown(a.content) }} />
-      {!!a.tags?.length && <div className="tags">{a.tags.map(t => <span key={t}>#{t}</span>)}</div>}
-      <ShareBar title={a.title} />
+        <div className="story-body">
+          <aside className="story-rail" aria-label="Share this article"><ShareBar title={a.title} /></aside>
+          <div className="story-text prose" dangerouslySetInnerHTML={{ __html: renderMarkdown(a.content) }} />
+        </div>
+
+        <footer className="story-foot">
+          {!!a.tags?.length && <div className="story-tags">{a.tags.map(t => <Link key={t} href={`/articles?q=${encodeURIComponent(t)}`}>{t}</Link>)}</div>}
+          <div className="author-box">
+            <Avatar a={a} size={64} />
+            <div><span className="kicker">Written by</span><b>{a.author}</b>{a.authorRole && <span>{a.authorRole}, LaSän Media Works</span>}</div>
+          </div>
+        </footer>
+      </article>
 
       {!!related.length && (
         <section className="section" style={{ paddingBottom: 0 }}>
           <div className="wrap">
-            <SectionHead eyebrow="Keep reading" title="More like" accent="this." />
+            <div className="mag-rule"><h2>More from LaSän</h2><Link href="/articles" className="more-link">All articles</Link></div>
             <div className="cards">{related.map(r => <ArticleCard a={r} key={r.id} />)}</div>
           </div>
         </section>

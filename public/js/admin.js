@@ -383,6 +383,7 @@
   const f = {
     title: $('#f-title'), slug: $('#f-slug'), excerpt: $('#f-excerpt'), content: $('#f-content'),
     category: $('#f-category'), tags: $('#f-tags'), author: $('#f-author'), cover: $('#f-cover'), featured: $('#f-featured'),
+    authorRole: $('#f-author-role'), authorPhoto: $('#f-author-photo'), coverCaption: $('#f-cover-caption'),
   };
   let slugTouched = false;
 
@@ -404,6 +405,9 @@
     f.author.value = a ? a.author : '';
     f.cover.value = a ? a.cover : '';
     f.featured.checked = a ? !!a.featured : false;
+    f.authorRole.value = a ? a.authorRole || '' : '';
+    f.authorPhoto.value = a ? a.authorPhoto || '' : '';
+    f.coverCaption.value = a ? a.coverCaption || '' : '';
     slugTouched = !!a;
 
     $('#danger').hidden = !a;
@@ -500,6 +504,7 @@
         break;
       }
       case 'img': pickInlineImage(); break;
+      case 'stats': wrapSel('\n:::stats\n300+ | Brands\n', '\n:::\n', '7K+ | Posters'); break;
     }
   });
 
@@ -571,6 +576,9 @@
       author: f.author.value.trim(),
       cover: f.cover.value.trim(),
       featured: f.featured.checked,
+      authorRole: f.authorRole.value.trim(),
+      authorPhoto: f.authorPhoto.value.trim(),
+      coverCaption: f.coverCaption.value.trim(),
       status,
     };
     if (!body.title) { toast('Give your article a title first', 'err'); f.title.focus(); return; }

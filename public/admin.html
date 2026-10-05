@@ -148,6 +148,7 @@
               <button type="button" data-md="quote" title="Quote">❝ Quote</button>
               <button type="button" data-md="link" title="Link">🔗 Link</button>
               <button type="button" data-md="img" title="Insert image">🖼 Image</button>
+              <button type="button" data-md="stats" title="Insert a row of key numbers">▦ Stats</button>
               <span class="md-spacer"></span>
               <div class="seg small" id="mode">
                 <button type="button" data-mode="write" class="active">Write</button>
@@ -181,6 +182,7 @@
               <input id="f-cover" placeholder="…or paste image URL">
               <button type="button" class="mini" id="cover-clear">Remove</button>
             </div>
+            <label class="field" style="margin-top:12px"><span>Cover caption <em>(optional)</em></span><input id="f-cover-caption" maxlength="200" placeholder="e.g. Founders Sreelatha Royal and Santhosh Rokaya"></label>
           </div>
 
           <div class="panel">
@@ -188,6 +190,8 @@
             <label class="field"><span>Category</span><select id="f-category"></select></label>
             <label class="field"><span>Tags <em>(comma separated)</em></span><input id="f-tags" placeholder="SEO, Social, AI"></label>
             <label class="field"><span>Author</span><input id="f-author" placeholder="LaSän Editorial"></label>
+            <label class="field"><span>Author role <em>(optional)</em></span><input id="f-author-role" maxlength="80" placeholder="e.g. Founder & CEO"></label>
+            <label class="field"><span>Author photo URL <em>(optional)</em></span><input id="f-author-photo" maxlength="500" placeholder="/img/team/… or https://…"></label>
           </div>
 
           <div class="panel danger" id="danger" hidden>

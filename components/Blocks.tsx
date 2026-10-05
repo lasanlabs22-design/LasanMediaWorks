@@ -269,12 +269,12 @@ export function Cover({ a, big = false }: { a: ArticleSummary; big?: boolean }) 
 export function ArticleCard({ a }: { a: ArticleSummary }) {
   return (
     <Link className="card reveal" href={`/article/${encodeURIComponent(a.slug)}`}>
-      <div className="card-cover"><Cover a={a} /><span className="tag">{a.category}</span></div>
+      <div className="card-cover"><Cover a={a} /></div>
       <div className="card-body">
-        <div className="card-meta"><span>{fmtDate(a.publishedAt)}</span><i /><span>{a.readTime} min read</span></div>
+        <span className="kicker">{a.category}</span>
         <h3>{a.title}</h3>
         <p>{a.excerpt}</p>
-        <span className="read">Read article</span>
+        <div className="card-meta"><span>{a.author}</span><i /><span>{fmtDate(a.publishedAt)}</span><i /><span>{a.readTime} min read</span></div>
       </div>
     </Link>
   );

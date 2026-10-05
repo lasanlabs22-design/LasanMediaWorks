@@ -57,6 +57,9 @@ export type Article = {
   author: string;
   status: 'published' | 'draft';
   featured: boolean;
+  authorRole?: string;   // e.g. "Founder & CEO"
+  authorPhoto?: string;  // /img/…, /uploads/… or https URL
+  coverCaption?: string;
   readTime: number;
   createdAt: string;
   updatedAt: string;
@@ -127,8 +130,13 @@ export function sanitizeArticle(body: Record<string, unknown>, existing: Partial
     author: str(body.author, 80) || existing.author || 'LaSän Editorial',
     status: (body.status === 'published' ? 'published' : 'draft') as Article['status'],
     featured: Boolean(body.featured),
+    authorRole: str(body.authorRole, 80),
+    authorPhoto: str(body.authorPhoto, 500),
+    coverCaption: str(body.coverCaption, 200),
   };
-  if (out.cover && !/^(https?:\/\/|\/uploads\/)/i.test(out.cover)) out.cover = '';
+  const imageUrl = (u: string) => /^(https?:\/\/|\/uploads\/|\/img\/)/i.test(u);
+  if (out.cover && !imageUrl(out.cover)) out.cover = '';
+  if (out.authorPhoto && !imageUrl(out.authorPhoto)) out.authorPhoto = '';
   if (!out.excerpt && out.content) {
     out.excerpt = out.content.replace(/[#>*_`[\]()!-]/g, '').replace(/\s+/g, ' ').trim().slice(0, 180);
   }
