@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Icon, { Arrow } from '@/components/Icon';
 import HeroSlider from '@/components/HeroSlider';
+import HeroMotion from '@/components/HeroMotion';
 import ServiceTabs from '@/components/ServiceTabs';
 import EnquiryForm from '@/components/EnquiryForm';
 import {
@@ -17,14 +18,11 @@ export default function Home() {
 
   return (
     <>
-      {/* HERO — full-screen video */}
-      <section className="hero">
-        <video className="hero-video" autoPlay muted loop playsInline preload="auto" poster="/img/stock/hero-poster.jpg" aria-hidden="true" data-autoplay>
-          <source src="/video/hero.mp4" type="video/mp4" />
-        </video>
-        <div className="hero-overlay" />
-        <div className="wrap hero-inner">
-          <HeroSlider />
+      {/* HERO — headline + looping motion graphics of what LaSän does */}
+      <section className="hero hero-m">
+        <div className="wrap hero-m-grid">
+          <div className="hero-inner"><HeroSlider /></div>
+          <HeroMotion />
         </div>
         <div className="wrap">
           <dl className="hero-facts">
