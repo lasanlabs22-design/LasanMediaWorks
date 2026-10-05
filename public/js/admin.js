@@ -90,6 +90,7 @@
     $$('.side-nav [data-go]').forEach(b => b.classList.toggle('active', b.dataset.go === (view === 'edit' ? 'list' : view || 'list')));
     if (view === 'new') return openEditor(null);
     if (view === 'careers') return showCareers();
+    if (view === 'jobs') return showJobs();
     if (view === 'edit') {
       const a = state.articles.find(x => x.id === id);
       if (a) return openEditor(a);
@@ -116,9 +117,117 @@
   function showList() {
     $('#editor-view').hidden = true;
     $('#careers-view').hidden = true;
+    $('#jobs-view').hidden = true;
     $('#list-view').hidden = false;
     renderList();
   }
+
+  /* ---------- job openings ---------- */
+  const jobsState = { jobs: [], types: [], editing: null };
+
+  async function showJobs() {
+    $('#list-view').hidden = true;
+    $('#editor-view').hidden = true;
+    $('#careers-view').hidden = true;
+    $('#jobs-view').hidden = false;
+    try {
+      Object.assign(jobsState, await api('/api/admin/jobs'));
+    } catch (err) {
+      toast(err.message, 'err');
+    }
+    $('#j-type').innerHTML = jobsState.types.map(t => `<option>${esc(t)}</option>`).join('');
+    closeJobForm();
+    renderJobs();
+  }
+
+  function renderJobs() {
+    const list = jobsState.jobs;
+    $('#jobs').innerHTML = list.length ? `
+      <div class="job-row head"><span>Title</span><span>Type</span><span>Location</span><span>Status</span><span>Updated</span><span></span></div>
+      ${list.map(j => `
+        <div class="job-row" data-id="${esc(j.id)}">
+          <span class="row-title" data-job="edit">${esc(j.title)}${j.experience ? `<small>${esc(j.experience)}</small>` : ''}</span>
+          <span class="muted">${esc(j.type)}</span>
+          <span class="muted">${esc(j.location || '—')}</span>
+          <span><span class="badge ${j.status === 'open' ? 'pub' : ''}">${j.status === 'open' ? 'Open' : 'Closed'}</span></span>
+          <span class="muted">${fmt(j.updatedAt)}</span>
+          <div class="row-actions">
+            <button class="mini" data-job="edit">Edit</button>
+            <button class="mini" data-job="toggle">${j.status === 'open' ? 'Close' : 'Reopen'}</button>
+            <button class="mini red" data-job="delete" aria-label="Delete opening">✕</button>
+          </div>
+        </div>`).join('')}`
+      : '<div class="empty">No job openings yet. Click “New opening” to add one.</div>';
+  }
+
+  function openJobForm(job) {
+    jobsState.editing = job;
+    $('#job-form-title').textContent = job ? 'Edit opening' : 'New opening';
+    $('#j-title').value = job ? job.title : '';
+    $('#j-type').value = job ? job.type : jobsState.types[0] || '';
+    $('#j-location').value = job ? job.location : '';
+    $('#j-experience').value = job ? job.experience : '';
+    $('#j-description').value = job ? job.description : '';
+    $('#j-open').checked = job ? job.status === 'open' : true;
+    $('#job-form').hidden = false;
+    $('#j-title').focus();
+  }
+
+  function closeJobForm() {
+    jobsState.editing = null;
+    $('#job-form').hidden = true;
+  }
+
+  const jobBody = j => ({ title: j.title, type: j.type, location: j.location, experience: j.experience, description: j.description, status: j.status });
+
+  $('#job-new').addEventListener('click', () => openJobForm(null));
+  $('#job-cancel').addEventListener('click', closeJobForm);
+
+  $('#job-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const body = {
+      title: $('#j-title').value, type: $('#j-type').value, location: $('#j-location').value,
+      experience: $('#j-experience').value, description: $('#j-description').value,
+      status: $('#j-open').checked ? 'open' : 'closed',
+    };
+    try {
+      const editing = jobsState.editing;
+      const { job } = editing
+        ? await api(`/api/admin/jobs/${encodeURIComponent(editing.id)}`, { method: 'PUT', body })
+        : await api('/api/admin/jobs', { method: 'POST', body });
+      jobsState.jobs = [job, ...jobsState.jobs.filter(j => j.id !== job.id)];
+      closeJobForm();
+      renderJobs();
+      toast(editing ? 'Opening updated' : 'Opening added');
+    } catch (err) {
+      toast(err.message, 'err');
+    }
+  });
+
+  $('#jobs').addEventListener('click', async e => {
+    const btn = e.target.closest('[data-job]');
+    if (!btn) return;
+    const job = jobsState.jobs.find(j => j.id === btn.closest('.job-row').dataset.id);
+    if (!job) return;
+    try {
+      if (btn.dataset.job === 'edit') return openJobForm(job);
+      if (btn.dataset.job === 'toggle') {
+        const { job: updated } = await api(`/api/admin/jobs/${encodeURIComponent(job.id)}`, { method: 'PUT', body: { ...jobBody(job), status: job.status === 'open' ? 'closed' : 'open' } });
+        jobsState.jobs = jobsState.jobs.map(j => (j.id === updated.id ? updated : j));
+        renderJobs();
+        toast(updated.status === 'open' ? 'Opening is live on the Careers page' : 'Opening closed');
+      }
+      if (btn.dataset.job === 'delete') {
+        if (!confirm(`Delete “${job.title}”? This can't be undone.`)) return;
+        await api(`/api/admin/jobs/${encodeURIComponent(job.id)}`, { method: 'DELETE' });
+        jobsState.jobs = jobsState.jobs.filter(j => j.id !== job.id);
+        renderJobs();
+        toast('Opening deleted');
+      }
+    } catch (err) {
+      toast(err.message, 'err');
+    }
+  });
 
   /* ---------- careers inbox ---------- */
   const careers = { applications: [], subscribers: [] };
@@ -127,6 +236,7 @@
   async function showCareers() {
     $('#list-view').hidden = true;
     $('#editor-view').hidden = true;
+    $('#jobs-view').hidden = true;
     $('#careers-view').hidden = false;
     try {
       Object.assign(careers, await api('/api/admin/careers'));
@@ -144,7 +254,7 @@
     $('#apps').innerHTML = apps.length ? apps.map(a => `
       <article class="app-item" data-id="${esc(a.id)}">
         <div class="app-top">
-          <div><b>${esc(a.name)}</b><small>${esc(a.area || '—')} · ${esc(a.office || 'Any office')} · ${fmtTime(a.at)}</small></div>
+          <div><b>${esc(a.name)}</b><small>${a.role ? `Applying for <strong>${esc(a.role)}</strong> · ` : 'General application · '}${esc(a.area || '—')} · ${esc(a.office || 'Any office')} · ${fmtTime(a.at)}</small></div>
           <div class="row-actions">
             ${a.resume ? `<a class="mini" href="/api/admin/resumes/${encodeURIComponent(a.resume.file)}">⤓ Resume</a>` : ''}
             ${a.link ? `<a class="mini" href="${esc(a.link)}" target="_blank" rel="noopener noreferrer">Portfolio ↗</a>` : ''}
@@ -280,6 +390,7 @@
     state.current = a;
     $('#list-view').hidden = true;
     $('#careers-view').hidden = true;
+    $('#jobs-view').hidden = true;
     $('#editor-view').hidden = false;
     $('#editor-title').textContent = a ? 'Edit article' : 'New article';
     f.category.innerHTML = state.categories.map(c => `<option>${esc(c)}</option>`).join('');

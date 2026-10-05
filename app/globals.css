@@ -687,3 +687,13 @@ section { position: relative; }
   .tags, .share { padding-left: 16px; padding-right: 16px; }
   .site-footer { margin-top: 80px; }
 }
+
+/* careers: job openings managed in the console */
+.jobs { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.job { padding: 26px 26px 24px; background: var(--surface); border: 1px solid var(--line); border-left: 4px solid var(--gold); border-radius: 8px; display: flex; flex-direction: column; }
+.job-meta { display: flex; flex-wrap: wrap; gap: 8px; }
+.job-meta span { font-size: 12.5px; font-weight: 600; padding: 4px 10px; border-radius: 4px; background: rgba(203, 179, 220, .12); color: rgba(255, 255, 255, .85); }
+.job h3 { font-size: 21px; margin: 14px 0 8px; }
+.job p { margin: 0 0 18px; color: var(--muted); font-size: 15px; white-space: pre-line; }
+.job .more-link { margin-top: auto; }
+@media (max-width: 800px) { .jobs { grid-template-columns: 1fr; } }

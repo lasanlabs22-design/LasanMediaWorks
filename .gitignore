@@ -18,3 +18,4 @@ _legacy/
 # local agent instructions, not for the repo
 CLAUDE.md
 AGENTS.md
+data/jobs.json

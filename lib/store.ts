@@ -11,6 +11,7 @@ export const UPLOAD_DIR = path.join(DATA_DIR, 'uploads');
 export const RESUME_DIR = path.join(DATA_DIR, 'resumes'); // private: only served to signed-in admins
 const ARTICLES_FILE = path.join(DATA_DIR, 'articles.json');
 const CAREERS_FILE = path.join(DATA_DIR, 'careers.json');
+const JOBS_FILE = path.join(DATA_DIR, 'jobs.json');
 
 export const CATEGORIES = ['Tips', 'Trends', 'Strategies', 'Case Studies', 'News'] as const;
 
@@ -139,6 +140,7 @@ export function sanitizeArticle(body: Record<string, unknown>, existing: Partial
 export type Application = {
   id: string; name: string; email: string; phone: string; area: string; office: string;
   link: string; about: string; resume: { file: string; name: string } | null; at: string;
+  role?: string; // job title applied for; empty = general application
 };
 export type Subscriber = { email: string; at: string };
 type Careers = { subscribers: Subscriber[]; applications: Application[] };
@@ -148,6 +150,30 @@ export function readCareers(): Careers {
   return { subscribers: d.subscribers || [], applications: d.applications || [] };
 }
 export const writeCareers = (d: Careers) => writeJSON(CAREERS_FILE, d);
+
+/* ---------- job openings (managed in the console) ---------- */
+
+export const JOB_TYPES = ['Full-time', 'Part-time', 'Internship', 'Contract'] as const;
+
+export type Job = {
+  id: string; title: string; type: string; location: string; experience: string;
+  description: string; status: 'open' | 'closed'; createdAt: string; updatedAt: string;
+};
+
+export const readJobs = () => readJSON<Job[]>(JOBS_FILE, []);
+export const writeJobs = (list: Job[]) => writeJSON(JOBS_FILE, list);
+export const openJobs = () => readJobs().filter(j => j.status === 'open').sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+
+export function sanitizeJob(body: Record<string, unknown>) {
+  return {
+    title: str(body.title, 120),
+    type: (JOB_TYPES as readonly string[]).includes(body.type as string) ? (body.type as string) : 'Full-time',
+    location: str(body.location, 60),
+    experience: str(body.experience, 60),
+    description: str(body.description, 4000),
+    status: (body.status === 'closed' ? 'closed' : 'open') as Job['status'],
+  };
+}
 
 /* ---------- files ---------- */
 

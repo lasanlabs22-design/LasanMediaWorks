@@ -1,7 +1,7 @@
 'use client';
 
 // Talent-pool sign-up and resume submission — both saved on the server.
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Arrow } from './Icon';
 
 type Status = { msg: string; ok: boolean };
@@ -53,8 +53,16 @@ export function NotifyForm() {
   );
 }
 
-export function ResumeForm() {
+export function ResumeForm({ jobs = [] }: { jobs?: { id: string; title: string }[] }) {
   const [status, setStatus] = useState<Status>({ msg: '', ok: false });
+  const roleRef = useRef<HTMLSelectElement>(null);
+
+  // "Apply for this role" links come in as /careers?role=<job id>#resume
+  useEffect(() => {
+    const id = new URLSearchParams(location.search).get('role');
+    const job = jobs.find(j => j.id === id);
+    if (job && roleRef.current) roleRef.current.value = job.title;
+  }, [jobs]);
   const [busy, setBusy] = useState(false);
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
@@ -66,7 +74,7 @@ export function ResumeForm() {
     try {
       const fd = new FormData(form);
       const body: Record<string, unknown> = {};
-      for (const k of ['name', 'email', 'phone', 'area', 'office', 'link', 'about']) body[k] = String(fd.get(k) || '').trim();
+      for (const k of ['name', 'email', 'phone', 'role', 'area', 'office', 'link', 'about']) body[k] = String(fd.get(k) || '').trim();
       const file = fd.get('resume');
       if (file instanceof File && file.size) {
         if (file.size > 5 * 1024 * 1024) throw new Error('Resume must be under 5 MB.');
@@ -86,6 +94,14 @@ export function ResumeForm() {
     <form className="form-card reveal" onSubmit={onSubmit} noValidate>
       <h3>Your profile</h3>
       <p>Fields marked * are required. Attach a resume or add a link.</p>
+      {jobs.length > 0 && (
+        <label className="f-field"><span>Applying for</span>
+          <select name="role" ref={roleRef} defaultValue="">
+            <option value="">General application</option>
+            {jobs.map(j => <option key={j.id} value={j.title}>{j.title}</option>)}
+          </select>
+        </label>
+      )}
       <label className="f-field"><span>Full name *</span><input name="name" required autoComplete="name" maxLength={100} /></label>
       <div className="f-row">
         <label className="f-field"><span>Email *</span><input name="email" type="email" required autoComplete="email" /></label>

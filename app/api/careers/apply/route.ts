@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
     office: str(b.office, 40),
     link: str(b.link, 500),
     about: str(b.about, 3000),
+    role: str(b.role, 120),
   };
   if (!app.name || !app.phone || !app.about) return bad('Please fill in your name, phone and a few words about you.');
   if (!EMAIL_RE.test(app.email)) return bad('Please enter a valid email address.');

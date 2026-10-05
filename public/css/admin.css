@@ -206,3 +206,15 @@ body.admin { background: #f6eff9; font-size: 15px; }
   .side-nav a { display: none; }
   .editor-main { padding: 18px; }
 }
+
+/* job openings */
+.job-form { background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 24px; margin-bottom: 20px; }
+.job-form h2 { font-size: 20px; margin-bottom: 16px; }
+.job-form textarea { width: 100%; font: inherit; padding: 11px 14px; border: 1.5px solid var(--line); border-radius: 12px; outline: none; resize: vertical; color: var(--text); }
+.job-form textarea:focus { border-color: var(--violet); }
+.job-form-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+.job-form-actions { display: flex; gap: 10px; margin-top: 16px; }
+.job-row { display: grid; grid-template-columns: 1fr 110px 140px 90px 110px auto; gap: 14px; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--line); }
+.job-row:last-child { border-bottom: 0; }
+.job-row.head { background: #faf7fe; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding-block: 12px; }
+@media (max-width: 900px) { .job-form-row { grid-template-columns: 1fr; } .job-row { grid-template-columns: 1fr auto; } .job-row > :nth-child(n+2):not(.row-actions) { display: none; } }

@@ -1,8 +1,12 @@
 import type { Metadata } from 'next';
-import Icon from '@/components/Icon';
+import Link from 'next/link';
+import Icon, { Arrow } from '@/components/Icon';
 import { NotifyForm, ResumeForm } from '@/components/CareersForms';
-import { PageHero } from '@/components/Blocks';
+import { PageHero, SectionHead } from '@/components/Blocks';
 import { CAREER_PERKS } from '@/lib/content';
+import { openJobs } from '@/lib/store';
+
+export const dynamic = 'force-dynamic'; // openings are managed in the console
 
 export const metadata: Metadata = {
   title: 'Careers',
@@ -10,6 +14,7 @@ export const metadata: Metadata = {
 };
 
 export default function CareersPage() {
+  const jobs = openJobs();
   return (
     <>
       <PageHero crumb="Careers" eyebrow="Careers at LaSän" title="Join the" accent="LaSän Family." text="Where ambition meets opportunity and creativity shapes the future." img="/img/stock/h-careers.jpg" actions={false} />
@@ -35,11 +40,36 @@ export default function CareersPage() {
       </section>
 
       <section className="section dark" id="openings">
+        {jobs.length > 0 && (
+          <div className="wrap" style={{ marginBottom: 64 }}>
+            <SectionHead eyebrow="Open roles" title="Current" accent="openings." text={`${jobs.length} open position${jobs.length === 1 ? '' : 's'}. Pick a role and send us your profile.`} />
+            <div className="jobs">
+              {jobs.map(j => (
+                <article className="job reveal" key={j.id}>
+                  <div className="job-meta">{[j.type, j.location, j.experience].filter(Boolean).map(m => <span key={m}>{m}</span>)}</div>
+                  <h3>{j.title}</h3>
+                  {j.description && <p>{j.description}</p>}
+                  <Link href={`/careers?role=${encodeURIComponent(j.id)}#resume`} className="more-link">Apply for this role <Arrow /></Link>
+                </article>
+              ))}
+            </div>
+          </div>
+        )}
         <div className="wrap openings">
           <div className="openings-empty reveal">
-            <span className="eyebrow">Open roles</span>
-            <h2>No active openings <em>at the moment.</em></h2>
-            <p>We are constantly scouting for exceptional talent. New opportunities will be announced soon!</p>
+            {jobs.length > 0 ? (
+              <>
+                <span className="eyebrow">Talent pool</span>
+                <h2>Don&apos;t see your role? <em>Stay in touch.</em></h2>
+                <p>We are constantly scouting for exceptional talent. New opportunities will be announced soon!</p>
+              </>
+            ) : (
+              <>
+                <span className="eyebrow">Open roles</span>
+                <h2>No active openings <em>at the moment.</em></h2>
+                <p>We are constantly scouting for exceptional talent. New opportunities will be announced soon!</p>
+              </>
+            )}
           </div>
           <NotifyForm />
         </div>
@@ -57,7 +87,7 @@ export default function CareersPage() {
               <div className="reveal"><h3>Join the family</h3><p>Grow with a team building growth engines for 200+ brands.</p></div>
             </div>
           </div>
-          <ResumeForm />
+          <ResumeForm jobs={jobs.map(j => ({ id: j.id, title: j.title }))} />
         </div>
       </section>
     </>
