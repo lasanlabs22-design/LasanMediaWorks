@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Studio Console — LaSän Media Works</title>
+  <meta name="theme-color" content="#662d91">
+  <link rel="icon" type="image/png" href="/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/admin.css">
+</head>
+<body class="admin">
+
+<!-- LOGIN -->
+<section id="login-view" class="login" hidden>
+  <form id="login-form" class="login-card">
+    <a href="/" class="logo"><span class="logo-mark">L</span><span>LaSän<small>Studio Console</small></span></a>
+    <h1>Welcome <span class="serif">back.</span></h1>
+    <p>Sign in to write, edit and publish articles.</p>
+    <label class="field"><span>Password</span><input id="password" type="password" autocomplete="current-password" required autofocus></label>
+    <p class="form-error" id="login-error" role="alert"></p>
+    <button class="btn btn-sun" type="submit" style="width:100%;justify-content:center">Sign in</button>
+  </form>
+</section>
+
+<!-- APP -->
+<div id="app-view" class="console" hidden>
+  <aside class="sidebar">
+    <a href="/" class="logo"><span class="logo-mark">L</span><span>LaSän<small>Studio Console</small></span></a>
+    <nav class="side-nav">
+      <button data-go="list" class="active"><span>▤</span> Articles</button>
+      <button data-go="new"><span>＋</span> New article</button>
+      <button data-go="careers"><span>✉</span> Careers inbox</button>
+      <a href="/articles" target="_blank" rel="noopener"><span>↗</span> View live site</a>
+    </nav>
+    <button id="logout" class="side-logout">Sign out</button>
+  </aside>
+
+  <main class="console-main">
+    <!-- LIST -->
+    <section id="list-view">
+      <header class="console-head">
+        <div><span class="eyebrow">Journal</span><h1>Articles</h1></div>
+        <button class="btn btn-sun" data-go="new">＋ New article</button>
+      </header>
+
+      <div class="stats">
+        <div class="stat"><b id="s-total">0</b><span>Total</span></div>
+        <div class="stat"><b id="s-pub">0</b><span>Published</span></div>
+        <div class="stat"><b id="s-draft">0</b><span>Drafts</span></div>
+        <div class="stat sun"><b id="s-feat">—</b><span>Featured</span></div>
+      </div>
+
+      <div class="list-tools">
+        <div class="seg" id="status-filter">
+          <button data-status="all" class="active">All</button>
+          <button data-status="published">Published</button>
+          <button data-status="draft">Drafts</button>
+        </div>
+        <input id="list-search" type="search" placeholder="Search by title…">
+      </div>
+
+      <div class="table" id="table"></div>
+    </section>
+
+    <!-- CAREERS INBOX -->
+    <section id="careers-view" hidden>
+      <header class="console-head">
+        <div><span class="eyebrow">Careers</span><h1>Careers inbox</h1></div>
+        <button class="btn btn-ghost" id="careers-refresh" type="button">↻ Refresh</button>
+      </header>
+
+      <div class="stats two">
+        <div class="stat"><b id="s-apps">0</b><span>Resume submissions</span></div>
+        <div class="stat"><b id="s-subs">0</b><span>Talent pool sign-ups</span></div>
+      </div>
+
+      <h2 class="inbox-h">Resume submissions</h2>
+      <div class="inbox" id="apps"></div>
+
+      <div class="inbox-bar">
+        <h2 class="inbox-h">Talent pool <small>(“Notify Me” sign-ups)</small></h2>
+        <button class="mini" id="copy-emails" type="button">Copy all emails</button>
+      </div>
+      <div class="table" id="subs"></div>
+    </section>
+
+    <!-- EDITOR -->
+    <section id="editor-view" hidden>
+      <header class="console-head">
+        <div>
+          <button class="link-back" data-go="list">← Back to articles</button>
+          <h1 id="editor-title">New article</h1>
+        </div>
+        <div class="head-actions">
+          <span class="save-state" id="save-state"></span>
+          <button class="btn btn-ghost" id="save-draft" type="button">Save draft</button>
+          <button class="btn btn-sun" id="publish" type="button">Publish</button>
+        </div>
+      </header>
+
+      <form id="editor" class="editor" autocomplete="off">
+        <div class="editor-main">
+          <input class="title-input" id="f-title" placeholder="Article title…" maxlength="200" required>
+          <div class="slug-row">/article/<input id="f-slug" placeholder="auto-from-title"></div>
+          <textarea class="excerpt-input" id="f-excerpt" rows="2" maxlength="400" placeholder="Short summary shown on cards (optional — auto-generated if empty)"></textarea>
+
+          <div class="md-box">
+            <div class="md-toolbar" role="toolbar" aria-label="Formatting">
+              <button type="button" data-md="h2" title="Heading">H2</button>
+              <button type="button" data-md="h3" title="Subheading">H3</button>
+              <button type="button" data-md="bold" title="Bold"><b>B</b></button>
+              <button type="button" data-md="italic" title="Italic"><i>I</i></button>
+              <button type="button" data-md="ul" title="Bullet list">• List</button>
+              <button type="button" data-md="ol" title="Numbered list">1. List</button>
+              <button type="button" data-md="quote" title="Quote">❝ Quote</button>
+              <button type="button" data-md="link" title="Link">🔗 Link</button>
+              <button type="button" data-md="img" title="Insert image">🖼 Image</button>
+              <span class="md-spacer"></span>
+              <div class="seg small" id="mode">
+                <button type="button" data-mode="write" class="active">Write</button>
+                <button type="button" data-mode="split">Split</button>
+                <button type="button" data-mode="preview">Preview</button>
+              </div>
+            </div>
+            <div class="md-panes" data-mode="write">
+              <textarea id="f-content" class="md-input" placeholder="Write your article here. Markdown supported: ## Heading, **bold**, *italic*, - lists, > quotes, [link](https://…)"></textarea>
+              <div class="md-preview prose" id="preview"></div>
+            </div>
+            <div class="md-foot"><span id="wc">0 words · 1 min read</span><span>Markdown supported</span></div>
+          </div>
+        </div>
+
+        <aside class="editor-side">
+          <div class="panel">
+            <h3>Status</h3>
+            <div class="status-line"><span class="badge" id="status-badge">Draft</span><span id="dates" class="muted"></span></div>
+            <label class="check"><input type="checkbox" id="f-featured"> <span>Feature on Articles page</span></label>
+          </div>
+
+          <div class="panel">
+            <h3>Cover image</h3>
+            <div class="cover-drop" id="cover-drop">
+              <img id="cover-img" alt="" hidden>
+              <div id="cover-empty"><b>Drop an image</b><span>or click to upload · PNG, JPG, WEBP · max 5 MB</span></div>
+              <input type="file" id="cover-file" accept="image/png,image/jpeg,image/webp,image/gif">
+            </div>
+            <div class="cover-actions">
+              <input id="f-cover" placeholder="…or paste image URL">
+              <button type="button" class="mini" id="cover-clear">Remove</button>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h3>Details</h3>
+            <label class="field"><span>Category</span><select id="f-category"></select></label>
+            <label class="field"><span>Tags <em>(comma separated)</em></span><input id="f-tags" placeholder="SEO, Social, AI"></label>
+            <label class="field"><span>Author</span><input id="f-author" placeholder="LaSän Editorial"></label>
+          </div>
+
+          <div class="panel danger" id="danger" hidden>
+            <h3>Danger zone</h3>
+            <button type="button" class="mini red" id="delete">Delete this article</button>
+          </div>
+        </aside>
+      </form>
+    </section>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/js/md.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

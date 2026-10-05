@@ -1,0 +1,16 @@
+node_modules/
+.next/
+out/
+next-env.d.ts
+*.tsbuildinfo
+.env
+.env*.local
+
+# runtime data written by the app — never commit
+data/*.tmp
+data/careers.json
+data/resumes/
+data/uploads/
+
+# old Express version, kept locally for reference only
+_legacy/

@@ -1,0 +1,80 @@
+[
+  {
+    "id": "seed-1",
+    "title": "Your Google Business Profile is your new storefront",
+    "slug": "google-business-profile-new-storefront",
+    "excerpt": "Most local customers meet you on a map before they meet you in person. Here's how to make that first glance count.",
+    "content": "Before anyone walks into your shop, they've already *visited* you — on a map, on their phone, in about four seconds.\n\n## Why it matters more than your website\n\nFor local searches, the map pack sits above every organic result. If your profile is thin, outdated or missing photos, you're invisible at the exact moment someone is ready to buy.\n\n## The five-minute checklist\n\n- Pick the most specific **primary category** you can\n- Add real photos every month — storefront, team, work in progress\n- Write a description that answers *who you serve* and *where*\n- Turn on messaging and reply within the hour\n- Ask every happy customer for a review, and reply to every review\n\n> A profile that looks alive gets clicked. A profile that looks abandoned gets skipped.\n\n## What we track\n\nWe watch three numbers: calls, direction requests and website clicks. If those climb month over month, the profile is doing its job.",
+    "category": "Tips",
+    "tags": [
+      "Local SEO",
+      "GMB"
+    ],
+    "cover": "",
+    "author": "LaSän Editorial",
+    "status": "published",
+    "featured": false,
+    "readTime": 2,
+    "createdAt": "2026-09-02T09:00:00.000Z",
+    "updatedAt": "2026-09-02T09:00:00.000Z",
+    "publishedAt": "2026-09-02T09:00:00.000Z"
+  },
+  {
+    "id": "seed-2",
+    "title": "AI search is changing who gets found — here's how to stay visible",
+    "slug": "ai-search-staying-visible",
+    "excerpt": "Answer engines summarise the web instead of listing it. Brands that publish clear, expert answers are the ones being quoted.",
+    "content": "Search used to be ten blue links. Now it's often a single paragraph written by an AI — and your brand is either *in* that paragraph or it isn't.\n\n## What answer engines reward\n\n1. Clear, direct answers near the top of a page\n2. Genuine expertise: data, examples, named authors\n3. Consistent facts about your business everywhere online\n\n## Practical moves this quarter\n\n- Turn your top 20 customer questions into short, well-structured pages\n- Add an FAQ section to every service page\n- Keep your name, address and phone identical across every listing\n- Publish original numbers — even small surveys get cited\n\n## The bottom line\n\nAI search doesn't replace SEO. It raises the bar for it. Helpful, specific content wins in both worlds.",
+    "category": "Trends",
+    "tags": [
+      "AI",
+      "SEO",
+      "Content"
+    ],
+    "cover": "",
+    "author": "LaSän Editorial",
+    "status": "published",
+    "featured": true,
+    "readTime": 2,
+    "createdAt": "2026-09-14T09:00:00.000Z",
+    "updatedAt": "2026-09-14T09:00:00.000Z",
+    "publishedAt": "2026-09-14T09:00:00.000Z"
+  },
+  {
+    "id": "seed-3",
+    "title": "Online meets offline: building a campaign that works on both",
+    "slug": "online-meets-offline-campaigns",
+    "excerpt": "A hoarding gets attention, a reel keeps it, a landing page converts it. The magic is in connecting all three.",
+    "content": "The best campaigns we run don't pick a side. They use offline media for **reach** and digital for **response**.\n\n## The handoff\n\nEvery offline touchpoint should point somewhere measurable — a QR code, a short URL, a WhatsApp number. That's how a billboard becomes a lead.\n\n## A simple framework\n\n- **See it:** hoardings, transit ads, events\n- **Search it:** strong Google profile and branded search ads\n- **Scroll it:** reels and stories that retell the same idea\n- **Start it:** a landing page or chat that captures the enquiry\n\n## Measure the bridge\n\nUse unique codes per location so you know which hoarding drove which enquiry. Then move budget toward what works.",
+    "category": "Strategies",
+    "tags": [
+      "Offline",
+      "Campaigns"
+    ],
+    "cover": "",
+    "author": "LaSän Editorial",
+    "status": "published",
+    "featured": false,
+    "readTime": 2,
+    "createdAt": "2026-09-24T09:00:00.000Z",
+    "updatedAt": "2026-09-24T09:00:00.000Z",
+    "publishedAt": "2026-09-24T09:00:00.000Z"
+  },
+  {
+    "id": "e123b48a-32f6-4e90-a656-6aba0207d2b3",
+    "title": "Hello Hi bye bye",
+    "excerpt": "em undile inka",
+    "content": "![image description](/uploads/1790858577617-faf3f0c2.png)",
+    "category": "Tips",
+    "tags": [],
+    "cover": "",
+    "author": "LaSän Editorial",
+    "status": "published",
+    "featured": false,
+    "slug": "hello-hi-bye-bye",
+    "readTime": 1,
+    "createdAt": "2026-10-01T12:43:09.304Z",
+    "updatedAt": "2026-10-01T12:43:09.304Z",
+    "publishedAt": "2026-10-01T12:43:09.304Z"
+  }
+]
