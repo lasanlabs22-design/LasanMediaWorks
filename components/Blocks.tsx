@@ -81,7 +81,7 @@ export function CtaBand({ title, accent, text, primary = ['Book Appointment', '/
 export function Steps() {
   return (
     <div className="steps">
-      {PROCESS.map(s => <div className="step spot reveal" key={s.title}><h3>{s.title}</h3><p>{s.text}</p></div>)}
+      {PROCESS.map(s => <div className="step reveal" key={s.title}><h3>{s.title}</h3><p>{s.text}</p></div>)}
     </div>
   );
 }
@@ -128,7 +128,7 @@ export function Cases() {
 export function Values() {
   return (
     <div className="values">
-      {VALUES.map(([h, p], i) => <article className="value spot reveal" key={h}><span className="vn">0{i + 1}</span><h3>{h}</h3><p>{p}</p></article>)}
+      {VALUES.map(([h, p], i) => <article className="value reveal" key={h}><span className="vn">0{i + 1}</span><h3>{h}</h3><p>{p}</p></article>)}
     </div>
   );
 }
@@ -185,7 +185,7 @@ export function Quotes({ count = 6 }: { count?: number }) {
   return (
     <div className="quotes">
       {TESTIMONIALS.slice(0, count).map(t => (
-        <figure className="quote spot reveal" key={t.name}>
+        <figure className="quote reveal" key={t.name}>
           <div className="stars" aria-label="5 out of 5">★★★★★</div>
           <p>“{t.quote}”</p>
           <footer><span className="q-av" aria-hidden="true">{t.name.replace('Dr. ', '')[0]}</span><div><b>{t.name}</b><small>{t.role}</small></div></footer>
@@ -198,7 +198,7 @@ export function Quotes({ count = 6 }: { count?: number }) {
 export function Blueprint() {
   return (
     <div className="deliver">
-      {BLUEPRINT.map(b => <div className="spot reveal" key={b.title}><Icon name={b.icon} /><h3>{b.title}</h3><p>{b.text}</p></div>)}
+      {BLUEPRINT.map(b => <div className="reveal" key={b.title}><Icon name={b.icon} /><h3>{b.title}</h3><p>{b.text}</p></div>)}
     </div>
   );
 }

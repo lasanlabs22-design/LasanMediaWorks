@@ -24,7 +24,7 @@ export default async function ArticlesPage({ searchParams }: { searchParams: Pro
         <div className="wrap">
           <div className="insight-types">
             {INSIGHT_TYPES.map(t => (
-              <article className="insight spot reveal" key={t.label}>
+              <article className="insight reveal" key={t.label}>
                 <span className="lbl"><Icon name={t.icon} /> {t.label}</span>
                 <h3>{t.title}</h3>
                 <p>{t.text}</p>

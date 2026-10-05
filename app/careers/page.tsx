@@ -29,7 +29,7 @@ export default function CareersPage() {
         </div>
         <div className="wrap" style={{ marginTop: 56 }}>
           <div className="audience">
-            {CAREER_PERKS.map(p => <div className="aud spot reveal" key={p.title}><Icon name={p.icon} /><h3>{p.title}</h3><p>{p.text}</p></div>)}
+            {CAREER_PERKS.map(p => <div className="aud reveal" key={p.title}><Icon name={p.icon} /><h3>{p.title}</h3><p>{p.text}</p></div>)}
           </div>
         </div>
       </section>

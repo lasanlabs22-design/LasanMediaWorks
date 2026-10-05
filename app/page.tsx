@@ -23,8 +23,6 @@ export default function Home() {
           <source src="/video/hero.mp4" type="video/mp4" />
         </video>
         <div className="hero-overlay" />
-        <div className="hero-lines" />
-        <div className="orb o1" /><div className="orb o2" />
         <div className="wrap hero-inner">
           <HeroSlider />
           <div className="hero-cards" aria-label="Highlights">
@@ -135,7 +133,7 @@ export default function Home() {
           </SectionHead>
           <div className="insight-types">
             {INSIGHT_TYPES.map(t => (
-              <article className="insight spot reveal" key={t.label}>
+              <article className="insight reveal" key={t.label}>
                 <span className="lbl"><Icon name={t.icon} /> {t.label}</span>
                 <h3>{t.title}</h3>
                 <p>{t.text}</p>

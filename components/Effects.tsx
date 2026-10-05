@@ -1,7 +1,7 @@
 'use client';
 
 // Page-wide motion: scroll progress bar, reveal-on-scroll, number counters,
-// cursor spotlight on cards, light parallax, and lazy background videos.
+// light parallax, and lazy background videos.
 // Re-scans the DOM on every route change.
 import { usePathname } from 'next/navigation';
 import { useEffect } from 'react';
@@ -91,16 +91,6 @@ export default function Effects() {
     document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
     cleanups.push(() => cio.disconnect());
 
-    // cursor spotlight
-    const onMove = (e: PointerEvent) => {
-      const card = (e.target as HTMLElement).closest?.('.spot') as HTMLElement | null;
-      if (!card) return;
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--mx', `${e.clientX - r.left}px`);
-      card.style.setProperty('--my', `${e.clientY - r.top}px`);
-    };
-    addEventListener('pointermove', onMove, { passive: true });
-    cleanups.push(() => removeEventListener('pointermove', onMove));
 
     // background videos: load + play only while visible
     const vio = new IntersectionObserver(entries => {
