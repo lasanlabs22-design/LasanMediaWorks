@@ -424,7 +424,10 @@ section { position: relative; }
 .footer-offices b { display: block; font-size: 15px; font-weight: 600; color: #fff; }
 .footer-offices span { display: block; margin-top: 2px; font-size: 14px; color: rgba(255, 255, 255, .62); }
 .footer-seo { margin: 22px 0 0; font-size: 13px; line-height: 1.7; color: rgba(255, 255, 255, .42); }
-.footer-mark { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); z-index: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(120px, 27vw, 400px); line-height: .8; letter-spacing: -0.03em; text-align: center; white-space: nowrap; color: rgba(128, 0, 128, .2); user-select: none; pointer-events: none; }
+.footer-mark { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); z-index: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(120px, 27vw, 400px); line-height: .8; letter-spacing: -0.03em; text-align: center; white-space: nowrap; color: transparent; user-select: none; pointer-events: none; }
+/* outline only, coloured like the logo: La in purple, Sän in yellow */
+.footer-mark .mk-p { -webkit-text-stroke: 2px rgba(160, 40, 160, .55); }
+.footer-mark .mk-y { -webkit-text-stroke: 2px rgba(255, 204, 0, .4); }
 .site-footer > .wrap { position: relative; z-index: 1; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 22px; font-size: 14px; color: rgba(255, 255, 255, .55); }
 .to-top { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: rgba(255, 255, 255, .8); }
