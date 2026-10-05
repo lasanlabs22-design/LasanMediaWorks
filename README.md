@@ -1,4 +1,4 @@
-# LaSän Media Works — website + Studio Console
+# LaSän Media Works: website and Studio Console
 
 Next.js 16 (App Router, TypeScript) site for LaSän Media Works, with a password-protected
 Studio Console for publishing articles and reviewing careers submissions.
