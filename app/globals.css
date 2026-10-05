@@ -410,7 +410,7 @@ section { position: relative; }
 @media (max-width: 860px) { .cta { grid-template-columns: 1fr; padding: 44px 22px; border-radius: 10px; } }
 
 /* footer */
-.site-footer { color: #fff; padding: 72px 0 28px; margin-top: 110px; background: #0a0012; border-top: 3px solid var(--gold); }
+.site-footer { position: relative; overflow: hidden; color: #fff; padding: 72px 0 28px; margin-top: 110px; background: #0a0012; border-top: 3px solid var(--gold); }
 .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; }
 .footer-brand p { margin: 18px 0 20px; max-width: 300px; font-size: 15px; line-height: 1.6; color: rgba(255, 255, 255, .7); }
 .footer-contact { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 15px; color: rgba(255, 255, 255, .85); overflow-wrap: anywhere; }
@@ -424,7 +424,8 @@ section { position: relative; }
 .footer-offices b { display: block; font-size: 15px; font-weight: 600; color: #fff; }
 .footer-offices span { display: block; margin-top: 2px; font-size: 14px; color: rgba(255, 255, 255, .62); }
 .footer-seo { margin: 22px 0 0; font-size: 13px; line-height: 1.7; color: rgba(255, 255, 255, .42); }
-.footer-mark { margin: 28px 0 -6px; font-family: var(--font-display); font-weight: 700; font-size: clamp(88px, 21vw, 300px); line-height: .8; letter-spacing: -0.03em; text-align: center; white-space: nowrap; overflow: hidden; color: rgba(128, 0, 128, .28); user-select: none; pointer-events: none; }
+.footer-mark { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); z-index: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(120px, 27vw, 400px); line-height: .8; letter-spacing: -0.03em; text-align: center; white-space: nowrap; color: rgba(128, 0, 128, .2); user-select: none; pointer-events: none; }
+.site-footer > .wrap { position: relative; z-index: 1; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 22px; font-size: 14px; color: rgba(255, 255, 255, .55); }
 .to-top { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: rgba(255, 255, 255, .8); }
 .to-top .i { width: 16px; height: 16px; }

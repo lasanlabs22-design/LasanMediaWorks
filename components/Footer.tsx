@@ -5,6 +5,7 @@ import { CONTACT, MEGA, OFFICES, SEO_TAGS } from '@/lib/content';
 export default function Footer() {
   return (
     <footer className="site-footer">
+      <div className="footer-mark" aria-hidden="true">LaSän</div>
       <div className="wrap">
         <div className="footer-grid">
           <div className="footer-brand">
@@ -46,8 +47,6 @@ export default function Footer() {
           Digital marketing, SEO and branding agency serving Tirupati, Andhra Pradesh, Karnataka, Telangana and across India.{' '}
           {SEO_TAGS.join(' · ')}
         </p>
-
-        <div className="footer-mark" aria-hidden="true">LaSän</div>
 
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} LaSän Media Works. All rights reserved.</span>
