@@ -1,84 +1,104 @@
 import type { Metadata } from 'next';
-import Link from 'next/link';
-import { Arrow } from '@/components/Icon';
-import { Blueprint, CenterHead, Clients, CtaBand, Numbers, Offices, PageHero, Quotes, SectionHead, Team, Values, VideoBand } from '@/components/Blocks';
+import { CenterHead, CtaBand, PageHero, SectionHead, SolutionRows, Team } from '@/components/Blocks';
+import { ABOUT_NUMBERS, ABOUT_SECTIONS, ABOUT_TEAM, FOUNDERS, JOURNEY, MISSION, PERFORMERS, VISION } from '@/lib/content';
 
 export const metadata: Metadata = {
   title: 'About',
-  description: 'LaSän Media Works is a premium growth agency helping SMEs and startups achieve digital dominance. Meet our leadership, values and offices.',
+  description: 'LaSän Media Works: your trusted partner in growth, innovation, and digital excellence since 2021. Meet our founders, team and best performers.',
 };
 
 export default function AboutPage() {
   return (
     <>
-      <PageHero crumb="About" eyebrow="About LaSän Media Works" title="A premium growth agency for" accent="ambitious SMEs & startups." text="Data-driven strategy, creative excellence and advanced technology — combined into growth engines that last." img="/img/stock/h-about.jpg" actions={false} />
+      <PageHero crumb="About" eyebrow="About us" title="About" accent="LaSän Media Works" text="Your trusted partner in growth, innovation, and digital excellence since 2021." img="/img/stock/h-about.jpg" actions={false} />
 
-      <section className="section">
+      <nav className="subnav" aria-label="On this page">
+        <ul>
+          <li><a href="#aboutus">About Us</a></li>
+          <li><a href="#team">Our Team</a></li>
+          {ABOUT_SECTIONS.map(s => <li key={s.id}><a href={`#${s.id}`}>{s.title} {s.accent}</a></li>)}
+        </ul>
+      </nav>
+
+      {/* FOUNDERS */}
+      <section className="section" id="aboutus">
         <div className="wrap split">
-          <div className="copy">
-            <span className="eyebrow reveal">Who we are</span>
-            <h2 className="reveal" style={{ margin: '14px 0 22px' }}>Your success is <em>our benchmark.</em></h2>
-            <p className="lead reveal">We are a premium growth agency focused on assisting SMEs and startups in achieving digital dominance through data-driven strategies, creative excellence, and advanced technology.</p>
-            <p className="reveal">Our method integrates performance marketing, brand storytelling, and intelligent automation to yield measurable results throughout your growth journey.</p>
-            <p className="reveal">We aim to construct sustainable growth engines — making your success our benchmark.</p>
-            <Link href="/book-appointment" className="btn btn-primary reveal" style={{ marginTop: 8 }}>Book Free Consultation <Arrow /></Link>
-          </div>
           <div className="media-frame reveal-img">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/stock/about-team.jpg" alt="The LaSän team collaborating" data-parallax="0.06" />
-            <div className="media-badge glass"><b>200+</b><span>brands grown<br />across India</span></div>
+            <img src={FOUNDERS.img} alt="LaSän Media Works founders Sreelatha Royal and Santhosh Rokaya" />
+          </div>
+          <div className="copy">
+            <span className="eyebrow reveal">About our founders &amp; leadership</span>
+            <h2 className="reveal" style={{ margin: '14px 0 20px' }}>About <em>Us</em></h2>
+            {FOUNDERS.paras.map((p, i) => <p className={`reveal${i === 0 ? ' lead' : ''}`} key={i}>{p}</p>)}
+            <ul className="chips reveal">{FOUNDERS.highlights.map(h => <li key={h}>{h}</li>)}</ul>
           </div>
         </div>
       </section>
 
-      <VideoBand>
-        <SectionHead eyebrow="By the numbers" title="Growth you can" accent="measure." />
-        <Numbers />
-      </VideoBand>
-
-      <section className="section" id="playbook">
-        <div className="wrap">
-          <SectionHead eyebrow="Our growth playbook" title="A calculated approach to" accent="scaling brands.">
-            <Link href="/strategy#process" className="btn btn-ghost reveal">How we work <Arrow /></Link>
-          </SectionHead>
-          <Blueprint />
-        </div>
-      </section>
-
+      {/* VISION & MISSION */}
       <section className="section tint">
         <div className="wrap">
-          <SectionHead eyebrow="The DNA of success" title="The LaSän" accent="core values." text="Beyond metrics and ROI, we are driven by a set of non-negotiable principles that define our impact." />
-          <Values />
+          <CenterHead eyebrow="What drives us" title="Our Vision &" accent="Mission" />
+          <div className="vm">
+            <article className="vm-card reveal"><span className="eyebrow">Our Vision</span><p>{VISION}</p></article>
+            <article className="vm-card reveal"><span className="eyebrow">Our Mission</span><p>{MISSION}</p></article>
+          </div>
         </div>
       </section>
 
-      <section className="section" id="team">
+      {/* JOURNEY */}
+      <section className="section">
         <div className="wrap">
-          <SectionHead eyebrow="Leadership" title="Meet our" accent="leadership team." text="Experts dedicated to your success." />
-          <Team />
+          <CenterHead eyebrow="Since 2021" title="Our Journey" accent="So Far" />
+          <ol className="journey">
+            {JOURNEY.map(j => <li className="reveal" key={j.year}><b>{j.year}</b><span>{j.text}</span></li>)}
+          </ol>
         </div>
       </section>
 
-      <section className="section dark">
+      {/* TEAM */}
+      <section className="section tint" id="team">
         <div className="wrap">
-          <SectionHead eyebrow="Where we are" title="Our" accent="offices." text="Headquartered in Bangalore, with teams in Hyderabad and Tirupati." />
-          <Offices />
+          <SectionHead eyebrow="The people behind LaSän" title="Our Team" accent="Members" />
+          <Team members={ABOUT_TEAM} />
         </div>
       </section>
 
-      <section className="section" id="clients">
-        <div className="wrap"><CenterHead eyebrow="Collaborations" title="Trusted by" accent="industry leaders." text="Partnering with 200+ forward-thinking brands across the globe." /></div>
-        <Clients />
-      </section>
-
-      <section className="section tint">
+      {/* BEST PERFORMERS */}
+      <section className="section">
         <div className="wrap">
-          <SectionHead eyebrow="Testimonials" title="What our" accent="clients say." text="Trusted by 200+ businesses across India." />
-          <Quotes count={3} />
+          <SectionHead eyebrow="Recognition" title="Best" accent="Performers" />
+          <div className="performers">
+            {PERFORMERS.map((src, i) => (
+              <figure className="performer reveal" key={src}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={src} alt={`Best Performer ${i + 1}`} loading="lazy" />
+              </figure>
+            ))}
+          </div>
         </div>
       </section>
 
-      <CtaBand title="Let's talk" accent="business." text="Ready to grow your business? We're here to help you achieve your goals." />
+      {/* NUMBERS */}
+      <section className="section dark" style={{ padding: '80px 0' }}>
+        <div className="wrap">
+          <div className="numbers">
+            {ABOUT_NUMBERS.map(n => (
+              <div className="glass reveal" key={n.label}><b data-count={n.value} data-suffix={n.suffix}>{n.value}{n.suffix}</b><span>{n.label}</span></div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* COLLABORATIONS, RESOURCES, HOW WE WORK, CAREERS, MEDIA */}
+      <section className="section">
+        <div className="wrap">
+          <SolutionRows items={ABOUT_SECTIONS} service="audit" />
+        </div>
+      </section>
+
+      <CtaBand title="Ready to work with" accent="industry experts?" text="Let's discuss how LaSän Media can help your brand achieve breakthrough results." primary={['Get Free Consultation', '/book-appointment']} />
     </>
   );
 }

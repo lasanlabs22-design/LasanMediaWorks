@@ -7,7 +7,7 @@ import {
   ArticleCard, Blueprint, Cases, CenterHead, Clients, ContactList, Faq, HelpCards, Numbers, Quotes,
   SectionHead, Steps, Team, Values, VideoBand,
 } from '@/components/Blocks';
-import { INSIGHT_TYPES, MARQUEE } from '@/lib/content';
+import { INSIGHT_TYPES, MARQUEE, NUMBERS } from '@/lib/content';
 import { publishedArticles } from '@/lib/store';
 
 export const dynamic = 'force-dynamic'; // latest articles come from the admin console
@@ -25,13 +25,14 @@ export default function Home() {
         <div className="hero-overlay" />
         <div className="wrap hero-inner">
           <HeroSlider />
-          <div className="hero-cards" aria-label="Highlights">
-            <div className="hero-card glass"><span className="hc-ic"><Icon name="brief" /></span><div><b data-count="200" data-suffix="+">200+</b><span>Projects delivered</span></div></div>
-            <div className="hero-card glass"><span className="hc-ic"><Icon name="heart" /></span><div><b data-count="98" data-suffix="%">98%</b><span>Client satisfaction</span></div></div>
-            <div className="hero-card glass"><span className="hc-ic"><Icon name="trend" /></span><div><b data-count="10" data-suffix="X">10X</b><span>Average ROI growth</span></div></div>
-          </div>
         </div>
-        <a href="#process" className="scroll-cue" aria-label="Scroll to content"><i />Scroll</a>
+        <div className="wrap">
+          <dl className="hero-facts">
+            {NUMBERS.map(n => (
+              <div key={n.label}><dt>{n.label}</dt><dd data-count={n.value} data-suffix={n.suffix}>{n.value}{n.suffix}</dd></div>
+            ))}
+          </dl>
+        </div>
       </section>
 
       <div className="marquee" aria-hidden="true">

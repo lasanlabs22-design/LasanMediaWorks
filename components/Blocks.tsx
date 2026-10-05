@@ -165,10 +165,10 @@ export function HelpCards() {
   );
 }
 
-export function Team() {
+export function Team({ members = TEAM }: { members?: { name: string; role: string; photo: string }[] }) {
   return (
     <div className="team">
-      {TEAM.map(m => (
+      {members.map(m => (
         <article className="member reveal" key={m.name}>
           <div className="member-photo">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -244,7 +244,9 @@ export function SolutionRows({ items, service }: { items: Solution[]; service: s
             <h3>{s.title} <em>{s.accent}</em></h3>
             {s.paras.map(p => <p key={p.slice(0, 24)}>{p}</p>)}
             <ul className="chips">{s.focus.map(f => <li key={f}>{f}</li>)}</ul>
-            <Link href={`/book-appointment?service=${service}`} className="more-link">Discuss {s.title} {s.accent} <Arrow /></Link>
+            {s.link
+              ? <Link href={s.link[1]} className="more-link">{s.link[0]} <Arrow /></Link>
+              : <Link href={`/book-appointment?service=${service}`} className="more-link">Discuss {s.title} {s.accent} <Arrow /></Link>}
           </div>
         </article>
       ))}

@@ -43,14 +43,14 @@ export const MEGA: Record<string, { side: { title: string; text: string; cta: st
     ],
   },
   about: {
-    side: { title: 'Know More About LaSän', text: 'Our Growth Playbook.', cta: 'Watch Now', href: '/about#playbook' },
+    side: { title: 'Know More About LaSän', text: 'Our Growth Playbook.', cta: 'Watch Now', href: '/about#howwework' },
     items: [
-      { icon: 'zap', title: 'About Us', desc: 'Learn about leadership & vision.', href: '/about' },
-      { icon: 'handshake', title: 'Collaborations', desc: 'Partnerships with effective results.', href: '/about#clients' },
-      { icon: 'book', title: 'Resources', desc: 'Explore Blog & Case Studies.', href: '/articles' },
-      { icon: 'cogs', title: 'How We Work', desc: 'Frameworks to hit Growth KPIs.', href: '/strategy#process' },
-      { icon: 'brief', title: 'Careers', desc: 'Are you willing to create impact?', href: '/careers' },
-      { icon: 'news', title: 'Media', desc: 'Featured on Popular News.', href: '/articles?category=News' },
+      { icon: 'zap', title: 'About Us', desc: 'Learn about leadership & vision.', href: '/about#aboutus' },
+      { icon: 'handshake', title: 'Collaborations', desc: 'Partnerships with effective results.', href: '/about#collaborations' },
+      { icon: 'book', title: 'Resources', desc: 'Explore Blog & Case Studies.', href: '/about#resources' },
+      { icon: 'cogs', title: 'How We Work', desc: 'Frameworks to hit Growth KPIs.', href: '/about#howwework' },
+      { icon: 'brief', title: 'Careers', desc: 'Are you willing to create impact?', href: '/about#careers' },
+      { icon: 'news', title: 'Media', desc: 'Featured on Popular News.', href: '/about#media' },
     ],
   },
 };
@@ -207,7 +207,53 @@ export const OFFICES = [
 
 export const SEO_TAGS = ['Best Digital Marketing Company in Tirupati', 'Best Digital Marketing Company in Andhra Pradesh', 'Best Digital Marketing Company in Karnataka', 'Best Digital Marketing Company in Telangana', 'SEO Company in Bangalore', 'PPC Services in Hyderabad', 'Social Media Marketing in Tirupati', 'Growth Agency for Startups', 'Brand Strategy Consultants', 'Website Development & CRM Experts'];
 
-export type Solution = { id: string; icon: IconName; word: string; title: string; accent: string; tag: string; paras: string[]; focus: string[]; stats?: [string, string][]; img: string };
+export type Solution = { id: string; icon: IconName; word: string; title: string; accent: string; tag: string; paras: string[]; focus: string[]; stats?: [string, string][]; img: string; link?: [string, string] };
+
+/* ---------- About page ---------- */
+
+export const FOUNDERS = {
+  img: '/img/about/founders.jpg',
+  paras: [
+    'Sreelatha Royal and Santhosh Rokaya, the Co-Founders of LaSan Media Works, bring over 7 years of combined experience in sales, marketing and digital strategy. With a strong foundation in understanding market dynamics and customer behavior, they have consistently helped businesses grow by aligning creativity with measurable results.',
+    'Their approach goes beyond traditional marketing. By blending creative storytelling with data-driven strategies, they craft brand experiences that not only capture attention but also build trust and long-term relationships. Every project they take on is driven by a clear objective to create meaningful impact and sustainable growth for their clients.',
+    "At LaSan Media Works, the focus is on delivering tailored solutions that match each brand's unique identity and goals. Whether it's building a brand from scratch or scaling an existing one, their combined expertise ensures a balance between innovation, strategy, and execution.",
+  ],
+  highlights: ['7+ Years Experience', 'Co-Founders', 'Sales & Marketing Experts', 'Data-Driven Strategies'],
+};
+
+export const VISION = 'To build powerful, recognizable, and trusted brands that stand out in competitive markets and create lasting impressions.';
+export const MISSION = 'To deliver creative, strategic, and growth-focused marketing solutions that empower businesses to scale, connect with their audience, and achieve measurable success.';
+
+export const JOURNEY = [
+  { year: '2021', text: 'LaSän Media Founded' },
+  { year: '2022', text: '50+ Clients Served' },
+  { year: '2023', text: 'Award-Winning Agency' },
+  { year: '2024', text: '500+ Campaigns' },
+  { year: '2025', text: 'Pan-India Presence' },
+];
+
+export const ABOUT_TEAM = [
+  { name: 'K Sree Latha Royal', role: 'Founder & CMO', photo: '/img/team/sree-latha.jpg' },
+  { name: 'Santhosh Rokaya', role: 'Co-Founder & CEO', photo: '/img/team/santhosh-rokaya.jpg' },
+  { name: 'Jagadeesh SH', role: 'Director', photo: '/img/team/jagadeesh-sh.jpg' },
+  { name: 'C V Monisha', role: 'General Manager', photo: '/img/team/mounisha-cv.jpg' },
+  { name: 'Dinesh', role: 'Business Analyst', photo: '/img/team/dinesh.jpg' },
+  { name: 'Gayathri K', role: 'Key Account Manager', photo: '/img/team/gayathri-k.jpg' },
+  { name: 'Sidhu', role: 'Sales Team Leader', photo: '/img/team/sidhu.jpg' },
+  { name: 'Babar', role: 'Editor', photo: '/img/team/babar.jpg' },
+  { name: 'Sasmith', role: 'Videographer', photo: '/img/team/sasmith.jpg' },
+  { name: 'Susmitha', role: 'Graphic Designer', photo: '/img/team/susmitha.jpg' },
+  { name: 'Lavanya P', role: 'Social Media Marketing', photo: '/img/team/lavanya-p.jpg' },
+];
+
+export const PERFORMERS = [1, 2, 3, 4, 5, 6, 7].map(n => `/img/performers/performer-${n}.jpg`);
+
+export const ABOUT_NUMBERS = [
+  { value: 150, suffix: '', label: 'Brands Empowered' },
+  { value: 98, suffix: '%', label: 'Client Retention Rate' },
+  { value: 500, suffix: '', label: 'Campaigns Executed' },
+  { value: 4, suffix: '', label: 'Years of Excellence' },
+];
 
 export const PILLARS: Solution[] = [
   { id: 'business', icon: 'target', word: 'Business', title: 'Business', accent: 'Strategy', tag: 'Tailored solutions for sustainable growth', img: '/img/stock/s-business.jpg', paras: ['Our Business Strategy framework goes beyond traditional consulting. We dive deep into your market landscape, competitive positioning, and operational capabilities to build a roadmap that ensures long-term viability and scalability.', "We help you identify untapped opportunities, mitigate risks, and align your resources with clear KPIs. Whether you're a startup or an established enterprise, our data-backed approach delivers measurable outcomes."], focus: ['Market Feasibility', 'Competitive Analysis', 'Strategic Roadmapping', 'Risk Mitigation'] },
@@ -225,6 +271,14 @@ export const SERVICES: Solution[] = [
   { id: 'branding', icon: 'pen', word: 'Brand', title: 'Branding', accent: '& Creative', tag: 'Logo designing & brand story', img: '/img/stock/v-branding.jpg', paras: ["Your brand is more than a logo — it's a feeling, a promise, an experience. Our creative team crafts compelling brand identities that capture hearts and minds. From logo design and color psychology to brand messaging and visual storytelling.", 'We help you discover your unique voice and translate it into every touchpoint — packaging, social media, website, and beyond.'], focus: ['Logo & Identity Design', 'Brand Strategy', 'Packaging Design', 'Social Media Creatives', 'Brand Guidelines'], stats: [['200+', 'Brands Created'], ['4.9★', 'Client Rating']] },
   { id: 'workforce', icon: 'users', word: 'Workforce', title: 'Marketing', accent: 'Workforce', tag: 'Maximize revenue through automation', img: '/img/stock/v-workforce.jpg', paras: ['Scale your marketing efforts without scaling your headcount. Our Marketing Workforce solutions provide you with dedicated, vetted marketing professionals who work as an extension of your team — from campaign managers to content creators and automation specialists.', 'We help you build and manage high-performing marketing teams, implement automation workflows, and optimize your marketing operations for maximum efficiency.'], focus: ['Dedicated Marketing Teams', 'Marketing Automation', 'Lead Nurturing', 'Email Campaigns', 'Performance Tracking'], stats: [['40%', 'Cost Savings'], ['24/7', 'Support Available']] },
   { id: 'media-pr', icon: 'radio', word: 'PR', title: 'Media', accent: '& PR', tag: 'Enabling business outreach', img: '/img/stock/v-pr.jpg', paras: ['Get the spotlight you deserve. Our Media & PR services help you build credibility, manage reputation, and amplify your brand story across top-tier publications, news outlets, and digital platforms.', "We have a vast network of media contacts and influencers ready to share your story. Whether you're launching a product or building thought leadership — we make sure the world hears about it."], focus: ['Press Release Distribution', 'Media Relations', 'Influencer Outreach', 'Crisis Management', 'Thought Leadership'], stats: [['100+', 'Media Features'], ['50M+', 'Reach']] },
+];
+
+export const ABOUT_SECTIONS: Solution[] = [
+  { id: 'collaborations', icon: 'handshake', word: 'Collaborations', title: 'Collaborations', accent: '', tag: 'Partnerships with effective results', img: '/img/about/collaborations.jpg', paras: ['We believe in the power of strategic partnerships. LaSän Media has collaborated with over 150+ brands across industries, from ambitious startups to established enterprises, delivering measurable growth and lasting impact.'], focus: ['150+ Brand Partners', '50+ Influencer Network', 'Tech Alliances', 'Strategic Joint Ventures'], link: ['Partner with us', '/book-appointment'] },
+  { id: 'resources', icon: 'book', word: 'Resources', title: 'Resources', accent: '', tag: 'Explore blog & case studies', img: '/img/about/resources.jpg', paras: ["Knowledge is power, and we're committed to sharing our expertise. Our resource center features in-depth blog posts, white papers, case studies, and marketing templates."], focus: ['100+ Blog Posts', '25+ Case Studies', 'Free Templates', 'Industry Reports'], link: ['Explore articles', '/articles'] },
+  { id: 'howwework', icon: 'cogs', word: 'How We Work', title: 'How We', accent: 'Work', tag: 'Frameworks to hit growth KPIs', img: '/img/about/how-we-work.jpg', paras: ['Our proven 4-step framework ensures clarity, alignment, and results. We start with deep research, craft custom strategies, execute with agility, and optimize continuously.'], focus: ['Discovery & Research', 'Strategy & Planning', 'Execution & Management', 'Optimization & Reporting'], link: ['See our process', '/strategy#process'] },
+  { id: 'careers', icon: 'brief', word: 'Careers', title: 'Careers', accent: '', tag: 'Are you willing to create impact?', img: '/img/about/careers.jpg', paras: ["Join a team that's redefining growth. We offer a culture of innovation, continuous learning, and unlimited growth opportunities."], focus: ['Open Positions: 5+', 'Remote & Hybrid', 'Learning Budget', 'Growth-Focused Culture'], link: ['View careers', '/careers'] },
+  { id: 'media', icon: 'news', word: 'Media', title: 'Media', accent: 'Presence', tag: 'Featured on popular news', img: '/img/about/media.jpg', paras: ['LaSän Media has been recognized by leading publications and news outlets for our innovative approach to digital growth.'], focus: ['Featured on 20+ Outlets', 'Industry Awards 2024', 'Guest Contributions', 'Press Releases'], link: ['Read our news', '/articles?category=News'] },
 ];
 
 export const CAREER_PERKS: { icon: IconName; title: string; text: string }[] = [
