@@ -67,7 +67,7 @@ export function CtaBand({ title, accent, text, primary = ['Book Appointment', '/
             <h2>{title} <em>{accent}</em></h2>
             <p>{text}</p>
             <div className="hero-actions" style={{ marginTop: 26 }}>
-              <Link href={primary[1]} className="btn btn-sun">{primary[0]} <Arrow /></Link>
+              <Link href={primary[1]} className="btn btn-primary">{primary[0]} <Arrow /></Link>
               <Link href={secondary[1]} className="btn btn-ghost">{secondary[0]}</Link>
             </div>
           </div>
