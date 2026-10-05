@@ -170,6 +170,8 @@ export default function Home() {
           </EnquiryForm>
         </div>
       </section>
+
+      <div className="brand-mark reveal" aria-hidden="true"><span className="mk-p">La</span><span className="mk-y">Sän</span></div>
     </>
   );
 }

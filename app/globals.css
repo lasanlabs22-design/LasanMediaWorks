@@ -409,8 +409,17 @@ section { position: relative; }
 .contact-list .ic .i { width: 17px; height: 17px; }
 @media (max-width: 860px) { .cta { grid-template-columns: 1fr; padding: 44px 22px; border-radius: 10px; } }
 
+/* big outlined LaSän above the footer (home page): La in purple, Sän in yellow, like the logo */
+.brand-mark { margin: 0 0 -50px; font-family: var(--font-display); font-weight: 700; font-size: clamp(72px, 15vw, 220px); line-height: .78; letter-spacing: -0.03em; text-align: center; white-space: nowrap; overflow: hidden; color: transparent; user-select: none; }
+.brand-mark span { transition: color .6s var(--ease); }
+.brand-mark .mk-p { -webkit-text-stroke: 2px #a62ea6; }
+.brand-mark .mk-y { -webkit-text-stroke: 2px var(--gold); }
+.brand-mark:hover .mk-p { color: rgba(128, 0, 128, .45); }
+.brand-mark:hover .mk-y { color: rgba(255, 204, 0, .3); }
+@media (max-width: 620px) { .brand-mark { margin-bottom: -40px; } .brand-mark span { -webkit-text-stroke-width: 1.5px; } }
+
 /* footer */
-.site-footer { position: relative; overflow: hidden; color: #fff; padding: 72px 0 28px; margin-top: 110px; background: #0a0012; border-top: 3px solid var(--gold); }
+.site-footer { color: #fff; padding: 72px 0 28px; margin-top: 110px; background: #0a0012; border-top: 3px solid var(--gold); }
 .footer-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 48px; padding-bottom: 48px; }
 .footer-brand p { margin: 18px 0 20px; max-width: 300px; font-size: 15px; line-height: 1.6; color: rgba(255, 255, 255, .7); }
 .footer-contact { display: flex; align-items: center; gap: 10px; margin-top: 8px; font-size: 15px; color: rgba(255, 255, 255, .85); overflow-wrap: anywhere; }
@@ -424,11 +433,6 @@ section { position: relative; }
 .footer-offices b { display: block; font-size: 15px; font-weight: 600; color: #fff; }
 .footer-offices span { display: block; margin-top: 2px; font-size: 14px; color: rgba(255, 255, 255, .62); }
 .footer-seo { margin: 22px 0 0; font-size: 13px; line-height: 1.7; color: rgba(255, 255, 255, .42); }
-.footer-mark { position: absolute; left: 0; right: 0; top: 50%; transform: translateY(-50%); z-index: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(120px, 27vw, 400px); line-height: .8; letter-spacing: -0.03em; text-align: center; white-space: nowrap; color: transparent; user-select: none; pointer-events: none; }
-/* outline only, coloured like the logo: La in purple, Sän in yellow */
-.footer-mark .mk-p { -webkit-text-stroke: 2px rgba(160, 40, 160, .55); }
-.footer-mark .mk-y { -webkit-text-stroke: 2px rgba(255, 204, 0, .4); }
-.site-footer > .wrap { position: relative; z-index: 1; }
 .footer-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-top: 22px; font-size: 14px; color: rgba(255, 255, 255, .55); }
 .to-top { display: inline-flex; align-items: center; gap: 8px; font-weight: 600; color: rgba(255, 255, 255, .8); }
 .to-top .i { width: 16px; height: 16px; }

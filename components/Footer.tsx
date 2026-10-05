@@ -5,7 +5,6 @@ import { CONTACT, MEGA, OFFICES, SEO_TAGS } from '@/lib/content';
 export default function Footer() {
   return (
     <footer className="site-footer">
-      <div className="footer-mark" aria-hidden="true"><span className="mk-p">La</span><span className="mk-y">Sän</span></div>
       <div className="wrap">
         <div className="footer-grid">
           <div className="footer-brand">
