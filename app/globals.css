@@ -410,13 +410,13 @@ section { position: relative; }
 @media (max-width: 860px) { .cta { grid-template-columns: 1fr; padding: 44px 22px; border-radius: 10px; } }
 
 /* big outlined LaSän above the footer (home page): La in purple, Sän in yellow, like the logo */
-.brand-mark { margin: 0 0 -50px; font-family: var(--font-display); font-weight: 700; font-size: clamp(72px, 15vw, 220px); line-height: .78; letter-spacing: -0.03em; text-align: center; white-space: nowrap; overflow: hidden; color: transparent; user-select: none; }
+.brand-mark { margin: 0 0 -.3em; font-family: var(--font-display); font-weight: 700; font-size: clamp(72px, 15vw, 220px); line-height: 1.1; letter-spacing: -0.03em; text-align: center; white-space: nowrap; color: transparent; user-select: none; }
 .brand-mark span { transition: color .6s var(--ease); }
 .brand-mark .mk-p { -webkit-text-stroke: 2px #a62ea6; }
 .brand-mark .mk-y { -webkit-text-stroke: 2px var(--gold); }
 .brand-mark:hover .mk-p { color: rgba(128, 0, 128, .45); }
 .brand-mark:hover .mk-y { color: rgba(255, 204, 0, .3); }
-@media (max-width: 620px) { .brand-mark { margin-bottom: -40px; } .brand-mark span { -webkit-text-stroke-width: 1.5px; } }
+@media (max-width: 620px) { .brand-mark span { -webkit-text-stroke-width: 1.5px; } }
 
 /* footer */
 .site-footer { color: #fff; padding: 72px 0 28px; margin-top: 110px; background: #0a0012; border-top: 3px solid var(--gold); }
