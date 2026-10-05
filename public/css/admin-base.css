@@ -10,6 +10,8 @@
   --radius: 18px; --ease: cubic-bezier(.2, .8, .2, 1);
 }
 *, *::before, *::after { box-sizing: border-box; }
+/* screens use display: grid/flex, which would otherwise override the hidden attribute */
+[hidden] { display: none !important; }
 body { margin: 0; font-family: var(--font-body); font-size: 15px; line-height: 1.6; color: var(--text); background: var(--cream); }
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
