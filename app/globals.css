@@ -750,7 +750,7 @@ section { position: relative; }
 /* The "Powered by Lasan Labs" signature keeps Lasan's own look. */
 .lasan-signature {
   font-family: var(--font-space-grotesk), var(--font-sans);
-  font-weight: 700;
+  font-weight: 600; /* font-semibold */
   letter-spacing: -0.025em;
   background: linear-gradient(100deg, #3b2a8f 10%, #6843f5 55%, #0891b2);
   -webkit-background-clip: text;
