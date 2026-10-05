@@ -50,7 +50,19 @@ export default function Effects() {
         io.unobserve(el);
       }
     }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    const observe = () => document.querySelectorAll('.reveal:not(.in), .reveal-img:not(.in), .step:not(.in)').forEach(el => io.observe(el));
+    // .reveal-img starts fully clipped, which never counts as intersecting, so watch its parent instead
+    const imgIo = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        e.target.querySelectorAll(':scope > .reveal-img').forEach(el => el.classList.add('in'));
+        imgIo.unobserve(e.target);
+      }
+    }, { threshold: 0.1 });
+    cleanups.push(() => imgIo.disconnect());
+    const observe = () => {
+      document.querySelectorAll('.reveal:not(.in), .step:not(.in)').forEach(el => io.observe(el));
+      document.querySelectorAll('.reveal-img:not(.in)').forEach(el => el.parentElement && imgIo.observe(el.parentElement));
+    };
     observe();
     // content rendered later (e.g. fetched article cards)
     const mo = new MutationObserver(observe);

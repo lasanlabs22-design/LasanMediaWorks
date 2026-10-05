@@ -94,8 +94,61 @@ export const VALUES = [
   ['Excellence with Velocity', 'Precision at speed. We deliver high-fidelity growth strategies in the blink of an eye.'],
 ] as const;
 
-export const CLIENTS_A = ['Delhi Public School', 'Atlantis', 'Sri Venkateshwara Childrens High School', 'Edify School', 'Spring Dale Public School', 'Polar Bear', 'AP Diagnostics', 'Robo Liquor Mall', 'Ignite Resto Bar', 'Robo Diner', 'Firoz Dental', 'Lathas Sri Ankura Fertility', 'MS Hospital', 'Sri Padmavathi Multispeciality Hospital', 'Tara Multispeciality Hospital', 'Ganta Neuro Hospitals', 'Mom and Me Clinic', 'AJ Dental Care', 'Medwell Surgicals', 'Sarayu Natural Healthcare', 'Barat Khadi Bhandhar', 'Kick Bunk Bar and Restaurant', 'Leela Gardens', 'Aloha Resorts', 'Vivaha Events'];
-export const CLIENTS_B = ['Asha Conventions', 'Beauty Basket', 'Rainbow Events', 'Sapthapadi Matrimony', 'Design and Integration', 'Blending', 'Om Prasanthi Fabric Works', 'Lakshmi Design Emporium', 'Sri Durgis', 'House of Varnam', 'Aakrithi Boutique', 'Kimai', 'Sri Nikhila Travels', 'Shizaa', 'Hotel Rajahamsa', 'Hotel Kinnera', 'Star Mandi Restaurant', 'Spicy Paradise Restaurant', 'Gokul Buds', 'MS Enterprises', 'Phoenix', 'Lod Interiors', 'Vaarahi Developers', 'LS Interiors', 'Nakshatra'];
+export type Client = { name: string; logo: string };
+export const CLIENTS_A: Client[] = [
+  { name: 'Delhi Public School', logo: '/img/clients/delhi-public-school.png' },
+  { name: 'Atlantis', logo: '/img/clients/atlantis.png' },
+  { name: 'Sri Venkateshwara Childrens High School', logo: '/img/clients/sri-venkateshwara-childrens-high-school.png' },
+  { name: 'Edify School', logo: '/img/clients/edify-school.png' },
+  { name: 'Spring Dale Public School', logo: '/img/clients/spring-dale-public-school.png' },
+  { name: 'Polar Bear', logo: '/img/clients/polar-bear.png' },
+  { name: 'AP Diagnostics', logo: '/img/clients/ap-diagnostics.png' },
+  { name: 'Robo Liquor Mall', logo: '/img/clients/robo-liquor-mall.png' },
+  { name: 'Ignite Resto Bar', logo: '/img/clients/ignite-resto-bar.png' },
+  { name: 'Robo Diner', logo: '/img/clients/robo-diner.png' },
+  { name: 'Firoz Dental', logo: '/img/clients/firoz-dental.png' },
+  { name: 'Lathas Sri Ankura Fertility', logo: '/img/clients/lathas-sri-ankura-fertility.png' },
+  { name: 'MS Hospital', logo: '/img/clients/ms-hospital.png' },
+  { name: 'Sri Padmavathi Multispeciality Hospital', logo: '/img/clients/sri-padmavathi-multispeciality-hospital.png' },
+  { name: 'Tara Multispeciality Hospital', logo: '/img/clients/tara-multispeciality-hospital.png' },
+  { name: 'Ganta Neuro Hospitals', logo: '/img/clients/ganta-neuro-hospitals.png' },
+  { name: 'Mom and Me Clinic', logo: '/img/clients/mom-and-me-clinic.png' },
+  { name: 'AJ Dental Care', logo: '/img/clients/aj-dental-care.png' },
+  { name: 'Medwell Surgicals', logo: '/img/clients/medwell-surgicals.png' },
+  { name: 'Sarayu Natural Healthcare', logo: '/img/clients/sarayu-natural-healthcare.png' },
+  { name: 'Barat Khadi Bhandhar', logo: '/img/clients/barat-khadi-bhandhar.png' },
+  { name: 'Kick Bunk Bar and Restaurant', logo: '/img/clients/kick-bunk-bar-and-restaurant.png' },
+  { name: 'Leela Gardens', logo: '/img/clients/leela-gardens.png' },
+  { name: 'Aloha Resorts', logo: '/img/clients/aloha-resorts.png' },
+  { name: 'Vivaha Events', logo: '/img/clients/vivaha-events.png' },
+];
+export const CLIENTS_B: Client[] = [
+  { name: 'Asha Conventions', logo: '/img/clients/asha-conventions.png' },
+  { name: 'Beauty Basket', logo: '/img/clients/beauty-basket.png' },
+  { name: 'Rainbow Events', logo: '/img/clients/rainbow-events.png' },
+  { name: 'Sapthapadi Matrimony', logo: '/img/clients/sapthapadi-matrimony.png' },
+  { name: 'Design and Integration', logo: '/img/clients/design-and-integration.png' },
+  { name: 'Blending', logo: '/img/clients/blending.png' },
+  { name: 'Om Prasanthi Fabric Works', logo: '/img/clients/om-prasanthi-fabric-works.png' },
+  { name: 'Lakshmi Design Emporium', logo: '/img/clients/lakshmi-design-emporium.png' },
+  { name: 'Sri Durgis', logo: '/img/clients/sri-durgis.png' },
+  { name: 'House of Varnam', logo: '/img/clients/house-of-varnam.png' },
+  { name: 'Aakrithi Boutique', logo: '/img/clients/aakrithi-boutique.png' },
+  { name: 'Kimai', logo: '/img/clients/kimai.png' },
+  { name: 'Sri Nikhila Travels', logo: '/img/clients/sri-nikhila-travels.png' },
+  { name: 'Shizaa', logo: '/img/clients/shizaa.png' },
+  { name: 'Hotel Rajahamsa', logo: '/img/clients/hotel-rajahamsa.png' },
+  { name: 'Hotel Kinnera', logo: '/img/clients/hotel-kinnera.png' },
+  { name: 'Star Mandi Restaurant', logo: '/img/clients/star-mandi-restaurant.png' },
+  { name: 'Spicy Paradise Restaurant', logo: '/img/clients/spicy-paradise-restaurant.png' },
+  { name: 'Gokul Buds', logo: '/img/clients/gokul-buds.png' },
+  { name: 'MS Enterprises', logo: '/img/clients/ms-enterprises.png' },
+  { name: 'Phoenix', logo: '/img/clients/phoenix.png' },
+  { name: 'Lod Interiors', logo: '/img/clients/lod-interiors.png' },
+  { name: 'Vaarahi Developers', logo: '/img/clients/vaarahi-developers.png' },
+  { name: 'LS Interiors', logo: '/img/clients/ls-interiors.png' },
+  { name: 'Nakshatra', logo: '/img/clients/nakshatra.png' },
+];
 
 export const HELP: { icon: IconName; title: string; text: string; href: string; img: string }[] = [
   { icon: 'compass', title: 'Business Strategy', text: 'Market research, audits and a growth roadmap built around ROI — so every rupee has a job.', href: '/strategy', img: '/img/stock/s-business.jpg' },

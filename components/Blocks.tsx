@@ -1,7 +1,7 @@
 // Small presentational pieces shared across pages (server components).
 import Link from 'next/link';
 import Icon, { Arrow } from './Icon';
-import { BLUEPRINT, CASES, CLIENTS_A, CLIENTS_B, CONTACT, FAQ, HELP, NUMBERS, OFFICES, PROCESS, TEAM, TESTIMONIALS, VALUES, type Solution } from '@/lib/content';
+import { BLUEPRINT, CASES, CLIENTS_A, CLIENTS_B, CONTACT, FAQ, HELP, NUMBERS, OFFICES, PROCESS, TEAM, TESTIMONIALS, VALUES, type Client, type Solution } from '@/lib/content';
 import type { ArticleSummary } from '@/lib/store';
 
 export function SectionHead({ eyebrow, title, accent, text, children }: { eyebrow: string; title: string; accent?: string; text?: string; children?: React.ReactNode }) {
@@ -134,9 +134,15 @@ export function Values() {
 }
 
 export function Clients() {
-  const row = (list: string[], rev = false) => (
+  // each row is doubled so the marquee loops seamlessly; the copy is hidden from screen readers
+  const row = (list: Client[], rev = false) => (
     <div className={`clients-row${rev ? ' rev' : ''}`}>
-      {[...list, ...list].map((c, i) => <span key={i} aria-hidden={i >= list.length ? true : undefined}>{c}</span>)}
+      {[...list, ...list].map((c, i) => (
+        <span className="client-tile" key={i} title={c.name} aria-hidden={i >= list.length ? true : undefined}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src={c.logo} alt={i >= list.length ? '' : c.name} loading="lazy" />
+        </span>
+      ))}
     </div>
   );
   return <div className="clients" aria-label="Clients">{row(CLIENTS_A)}{row(CLIENTS_B, true)}</div>;
