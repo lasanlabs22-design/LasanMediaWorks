@@ -47,6 +47,8 @@ export default function Footer() {
           {SEO_TAGS.join(' · ')}
         </p>
 
+        <div className="footer-mark" aria-hidden="true">LaSän</div>
+
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} LaSän Media Works. All rights reserved.</span>
           <a href="#top" className="to-top">Back to top <Icon name="up" /></a>
