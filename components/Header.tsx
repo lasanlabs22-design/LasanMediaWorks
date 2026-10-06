@@ -51,6 +51,7 @@ export default function Header() {
           <Link href="/" className="logo" aria-label="LaSän Media Works — home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/img/logo.png" alt="LaSän Media Works" width={624} height={782} />
+            <span className="logo-name" aria-hidden="true"><b>LaSän Media Works</b><small>Private Limited</small></span>
           </Link>
           <div className="nav-menu" id="nav-menu">
             <ul className="nav-links">

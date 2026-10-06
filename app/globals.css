@@ -95,6 +95,15 @@ a:hover .more-link svg, .more-link:hover svg { transform: translateX(5px); }
 .logo { display: flex; align-items: center; gap: 10px; flex-shrink: 0; }
 .logo img { height: 54px; width: auto; }
 .site-footer .logo img { height: 64px; }
+/* company name beside the logo, same type treatment as the Lasan Labs signature */
+.logo-name { display: flex; flex-direction: column; justify-content: center; line-height: 1.1; font-family: var(--font-space-grotesk), var(--font-sans); font-weight: 600; letter-spacing: -0.025em; white-space: nowrap; }
+.logo-name b, .logo-name small {
+  font-weight: 600; background: linear-gradient(100deg, #ffffff 10%, #e2c8f5 55%, var(--gold)); -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.logo-name b { font-size: 15px; }
+.logo-name small { margin-top: 3px; font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; }
+.site-footer .logo-name b { font-size: 17px; }
+.site-footer .logo-name small { font-size: 10.5px; }
 .nav-menu { display: flex; align-items: center; gap: 16px; }
 .nav-links { display: flex; list-style: none; margin: 0; padding: 0; }
 .nav-links > li { display: flex; align-items: center; height: var(--header-h); }
