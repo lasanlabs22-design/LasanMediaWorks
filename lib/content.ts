@@ -436,7 +436,7 @@ export const TEAM = [
   {
     name: "Santhosh Rokaya",
     role: "Co-Founder & CEO",
-    photo: "/img/team/santhosh-rokaya.jpg",
+    photo: "/img/team/santhosh-rokaya.webp",
   },
   {
     name: "Jagadeesh SH",
@@ -709,7 +709,7 @@ export const ABOUT_TEAM = [
   {
     name: "Santhosh Rokaya",
     role: "Co-Founder & CEO",
-    photo: "/img/team/santhosh-rokaya.jpg",
+    photo: "/img/team/santhosh-rokaya.webp",
   },
   {
     name: "Jagadeesh SH",
@@ -728,7 +728,7 @@ export const ABOUT_TEAM = [
     photo: "/img/team/gayathri-k.png",
   },
   { name: "Sidhu", role: "Sales Team Leader", photo: "/img/team/sidhu.png" },
-  { name: "Aaron Amit Birru", role: "Full Stack Software Engineer", photo: "/img/team/aaron-amit-birru.webp" },
+  { name: "Aaron Amit", role: "Full Stack Software Engineer", photo: "/img/team/aaron-amit.webp" },
   { name: "Babar", role: "Editor", photo: "/img/team/babar.png" },
   { name: "Sasmith", role: "Videographer", photo: "/img/team/sasmith.png" },
   {
