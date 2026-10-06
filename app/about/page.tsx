@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 const monthLabel = (m: string) => new Date(`${m}-01T00:00:00Z`).toLocaleDateString('en-IN', { month: 'long', year: 'numeric', timeZone: 'UTC' });
 
 export default function AboutPage() {
-  const [winner, ...past] = readRecognition();
+  const winners = readRecognition();
   return (
     <>
       <PageHero crumb="About" eyebrow="About us" title="About" accent="LaSän Media Works" text="Your trusted partner in growth, innovation, and digital excellence since 2021." img="/img/stock/h-about.jpg" actions={false} />
@@ -72,39 +72,28 @@ export default function AboutPage() {
       </section>
 
       {/* BEST PERFORMERS */}
-      {winner && (
+      {winners.length > 0 && (
         <section className="section recog" id="performers">
           <div className="wrap">
             <CenterHead eyebrow="Recognition" title="Best" accent="Performers" />
-            <article className="eotm reveal">
-              <span className="eotm-badge">★ Employee of the Month</span>
-              <figure className="eotm-photo">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={winner.photo} alt={winner.name} />
-              </figure>
-              <span className="eotm-month">{monthLabel(winner.month)}</span>
-              <h3>{winner.name}</h3>
-              {winner.role && <p className="eotm-role">{winner.role}</p>}
-              <blockquote className="eotm-quote">
-                <p>{winner.quote}</p>
-                {winner.quoteBy && <cite>{winner.quoteBy}</cite>}
-              </blockquote>
-            </article>
-
-            {past.length > 0 && (
-              <>
-                <h3 className="hof-h reveal">Hall of <em>Fame</em></h3>
-                <div className="hof">
-                  {past.map(p => (
-                    <figure className="hof-card reveal" key={p.id}>
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img src={p.photo} alt={p.name} loading="lazy" />
-                      <figcaption><b>{p.name}</b><span>{monthLabel(p.month)}</span></figcaption>
-                    </figure>
-                  ))}
-                </div>
-              </>
-            )}
+            <div className="eotm-grid">
+              {winners.map((w, i) => (
+                <article className={`eotm reveal${i === 0 ? ' current' : ''}`} key={w.id}>
+                  <span className="eotm-badge">{i === 0 ? '★ Employee of the Month' : 'Best Performer'}</span>
+                  <figure className="eotm-photo">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={w.photo} alt={w.name} loading={i < 4 ? undefined : 'lazy'} />
+                  </figure>
+                  <span className="eotm-month">{monthLabel(w.month)}</span>
+                  <h3>{w.name}</h3>
+                  {w.role && <p className="eotm-role">{w.role}</p>}
+                  <blockquote className="eotm-quote">
+                    <p>{w.quote}</p>
+                    {w.quoteBy && <cite>{w.quoteBy}</cite>}
+                  </blockquote>
+                </article>
+              ))}
+            </div>
           </div>
         </section>
       )}

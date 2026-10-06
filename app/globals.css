@@ -482,42 +482,44 @@ section { position: relative; }
 .journey b { display: block; font-family: var(--font-display); font-size: 26px; color: var(--gold); line-height: 1; }
 .journey span { display: block; margin-top: 8px; color: var(--muted); font-size: 15px; }
 .recog { background: radial-gradient(700px 420px at 50% 38%, rgba(128, 0, 128, .32), transparent 70%), var(--bg); }
+.eotm-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
 .eotm {
-  position: relative; max-width: 420px; margin: 0 auto; padding: 26px 28px 24px; text-align: center; border-radius: 16px; overflow: hidden;
-  background: linear-gradient(180deg, var(--d2), var(--surface) 62%); border: 1px solid rgba(255, 204, 0, .28);
-  box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .8), inset 0 1px 0 rgba(255, 255, 255, .06);
+  position: relative; padding: 18px 16px 18px; text-align: center; border-radius: 14px; overflow: hidden;
+  background: linear-gradient(180deg, var(--surface-2), var(--surface) 60%); border: 1px solid var(--line);
+  box-shadow: 0 20px 40px -26px rgba(0, 0, 0, .8); transition: transform .4s var(--ease), border-color .4s;
 }
-.eotm::before { content: ''; position: absolute; inset: -40% -20% auto; height: 70%; background: radial-gradient(closest-side, rgba(255, 204, 0, .14), transparent); pointer-events: none; }
+.eotm:hover { transform: translateY(-3px); border-color: var(--line-strong); }
+.eotm.current { background: linear-gradient(180deg, var(--d2), var(--surface) 62%); border-color: rgba(255, 204, 0, .4); box-shadow: 0 20px 44px -24px rgba(255, 204, 0, .3); }
+.eotm.current::before { content: ''; position: absolute; inset: -40% -20% auto; height: 70%; background: radial-gradient(closest-side, rgba(255, 204, 0, .14), transparent); pointer-events: none; }
 .eotm-badge {
-  position: relative; display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--d0); background: linear-gradient(90deg, #ffb800, var(--gold), #ffe680, var(--gold), #ffb800); background-size: 200% 100%; animation: shimmer 4s linear infinite;
+  position: relative; display: inline-block; padding: 4px 11px; border-radius: 999px; font-size: 10px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--muted); border: 1px solid var(--line-strong);
 }
-.eotm-photo { position: relative; width: min(170px, 60%); aspect-ratio: 4 / 5; margin: 20px auto 0; padding: 3px; border-radius: 100px 100px 12px 12px; background: conic-gradient(from 180deg, var(--gold), #ff8a00, var(--purple), var(--gold)); box-shadow: 0 0 44px -10px rgba(255, 204, 0, .4); }
-.eotm-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 97px 97px 9px 9px; display: block; background: var(--surface); }
-.eotm-month { display: block; margin-top: 16px; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
-.eotm h3 { margin: 4px 0 0; font-size: clamp(22px, 2.4vw, 26px); color: #fff; line-height: 1.15; }
-.eotm-role { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
-.eotm-quote { position: relative; margin: 20px auto 0; padding-top: 18px; border-top: 1px solid var(--line); }
-.eotm-quote::before { content: '\201C'; position: absolute; left: 50%; top: -18px; transform: translateX(-50%); padding: 0 10px; background: var(--surface); font-family: Georgia, serif; font-size: 42px; line-height: 1; color: var(--gold); }
-.eotm-quote p { margin: 0; font-size: 15px; line-height: 1.55; font-style: italic; color: var(--text); }
-.eotm-quote cite { display: block; margin-top: 8px; font-style: normal; font-size: 12px; color: var(--muted); }
+.eotm.current .eotm-badge {
+  color: var(--d0); border-color: transparent;
+  background: linear-gradient(90deg, #ffb800, var(--gold), #ffe680, var(--gold), #ffb800); background-size: 200% 100%; animation: shimmer 4s linear infinite;
+}
+.eotm-photo { position: relative; width: min(120px, 62%); aspect-ratio: 4 / 5; margin: 14px auto 0; padding: 2px; border-radius: 70px 70px 10px 10px; background: var(--line-strong); }
+.eotm.current .eotm-photo { padding: 3px; background: conic-gradient(from 180deg, var(--gold), #ff8a00, var(--purple), var(--gold)); box-shadow: 0 0 32px -8px rgba(255, 204, 0, .45); }
+.eotm-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 68px 68px 8px 8px; display: block; background: var(--surface); }
+.eotm-month { display: block; margin-top: 12px; font-size: 10px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); }
+.eotm h3 { margin: 3px 0 0; font-size: 18px; color: #fff; line-height: 1.2; }
+.eotm-role { margin: 1px 0 0; color: var(--muted); font-size: 12.5px; }
+.eotm-quote { position: relative; margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--line); }
+.eotm-quote::before { content: '\201C'; position: absolute; left: 50%; top: -13px; transform: translateX(-50%); padding: 0 8px; background: var(--surface); font-family: Georgia, serif; font-size: 30px; line-height: 1; color: var(--gold); }
+.eotm-quote p { margin: 0; font-size: 13px; line-height: 1.5; font-style: italic; color: var(--text); }
+.eotm-quote cite { display: block; margin-top: 6px; font-style: normal; font-size: 11px; color: var(--muted); }
 .eotm-quote cite::before { content: '- '; }
-.hof-h { margin: 48px 0 20px; text-align: center; font-size: clamp(22px, 2.4vw, 28px); }
-.hof { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 180px)); justify-content: center; gap: 16px; }
-.hof-card { position: relative; margin: 0; border-radius: 10px; overflow: hidden; aspect-ratio: 4 / 5; border: 1px solid var(--line); background: var(--surface); }
-.hof-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
-.hof-card:hover img { transform: scale(1.04); }
-.hof-card figcaption { position: absolute; inset: auto 0 0; padding: 40px 14px 12px; background: linear-gradient(180deg, transparent, rgba(13, 0, 22, .92)); }
-.hof-card b { display: block; color: #fff; font-size: 15px; }
-.hof-card span { font-size: 12px; color: var(--gold); }
 @media (max-width: 900px) {
   .vm { grid-template-columns: 1fr; }
   .journey { grid-template-columns: 1fr; gap: 22px; }
   .journey::before { left: 7px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
   .journey li { padding: 0 0 0 36px; }
   .journey li::before { top: 2px; }
-  .eotm { padding: 24px 18px 22px; }
-  .hof { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .eotm-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .eotm { padding: 14px 10px; }
+  .eotm-badge { font-size: 9px; padding: 4px 8px; letter-spacing: .08em; }
+  .eotm-quote p { font-size: 12px; }
 }
 
 .audience { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
