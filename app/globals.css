@@ -483,27 +483,27 @@ section { position: relative; }
 .journey span { display: block; margin-top: 8px; color: var(--muted); font-size: 15px; }
 .recog { background: radial-gradient(700px 420px at 50% 38%, rgba(128, 0, 128, .32), transparent 70%), var(--bg); }
 .eotm {
-  position: relative; max-width: 640px; margin: 0 auto; padding: 46px 40px 40px; text-align: center; border-radius: 16px; overflow: hidden;
+  position: relative; max-width: 420px; margin: 0 auto; padding: 26px 28px 24px; text-align: center; border-radius: 16px; overflow: hidden;
   background: linear-gradient(180deg, var(--d2), var(--surface) 62%); border: 1px solid rgba(255, 204, 0, .28);
   box-shadow: 0 30px 70px -30px rgba(0, 0, 0, .8), inset 0 1px 0 rgba(255, 255, 255, .06);
 }
 .eotm::before { content: ''; position: absolute; inset: -40% -20% auto; height: 70%; background: radial-gradient(closest-side, rgba(255, 204, 0, .14), transparent); pointer-events: none; }
 .eotm-badge {
-  position: relative; display: inline-block; padding: 8px 18px; border-radius: 999px; font-size: 12px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
+  position: relative; display: inline-block; padding: 6px 14px; border-radius: 999px; font-size: 11px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase;
   color: var(--d0); background: linear-gradient(90deg, #ffb800, var(--gold), #ffe680, var(--gold), #ffb800); background-size: 200% 100%; animation: shimmer 4s linear infinite;
 }
-.eotm-photo { position: relative; width: min(260px, 70%); aspect-ratio: 4 / 5; margin: 30px auto 0; padding: 4px; border-radius: 140px 140px 14px 14px; background: conic-gradient(from 180deg, var(--gold), #ff8a00, var(--purple), var(--gold)); box-shadow: 0 0 60px -10px rgba(255, 204, 0, .4); }
-.eotm-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 136px 136px 10px 10px; display: block; background: var(--surface); }
-.eotm-month { display: block; margin-top: 24px; font-size: 12px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
-.eotm h3 { margin: 8px 0 0; font-size: clamp(28px, 4vw, 40px); color: #fff; line-height: 1.1; }
-.eotm-role { margin: 6px 0 0; color: var(--muted); font-size: 15px; }
-.eotm-quote { position: relative; margin: 26px auto 0; padding-top: 26px; max-width: 460px; border-top: 1px solid var(--line); }
-.eotm-quote::before { content: '\201C'; position: absolute; left: 50%; top: -24px; transform: translateX(-50%); padding: 0 12px; background: var(--surface); font-family: Georgia, serif; font-size: 56px; line-height: 1; color: var(--gold); }
-.eotm-quote p { margin: 0; font-size: 18px; line-height: 1.6; font-style: italic; color: var(--text); }
-.eotm-quote cite { display: block; margin-top: 12px; font-style: normal; font-size: 13px; color: var(--muted); }
+.eotm-photo { position: relative; width: min(170px, 60%); aspect-ratio: 4 / 5; margin: 20px auto 0; padding: 3px; border-radius: 100px 100px 12px 12px; background: conic-gradient(from 180deg, var(--gold), #ff8a00, var(--purple), var(--gold)); box-shadow: 0 0 44px -10px rgba(255, 204, 0, .4); }
+.eotm-photo img { width: 100%; height: 100%; object-fit: cover; border-radius: 97px 97px 9px 9px; display: block; background: var(--surface); }
+.eotm-month { display: block; margin-top: 16px; font-size: 11px; font-weight: 600; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+.eotm h3 { margin: 4px 0 0; font-size: clamp(22px, 2.4vw, 26px); color: #fff; line-height: 1.15; }
+.eotm-role { margin: 2px 0 0; color: var(--muted); font-size: 14px; }
+.eotm-quote { position: relative; margin: 20px auto 0; padding-top: 18px; border-top: 1px solid var(--line); }
+.eotm-quote::before { content: '\201C'; position: absolute; left: 50%; top: -18px; transform: translateX(-50%); padding: 0 10px; background: var(--surface); font-family: Georgia, serif; font-size: 42px; line-height: 1; color: var(--gold); }
+.eotm-quote p { margin: 0; font-size: 15px; line-height: 1.55; font-style: italic; color: var(--text); }
+.eotm-quote cite { display: block; margin-top: 8px; font-style: normal; font-size: 12px; color: var(--muted); }
 .eotm-quote cite::before { content: '- '; }
-.hof-h { margin: 64px 0 22px; text-align: center; font-size: clamp(22px, 2.4vw, 28px); }
-.hof { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 220px)); justify-content: center; gap: 16px; }
+.hof-h { margin: 48px 0 20px; text-align: center; font-size: clamp(22px, 2.4vw, 28px); }
+.hof { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 180px)); justify-content: center; gap: 16px; }
 .hof-card { position: relative; margin: 0; border-radius: 10px; overflow: hidden; aspect-ratio: 4 / 5; border: 1px solid var(--line); background: var(--surface); }
 .hof-card img { width: 100%; height: 100%; object-fit: cover; transition: transform .6s var(--ease); }
 .hof-card:hover img { transform: scale(1.04); }
@@ -516,7 +516,7 @@ section { position: relative; }
   .journey::before { left: 7px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
   .journey li { padding: 0 0 0 36px; }
   .journey li::before { top: 2px; }
-  .eotm { padding: 36px 20px 30px; }
+  .eotm { padding: 24px 18px 22px; }
   .hof { grid-template-columns: repeat(2, 1fr); gap: 12px; }
 }
 
