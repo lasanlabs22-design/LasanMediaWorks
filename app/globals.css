@@ -305,17 +305,18 @@ section { position: relative; }
 @media (max-width: 560px) { .offer-cards { grid-template-columns: 1fr; } }
 
 /* team */
-.team { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.team { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; } /* same grid and card shape as .eotm-grid */
 .member { position: relative; border-radius: 10px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); transition: transform .4s var(--ease), border-color .4s; }
 .member:hover { transform: translateY(-3px); border-color: var(--line-strong); }
-.member-photo { position: relative; aspect-ratio: 4 / 4.2; overflow: hidden; background: var(--grad); }
+.member-photo { position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--grad); }
 .member-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top center; transition: transform 1.2s var(--ease-out), filter .6s; filter: saturate(.9); }
 .member:hover .member-photo img { transform: scale(1.06); filter: saturate(1.05); }
 .member-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 55%, rgba(35, 0, 57, .9)); }
 .member-info { position: absolute; left: 20px; right: 20px; bottom: 18px; z-index: 1; }
 .member h3 { font-size: 17px; }
 .member p { margin: 2px 0 0; font-size: 13.5px; font-weight: 500; color: var(--accent); }
-@media (max-width: 960px) { .team { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 1100px) { .team { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px) { .team { grid-template-columns: 1fr 1fr; } }
 @media (max-width: 560px) { .team { grid-template-columns: 1fr; } }
 
 /* service tabs */
