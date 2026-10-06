@@ -15,8 +15,10 @@ export default function Footer() {
               <span aria-hidden="true"><BrandName after=" Media Works" sub="Private Limited" className="logo-name" /></span>
             </Link>
             <p>A growth agency helping SMEs and startups grow through strategy, creative and technology.</p>
-            <a href={CONTACT.tel} className="footer-contact"><Icon name="phone" /> {CONTACT.phone}</a>
-            <a href={`mailto:${CONTACT.email}`} className="footer-contact"><Icon name="mail" /> {CONTACT.email}</a>
+            <div className="footer-contacts">
+              <a href={CONTACT.tel} className="footer-contact"><Icon name="phone" /> {CONTACT.phone}</a>
+              <a href={`mailto:${CONTACT.email}`} className="footer-contact"><Icon name="mail" /> {CONTACT.email}</a>
+            </div>
           </div>
           <nav aria-label="Services">
             <h4>Services</h4>
@@ -33,30 +35,33 @@ export default function Footer() {
               <li><Link href="/articles">Articles</Link></li>
               <li><Link href="/careers">Careers</Link></li>
               <li><Link href="/book-appointment">Book Appointment</Link></li>
-              <li><Link href="/">Home</Link></li>
             </ul>
           </nav>
         </div>
 
-        <div className="footer-offices">
-          {OFFICES.map(o => (
-            <div key={o.city}><b>{o.city}{o.hq ? ' (HQ)' : ''}</b><span>{o.address}</span></div>
-          ))}
+        <div className="footer-mid">
+          <ul className="footer-offices" aria-label="Offices">
+            {OFFICES.map(o => (
+              <li key={o.city} title={o.address}><Icon name="pin" /> {o.city.replace(', IND', '')}{o.hq ? <em>HQ</em> : null}<span>{o.address}</span></li>
+            ))}
+          </ul>
+          <details className="footer-seo">
+            <summary>Areas we serve</summary>
+            <p>
+              Digital marketing, SEO and branding agency serving Tirupati, Andhra Pradesh, Karnataka, Telangana and across India.{' '}
+              {SEO_TAGS.join(' · ')}
+            </p>
+          </details>
         </div>
 
-        <p className="footer-seo">
-          Digital marketing, SEO and branding agency serving Tirupati, Andhra Pradesh, Karnataka, Telangana and across India.{' '}
-          {SEO_TAGS.join(' · ')}
-        </p>
-
         <div className="footer-bottom">
-          <span>© {new Date().getFullYear()} LaSän Media Works. All rights reserved.</span>
+          <span>© {new Date().getFullYear()} LaSän Media Works Private Limited</span>
           <nav className="footer-legal" aria-label="Legal">
             <Link href="/privacy-policy">Privacy Policy</Link>
             <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
           </nav>
           <span className="powered">Powered by <span className="lasan-signature">Lasan Labs</span></span>
-          <a href="#top" className="to-top">Back to top <Icon name="up" /></a>
+          <a href="#top" className="to-top" aria-label="Back to top"><Icon name="up" /></a>
         </div>
       </div>
     </footer>
