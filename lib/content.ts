@@ -200,8 +200,8 @@ export const MARQUEE = [
 export const VENTURES = [
   { logo: "/img/brands/lasan-talks.webp", name: "LaSän Talks", after: " Talks", mark: "Sän", sub: "Podcast" },
   { logo: "/img/brands/life-at-lasan.webp", name: "Life at LaSan", before: "Life at ", mark: "San", sub: "Our People. Our Stories." },
-  { logo: "/img/brands/lasan-labs.webp", name: "LaSan Labs", after: " Labs", mark: "San" },
-  { logo: "/img/brands/lasan-academy.webp", name: "LaSän Academy", after: " Academy", mark: "Sän" },
+  { logo: "/img/brands/lasan-labs.webp", name: "LaSan Labs", after: " Labs", mark: "San", sub: "IT & Software" },
+  { logo: "/img/brands/lasan-academy.webp", name: "LaSän Academy", after: " Academy", mark: "Sän", sub: "Training" },
 ];
 
 export const PROCESS = [
