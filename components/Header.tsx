@@ -3,6 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import BrandName from './BrandName';
 import Icon, { Arrow } from './Icon';
 import { CONTACT, MEGA, NAV } from '@/lib/content';
 
@@ -51,7 +52,7 @@ export default function Header() {
           <Link href="/" className="logo" aria-label="LaSän Media Works — home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src="/img/logo.png" alt="LaSän Media Works" width={624} height={782} />
-            <span className="logo-name" aria-hidden="true"><b>LaSän Media Works</b><small>Private Limited</small></span>
+            <span aria-hidden="true"><BrandName after=" Media Works" sub="Private Limited" className="logo-name" /></span>
           </Link>
           <div className="nav-menu" id="nav-menu">
             <ul className="nav-links">

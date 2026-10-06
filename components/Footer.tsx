@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import BrandName from './BrandName';
 import Icon from './Icon';
 import { CONTACT, MEGA, OFFICES, SEO_TAGS } from '@/lib/content';
 
@@ -11,7 +12,7 @@ export default function Footer() {
             <Link href="/" className="logo" aria-label="LaSän Media Works — home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/img/logo.png" alt="LaSän Media Works" width={624} height={782} loading="lazy" />
-              <span className="logo-name" aria-hidden="true"><b>LaSän Media Works</b><small>Private Limited</small></span>
+              <span aria-hidden="true"><BrandName after=" Media Works" sub="Private Limited" className="logo-name" /></span>
             </Link>
             <p>A growth agency helping SMEs and startups grow through strategy, creative and technology.</p>
             <a href={CONTACT.tel} className="footer-contact"><Icon name="phone" /> {CONTACT.phone}</a>

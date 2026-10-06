@@ -8,7 +8,8 @@ import {
   ArticleCard, Blueprint, Cases, CenterHead, Clients, ContactList, Faq, HelpCards, Numbers, Quotes,
   SectionHead, Steps, Team, Values, VideoBand,
 } from '@/components/Blocks';
-import { INSIGHT_TYPES, MARQUEE, NUMBERS } from '@/lib/content';
+import BrandName from '@/components/BrandName';
+import { INSIGHT_TYPES, MARQUEE, NUMBERS, VENTURES } from '@/lib/content';
 import { publishedArticles } from '@/lib/store';
 
 export const dynamic = 'force-dynamic'; // latest articles come from the admin console
@@ -64,6 +65,24 @@ export default function Home() {
         <div className="wrap">
           <SectionHead eyebrow="The DNA of success" title="The LaSän" accent="core values." text="Beyond metrics and ROI, we are driven by a set of non-negotiable principles that define our impact." />
           <Values />
+        </div>
+      </section>
+
+      {/* SISTER COMPANIES */}
+      <section className="section" id="family">
+        <div className="wrap">
+          <CenterHead eyebrow="The LaSän family" title="More from" accent="LaSän." text="Companies that are part of LaSän Media Works." />
+          <div className="ventures">
+            {VENTURES.map(v => (
+              <article className="venture reveal" key={v.name}>
+                <div className="venture-tile">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={v.logo} alt={`${v.name} logo`} loading="lazy" />
+                </div>
+                <BrandName before={v.before} after={v.after} mark={v.mark} sub={v.sub} />
+              </article>
+            ))}
+          </div>
         </div>
       </section>
 
