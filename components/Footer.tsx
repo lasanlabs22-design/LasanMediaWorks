@@ -56,12 +56,14 @@ export default function Footer() {
 
         <div className="footer-bottom">
           <span>© {new Date().getFullYear()} LaSän Media Works Private Limited</span>
-          <nav className="footer-legal" aria-label="Legal">
-            <Link href="/privacy-policy">Privacy Policy</Link>
-            <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
-          </nav>
           <span className="powered">Powered by <span className="lasan-signature">Lasan Labs</span></span>
-          <a href="#top" className="to-top" aria-label="Back to top"><Icon name="up" /></a>
+          <div className="footer-end">
+            <nav className="footer-legal" aria-label="Legal">
+              <Link href="/privacy-policy">Privacy Policy</Link>
+              <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
+            </nav>
+            <a href="#top" className="to-top" aria-label="Back to top"><Icon name="up" /></a>
+          </div>
         </div>
       </div>
     </footer>

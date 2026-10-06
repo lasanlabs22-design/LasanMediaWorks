@@ -476,8 +476,10 @@ section { position: relative; }
 .footer-seo[open] { flex-basis: 100%; }
 .footer-seo p { margin: 6px 0 4px; font-size: 12.5px; line-height: 1.7; color: rgba(255, 255, 255, .4); }
 
-.footer-bottom { display: flex; align-items: center; flex-wrap: wrap; gap: 6px 28px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, .07); font-size: 13px; color: rgba(255, 255, 255, .5); }
-.footer-bottom > span:first-child { margin-right: auto; }
+/* copyright left, Lasan Labs centred, legal links + back to top right */
+.footer-bottom { display: grid; grid-template-columns: 1fr auto 1fr; align-items: center; gap: 6px 28px; padding-top: 16px; border-top: 1px solid rgba(255, 255, 255, .07); font-size: 13px; color: rgba(255, 255, 255, .5); }
+.footer-bottom .powered { justify-self: center; }
+.footer-end { justify-self: end; display: flex; align-items: center; gap: 22px; }
 .footer-legal { display: flex; gap: 22px; flex-wrap: wrap; }
 .footer-legal a { display: inline-flex; align-items: center; min-height: 44px; color: rgba(255, 255, 255, .6); transition: color .2s; }
 .footer-legal a:hover { color: #fff; }
@@ -487,7 +489,8 @@ section { position: relative; }
 .to-top .i { width: 16px; height: 16px; }
 .to-top:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-2px); }
 @media (max-width: 960px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 40px; } }
-@media (max-width: 620px) { .footer-grid { grid-template-columns: 1fr; } .footer-bottom > span:first-child { flex-basis: 100%; } }
+@media (max-width: 900px) { .footer-bottom { grid-template-columns: 1fr; justify-items: start; } .footer-bottom .powered, .footer-end { justify-self: start; } }
+@media (max-width: 620px) { .footer-grid { grid-template-columns: 1fr; } }
 
 /* inner page hero */
 .page-hero { position: relative; overflow: hidden; isolation: isolate; padding: 200px 0 100px; color: #fff; background: var(--d1); }
