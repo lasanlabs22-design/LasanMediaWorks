@@ -204,6 +204,14 @@ export const VENTURES = [
   { logo: "/img/brands/lasan-academy.webp", name: "LaSän Academy", after: " Academy", mark: "Sän", sub: "Institute" },
 ];
 
+// LaSan Labs section on the About page
+export const LABS = {
+  text: "LaSan Labs is the IT and software arm of LaSän Media Works. The team builds the websites, CRMs and automation behind our clients' growth, including this website.",
+  people: [
+    { name: "Aaron Amit Birru", role: "Full Stack Software Engineer", photo: "/img/team/aaron-amit-birru.webp" },
+  ],
+};
+
 export const PROCESS = [
   {
     title: "Discovery Call",
