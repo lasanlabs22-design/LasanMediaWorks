@@ -36,6 +36,7 @@
       <button data-go="new"><span>＋</span> New article</button>
       <button data-go="jobs"><span>◆</span> Job openings</button>
       <button data-go="careers"><span>✉</span> Careers inbox</button>
+      <button data-go="recognition"><span>★</span> Recognition</button>
       <a href="/articles" target="_blank" rel="noopener"><span>↗</span> View live site</a>
     </nav>
     <button id="logout" class="side-logout">Sign out</button>
@@ -115,6 +116,47 @@
         <button class="mini" id="copy-emails" type="button">Copy all emails</button>
       </div>
       <div class="table" id="subs"></div>
+    </section>
+
+    <!-- RECOGNITION -->
+    <section id="recognition-view" hidden>
+      <header class="console-head">
+        <div><span class="eyebrow">About page</span><h1>Best performers</h1></div>
+        <button class="btn btn-sun" id="rec-new" type="button">＋ New winner</button>
+      </header>
+      <p class="muted" style="margin:-12px 0 20px">The latest month is featured as Employee of the Month on the About page. Earlier months appear in the Hall of Fame below it.</p>
+
+      <form id="rec-form" class="job-form rec-form" hidden>
+        <h2 id="rec-form-title">New winner</h2>
+        <div class="rec-form-grid">
+          <div>
+            <div class="cover-drop rec-drop" id="rec-drop">
+              <img id="rec-img" alt="" hidden>
+              <div id="rec-empty"><b>Drop a photo</b><span>or click to upload · portrait works best · max 5 MB</span></div>
+              <input type="file" id="rec-file" accept="image/png,image/jpeg,image/webp">
+            </div>
+            <div class="cover-actions"><input id="r-photo" maxlength="500" placeholder="…or paste image URL"></div>
+          </div>
+          <div>
+            <div class="job-form-row two">
+              <label class="field"><span>Name *</span><input id="r-name" maxlength="80" required placeholder="e.g. Siddu"></label>
+              <label class="field"><span>Month *</span><input id="r-month" type="month" required></label>
+            </div>
+            <label class="field"><span>Role <em>(optional)</em></span><input id="r-role" maxlength="80" placeholder="e.g. Video Editor"></label>
+            <label class="field"><span>Quote <em>(leave empty for a random one)</em></span><textarea id="r-quote" maxlength="300" rows="3"></textarea></label>
+            <div class="rec-quote-row">
+              <label class="field"><span>Quote by</span><input id="r-quote-by" maxlength="80"></label>
+              <button class="mini" type="button" id="rec-random">🎲 Random quote</button>
+            </div>
+          </div>
+        </div>
+        <div class="job-form-actions">
+          <button class="btn btn-sun" type="submit">Save winner</button>
+          <button class="btn btn-ghost" type="button" id="rec-cancel">Cancel</button>
+        </div>
+      </form>
+
+      <div class="rec-list" id="rec-list"></div>
     </section>
 
     <!-- EDITOR -->

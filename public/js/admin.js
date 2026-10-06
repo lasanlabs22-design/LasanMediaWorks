@@ -91,6 +91,7 @@
     if (view === 'new') return openEditor(null);
     if (view === 'careers') return showCareers();
     if (view === 'jobs') return showJobs();
+    if (view === 'recognition') return showRecognition();
     if (view === 'edit') {
       const a = state.articles.find(x => x.id === id);
       if (a) return openEditor(a);
@@ -118,6 +119,7 @@
     $('#editor-view').hidden = true;
     $('#careers-view').hidden = true;
     $('#jobs-view').hidden = true;
+    $('#recognition-view').hidden = true;
     $('#list-view').hidden = false;
     renderList();
   }
@@ -129,6 +131,7 @@
     $('#list-view').hidden = true;
     $('#editor-view').hidden = true;
     $('#careers-view').hidden = true;
+    $('#recognition-view').hidden = true;
     $('#jobs-view').hidden = false;
     try {
       Object.assign(jobsState, await api('/api/admin/jobs'));
@@ -237,6 +240,7 @@
     $('#list-view').hidden = true;
     $('#editor-view').hidden = true;
     $('#jobs-view').hidden = true;
+    $('#recognition-view').hidden = true;
     $('#careers-view').hidden = false;
     try {
       Object.assign(careers, await api('/api/admin/careers'));
@@ -301,6 +305,129 @@
     const list = careers.subscribers.map(s => s.email).join(', ');
     if (!list) return toast('No emails to copy', 'err');
     navigator.clipboard.writeText(list).then(() => toast(`Copied ${careers.subscribers.length} email(s)`), () => toast('Could not copy', 'err'));
+  });
+
+  /* ---------- recognition (employee of the month) ---------- */
+  const rec = { entries: [], quotes: [], editing: null };
+  const fmtMonth = m => new Date(`${m}-01T00:00:00`).toLocaleDateString('en-IN', { month: 'long', year: 'numeric' });
+
+  async function showRecognition() {
+    $('#list-view').hidden = true;
+    $('#editor-view').hidden = true;
+    $('#careers-view').hidden = true;
+    $('#jobs-view').hidden = true;
+    $('#recognition-view').hidden = false;
+    try {
+      Object.assign(rec, await api('/api/admin/recognition'));
+    } catch (err) {
+      toast(err.message, 'err');
+    }
+    closeRecForm();
+    renderRecognition();
+  }
+
+  function renderRecognition() {
+    $('#rec-list').innerHTML = rec.entries.length ? rec.entries.map((r, i) => `
+      <article class="rec-item${i === 0 ? ' current' : ''}" data-id="${esc(r.id)}">
+        <img src="${esc(r.photo)}" alt="">
+        <div class="rec-body">
+          <span class="badge ${i === 0 ? 'feat' : ''}">${i === 0 ? '★ Featured · ' : ''}${esc(fmtMonth(r.month))}</span>
+          <b>${esc(r.name)}</b>${r.role ? `<small>${esc(r.role)}</small>` : ''}
+          <p>“${esc(r.quote)}”${r.quoteBy ? ` <em>${esc(r.quoteBy)}</em>` : ''}</p>
+          <div class="row-actions">
+            <button class="mini" data-rec="edit">Edit</button>
+            <button class="mini red" data-rec="delete" aria-label="Delete winner">✕</button>
+          </div>
+        </div>
+      </article>`).join('')
+      : '<div class="empty">No winners yet. Click “New winner” to add this month’s best performer.</div>';
+  }
+
+  function updateRecPhoto() {
+    const url = $('#r-photo').value.trim();
+    $('#rec-img').hidden = !url;
+    $('#rec-empty').hidden = !!url;
+    if (url) $('#rec-img').src = url; else $('#rec-img').removeAttribute('src');
+  }
+
+  function openRecForm(r) {
+    rec.editing = r;
+    $('#rec-form-title').textContent = r ? 'Edit winner' : 'New winner';
+    $('#r-name').value = r ? r.name : '';
+    $('#r-role').value = r ? r.role : '';
+    $('#r-month').value = r ? r.month : new Date().toISOString().slice(0, 7);
+    $('#r-photo').value = r ? r.photo : '';
+    $('#r-quote').value = r ? r.quote : '';
+    $('#r-quote-by').value = r ? r.quoteBy : '';
+    updateRecPhoto();
+    $('#rec-form').hidden = false;
+    $('#r-name').focus();
+  }
+
+  function closeRecForm() {
+    rec.editing = null;
+    $('#rec-form').hidden = true;
+  }
+
+  $('#rec-new').addEventListener('click', () => openRecForm(null));
+  $('#rec-cancel').addEventListener('click', closeRecForm);
+  $('#r-photo').addEventListener('input', updateRecPhoto);
+  $('#rec-random').addEventListener('click', () => {
+    const options = rec.quotes.filter(q => q.text !== $('#r-quote').value);
+    const q = options[Math.floor(Math.random() * options.length)];
+    if (!q) return;
+    $('#r-quote').value = q.text;
+    $('#r-quote-by').value = q.by;
+  });
+
+  async function setRecPhoto(file) {
+    try {
+      $('#r-photo').value = await upload(file);
+      updateRecPhoto();
+    } catch (err) { toast(err.message, 'err'); }
+  }
+  const recDrop = $('#rec-drop');
+  $('#rec-file').addEventListener('change', e => { if (e.target.files[0]) setRecPhoto(e.target.files[0]); e.target.value = ''; });
+  ['dragenter', 'dragover'].forEach(ev => recDrop.addEventListener(ev, e => { e.preventDefault(); recDrop.classList.add('over'); }));
+  ['dragleave', 'drop'].forEach(ev => recDrop.addEventListener(ev, e => { e.preventDefault(); recDrop.classList.remove('over'); }));
+  recDrop.addEventListener('drop', e => { const file = e.dataTransfer.files[0]; if (file) setRecPhoto(file); });
+
+  $('#rec-form').addEventListener('submit', async e => {
+    e.preventDefault();
+    const body = {
+      name: $('#r-name').value, role: $('#r-role').value, month: $('#r-month').value,
+      photo: $('#r-photo').value, quote: $('#r-quote').value, quoteBy: $('#r-quote-by').value,
+    };
+    if (!body.photo.trim()) return toast('Add a photo first', 'err');
+    try {
+      const editing = rec.editing;
+      const { entry } = editing
+        ? await api(`/api/admin/recognition/${encodeURIComponent(editing.id)}`, { method: 'PUT', body })
+        : await api('/api/admin/recognition', { method: 'POST', body });
+      rec.entries = [entry, ...rec.entries.filter(r => r.id !== entry.id)].sort((a, b) => b.month.localeCompare(a.month));
+      closeRecForm();
+      renderRecognition();
+      toast(editing ? 'Winner updated' : 'Winner added to the About page');
+    } catch (err) {
+      toast(err.message, 'err');
+    }
+  });
+
+  $('#rec-list').addEventListener('click', async e => {
+    const btn = e.target.closest('[data-rec]');
+    if (!btn) return;
+    const r = rec.entries.find(x => x.id === btn.closest('.rec-item').dataset.id);
+    if (!r) return;
+    if (btn.dataset.rec === 'edit') return openRecForm(r);
+    if (!confirm(`Remove ${r.name} (${fmtMonth(r.month)})? This can't be undone.`)) return;
+    try {
+      await api(`/api/admin/recognition/${encodeURIComponent(r.id)}`, { method: 'DELETE' });
+      rec.entries = rec.entries.filter(x => x !== r);
+      renderRecognition();
+      toast('Winner removed');
+    } catch (err) {
+      toast(err.message, 'err');
+    }
   });
 
   function renderList() {
@@ -392,6 +519,7 @@
     $('#list-view').hidden = true;
     $('#careers-view').hidden = true;
     $('#jobs-view').hidden = true;
+    $('#recognition-view').hidden = true;
     $('#editor-view').hidden = false;
     $('#editor-title').textContent = a ? 'Edit article' : 'New article';
     f.category.innerHTML = state.categories.map(c => `<option>${esc(c)}</option>`).join('');

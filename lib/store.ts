@@ -184,6 +184,52 @@ export function sanitizeJob(body: Record<string, unknown>) {
   };
 }
 
+/* ---------- recognition: employee of the month (managed in the console) ---------- */
+
+const RECOGNITION_FILE = path.join(DATA_DIR, 'recognition.json');
+
+export const QUOTES = [
+  { text: 'Success is the sum of small efforts, repeated day in and day out.', by: 'Robert Collier' },
+  { text: 'Alone we can do so little; together we can do so much.', by: 'Helen Keller' },
+  { text: 'The only way to do great work is to love what you do.', by: 'Steve Jobs' },
+  { text: "Great things in business are never done by one person. They're done by a team of people.", by: 'Steve Jobs' },
+  { text: 'Talent wins games, but teamwork and intelligence win championships.', by: 'Michael Jordan' },
+  { text: "Hard work beats talent when talent doesn't work hard.", by: 'Tim Notke' },
+  { text: "Don't watch the clock; do what it does. Keep going.", by: 'Sam Levenson' },
+  { text: 'Do what you can, with what you have, where you are.', by: 'Theodore Roosevelt' },
+  { text: "Opportunities don't happen. You create them.", by: 'Chris Grosser' },
+  { text: 'Excellence is not a skill. It is an attitude.', by: 'Ralph Marston' },
+  { text: 'Start where you are. Use what you have. Do what you can.', by: 'Arthur Ashe' },
+  { text: 'Coming together is a beginning, staying together is progress, and working together is success.', by: 'Henry Ford' },
+];
+
+export type Recognition = {
+  id: string; name: string; role: string; month: string; // month as YYYY-MM
+  photo: string; quote: string; quoteBy: string; createdAt: string; updatedAt: string;
+};
+
+// newest month first
+export const readRecognition = () => readJSON<Recognition[]>(RECOGNITION_FILE, []).sort((a, b) => b.month.localeCompare(a.month));
+export const writeRecognition = (list: Recognition[]) => writeJSON(RECOGNITION_FILE, list);
+
+export function sanitizeRecognition(body: Record<string, unknown>) {
+  const out = {
+    name: str(body.name, 80),
+    role: str(body.role, 80),
+    month: /^\d{4}-(0[1-9]|1[0-2])$/.test(str(body.month, 7)) ? str(body.month, 7) : '',
+    photo: str(body.photo, 500),
+    quote: str(body.quote, 300),
+    quoteBy: str(body.quoteBy, 80),
+  };
+  if (out.photo && !/^(https?:\/\/|\/uploads\/|\/img\/)/i.test(out.photo)) out.photo = '';
+  if (!out.quote) {
+    const q = QUOTES[Math.floor(Math.random() * QUOTES.length)];
+    out.quote = q.text;
+    out.quoteBy = q.by;
+  }
+  return out;
+}
+
 /* ---------- files ---------- */
 
 export function saveFile(dir: string, ext: string, buf: Buffer) {

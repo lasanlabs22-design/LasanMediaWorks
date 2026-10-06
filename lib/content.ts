@@ -734,10 +734,6 @@ export const ABOUT_TEAM = [
   },
 ];
 
-export const PERFORMERS = [1, 2, 3, 4, 5, 6, 7].map(
-  (n) => `/img/performers/performer-${n}.jpg`,
-);
-
 export const ABOUT_NUMBERS = [
   { value: 150, suffix: "", label: "Brands Empowered" },
   { value: 98, suffix: "%", label: "Client Retention Rate" },

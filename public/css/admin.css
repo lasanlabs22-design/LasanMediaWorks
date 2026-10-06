@@ -217,4 +217,24 @@ body.admin { background: #f6eff9; font-size: 15px; }
 .job-row { display: grid; grid-template-columns: 1fr 110px 140px 90px 110px auto; gap: 14px; align-items: center; padding: 14px 18px; border-bottom: 1px solid var(--line); }
 .job-row:last-child { border-bottom: 0; }
 .job-row.head { background: #faf7fe; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); padding-block: 12px; }
+
+/* recognition */
+.rec-form-grid { display: grid; grid-template-columns: 240px 1fr; gap: 24px; }
+.rec-drop { aspect-ratio: 4 / 5; }
+.job-form-row.two { grid-template-columns: 1fr 1fr; }
+.rec-quote-row { display: flex; gap: 10px; align-items: flex-end; }
+.rec-quote-row .field { flex: 1; }
+.rec-quote-row .mini { margin-bottom: 14px; padding: 11px 14px; }
+.rec-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 14px; }
+.rec-item { display: grid; grid-template-columns: 110px 1fr; gap: 16px; background: #fff; border: 1px solid var(--line); border-radius: 18px; padding: 14px; }
+.rec-item.current { border-color: var(--violet); box-shadow: 0 0 0 3px rgba(128,0,128,.1); }
+.rec-item img { width: 110px; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 12px; background: var(--lilac); }
+.rec-body { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.rec-body .badge { align-self: flex-start; margin: 0 0 4px; }
+.rec-body b { font-size: 17px; color: var(--ink); }
+.rec-body small { color: var(--muted); font-size: 13px; }
+.rec-body p { margin: 6px 0 10px; font-size: 13.5px; color: var(--text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+.rec-body p em { color: var(--muted); }
+.rec-body .row-actions { margin-top: auto; justify-content: flex-start; }
+@media (max-width: 700px) { .rec-form-grid { grid-template-columns: 1fr; } .rec-drop { max-width: 240px; } .rec-list { grid-template-columns: 1fr; } }
 @media (max-width: 900px) { .job-form-row { grid-template-columns: 1fr; } .job-row { grid-template-columns: 1fr auto; } .job-row > :nth-child(n+2):not(.row-actions) { display: none; } }

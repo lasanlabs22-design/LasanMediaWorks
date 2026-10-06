@@ -1,13 +1,19 @@
 import type { Metadata } from 'next';
 import { CenterHead, CtaBand, PageHero, SectionHead, SolutionRows, Team } from '@/components/Blocks';
-import { ABOUT_NUMBERS, ABOUT_SECTIONS, ABOUT_TEAM, FOUNDERS, JOURNEY, MISSION, PERFORMERS, VISION } from '@/lib/content';
+import { ABOUT_NUMBERS, ABOUT_SECTIONS, ABOUT_TEAM, FOUNDERS, JOURNEY, MISSION, VISION } from '@/lib/content';
+import { readRecognition } from '@/lib/store';
+
+export const dynamic = 'force-dynamic'; // best performers are managed in the console
 
 export const metadata: Metadata = {
   title: 'About',
   description: 'LaSän Media Works: your trusted partner in growth, innovation, and digital excellence since 2021. Meet our founders, team and best performers.',
 };
 
+const monthLabel = (m: string) => new Date(`${m}-01T00:00:00Z`).toLocaleDateString('en-IN', { month: 'long', year: 'numeric', timeZone: 'UTC' });
+
 export default function AboutPage() {
+  const [winner, ...past] = readRecognition();
   return (
     <>
       <PageHero crumb="About" eyebrow="About us" title="About" accent="LaSän Media Works" text="Your trusted partner in growth, innovation, and digital excellence since 2021." img="/img/stock/h-about.jpg" actions={false} />
@@ -66,19 +72,42 @@ export default function AboutPage() {
       </section>
 
       {/* BEST PERFORMERS */}
-      <section className="section">
-        <div className="wrap">
-          <SectionHead eyebrow="Recognition" title="Best" accent="Performers" />
-          <div className="performers">
-            {PERFORMERS.map((src, i) => (
-              <figure className="performer reveal" key={src}>
+      {winner && (
+        <section className="section recog" id="performers">
+          <div className="wrap">
+            <CenterHead eyebrow="Recognition" title="Best" accent="Performers" />
+            <article className="eotm reveal">
+              <span className="eotm-badge">★ Employee of the Month</span>
+              <figure className="eotm-photo">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={src} alt={`Best Performer ${i + 1}`} loading="lazy" />
+                <img src={winner.photo} alt={winner.name} />
               </figure>
-            ))}
+              <span className="eotm-month">{monthLabel(winner.month)}</span>
+              <h3>{winner.name}</h3>
+              {winner.role && <p className="eotm-role">{winner.role}</p>}
+              <blockquote className="eotm-quote">
+                <p>{winner.quote}</p>
+                {winner.quoteBy && <cite>{winner.quoteBy}</cite>}
+              </blockquote>
+            </article>
+
+            {past.length > 0 && (
+              <>
+                <h3 className="hof-h reveal">Hall of <em>Fame</em></h3>
+                <div className="hof">
+                  {past.map(p => (
+                    <figure className="hof-card reveal" key={p.id}>
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img src={p.photo} alt={p.name} loading="lazy" />
+                      <figcaption><b>{p.name}</b><span>{monthLabel(p.month)}</span></figcaption>
+                    </figure>
+                  ))}
+                </div>
+              </>
+            )}
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       {/* NUMBERS */}
       <section className="section dark" style={{ padding: '80px 0' }}>
