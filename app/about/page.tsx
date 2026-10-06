@@ -79,18 +79,20 @@ export default function AboutPage() {
             <div className="eotm-grid">
               {winners.map((w, i) => (
                 <article className={`eotm reveal${i === 0 ? ' current' : ''}`} key={w.id}>
-                  <span className="eotm-badge">{i === 0 ? '★ Employee of the Month' : 'Best Performer'}</span>
                   <figure className="eotm-photo">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img src={w.photo} alt={w.name} loading={i < 4 ? undefined : 'lazy'} />
+                    {i === 0 && <span className="eotm-badge">Employee of the Month</span>}
                   </figure>
-                  <span className="eotm-month">{monthLabel(w.month)}</span>
-                  <h3>{w.name}</h3>
-                  {w.role && <p className="eotm-role">{w.role}</p>}
-                  <blockquote className="eotm-quote">
-                    <p>{w.quote}</p>
-                    {w.quoteBy && <cite>{w.quoteBy}</cite>}
-                  </blockquote>
+                  <div className="eotm-body">
+                    <span className="eotm-month">{monthLabel(w.month)}</span>
+                    <h3>{w.name}</h3>
+                    {w.role && <p className="eotm-role">{w.role}</p>}
+                    <blockquote className="eotm-quote">
+                      <p>{w.quote}</p>
+                      {w.quoteBy && <cite>{w.quoteBy}</cite>}
+                    </blockquote>
+                  </div>
                 </article>
               ))}
             </div>
