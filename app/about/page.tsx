@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { CenterHead, CtaBand, PageHero, SectionHead, SolutionRows, Team } from '@/components/Blocks';
-import { ABOUT_NUMBERS, ABOUT_SECTIONS, ABOUT_TEAM, FOUNDERS, JOURNEY, LABS, MISSION, VISION } from '@/lib/content';
+import { ABOUT_NUMBERS, ABOUT_SECTIONS, ABOUT_TEAM, FOUNDERS, JOURNEY, MISSION, VISION } from '@/lib/content';
 import Performers from '@/components/Performers';
 import { readRecognition } from '@/lib/store';
 
@@ -23,7 +23,6 @@ export default function AboutPage() {
         <ul>
           <li><a href="#aboutus">About Us</a></li>
           <li><a href="#team">Our Team</a></li>
-          <li><a href="#lasan-labs">LaSan Labs</a></li>
           {ABOUT_SECTIONS.map(s => <li key={s.id}><a href={`#${s.id}`}>{s.title} {s.accent}</a></li>)}
         </ul>
       </nav>
@@ -70,30 +69,6 @@ export default function AboutPage() {
         <div className="wrap">
           <SectionHead eyebrow="The people behind LaSän" title="Our Team" accent="Members" />
           <Team members={ABOUT_TEAM} />
-        </div>
-      </section>
-
-      {/* LASAN LABS */}
-      <section className="section labs" id="lasan-labs">
-        <div className="wrap labs-grid">
-          <div className="labs-copy reveal">
-            <div className="labs-logo">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/img/brands/lasan-labs.webp" alt="LaSan Labs logo" loading="lazy" />
-            </div>
-            <span className="eyebrow">IT &amp; Software</span>
-            <h2><span className="mk-p">La</span><span className="mk-y">San</span> Labs</h2>
-            <p>{LABS.text}</p>
-          </div>
-          <div className="labs-people">
-            {LABS.people.map(p => (
-              <figure className="labs-person reveal" key={p.name}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={p.photo} alt={p.name} loading="lazy" />
-                <figcaption><b>{p.name}</b><span className="labs-tag">{p.role}</span></figcaption>
-              </figure>
-            ))}
-          </div>
         </div>
       </section>
 
