@@ -481,39 +481,101 @@ section { position: relative; }
 .journey li::before { content: ''; position: absolute; left: 0; top: 4px; width: 16px; height: 16px; border-radius: 50%; background: var(--gold); border: 3px solid var(--bg); box-shadow: 0 0 0 1px var(--purple); }
 .journey b { display: block; font-family: var(--font-display); font-size: 26px; color: var(--gold); line-height: 1; }
 .journey span { display: block; margin-top: 8px; color: var(--muted); font-size: 15px; }
-/* best performers: quiet editorial cards, muted champagne accent */
-.recog { --champagne: #d8c08a; }
+/* best performers: one "Employee of the Month" poster per winner.
+   Everything inside a poster is sized in cqw so the whole poster scales with the card.
+   Entrance runs off .reveal.in; components/Performers.tsx sets the tilt/sheen vars. */
+@property --spin { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
 .eotm-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
-.eotm { display: flex; flex-direction: column; border-radius: 6px; overflow: hidden; background: var(--surface); border: 1px solid var(--line); transition: border-color .4s; }
-.eotm:hover { border-color: var(--line-strong); }
-.eotm.current { border-color: rgba(216, 192, 138, .45); }
-.eotm-photo { position: relative; margin: 0; aspect-ratio: 1 / 1; overflow: hidden; background: var(--d1); }
-.eotm-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; filter: saturate(.92); transition: transform .8s var(--ease); }
-.eotm:hover .eotm-photo img { transform: scale(1.03); }
-.eotm-badge {
-  position: absolute; left: 12px; bottom: 12px; padding: 5px 10px; border-radius: 3px; font-size: 10px; font-weight: 600; letter-spacing: .14em; text-transform: uppercase;
-  color: var(--champagne); background: rgba(13, 0, 22, .78); border: 1px solid rgba(216, 192, 138, .5); backdrop-filter: blur(4px);
+.eotm { display: flex; }
+.eotm-inner {
+  position: relative; flex: 1; aspect-ratio: 4 / 5; container-type: inline-size; overflow: hidden; isolation: isolate; border-radius: 10px;
+  background: radial-gradient(circle at 62% 44%, #5b1a8c 0%, #2c0848 34%, #14001f 72%); border: 1px solid var(--line);
+  box-shadow: inset 0 0 60px rgba(0, 0, 0, .45), 0 18px 40px -26px rgba(0, 0, 0, .9);
+  transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+  transition: transform .7s var(--ease-out), box-shadow .7s var(--ease-out), border-color .5s;
 }
-.eotm-body { display: flex; flex-direction: column; flex: 1; padding: 18px 18px 20px; }
-.eotm-month { font-size: 10.5px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--champagne); }
-.eotm h3 { margin: 6px 0 0; font-size: 18px; font-weight: 600; color: #fff; line-height: 1.25; letter-spacing: -.01em; }
-.eotm-role { margin: 2px 0 0; color: var(--muted); font-size: 12.5px; }
-.eotm-quote { margin: 16px 0 0; padding-top: 14px; border-top: 1px solid var(--line); }
-.eotm-quote p { margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 14px; line-height: 1.55; font-style: italic; color: var(--text); }
-.eotm-quote p::before { content: '\201C'; } .eotm-quote p::after { content: '\201D'; }
-.eotm-quote cite { display: block; margin-top: 8px; font-style: normal; font-size: 11px; letter-spacing: .04em; color: var(--muted); }
-.eotm-quote cite::before { content: '- '; }
+.eotm-inner:hover { transition: transform .15s ease-out, box-shadow .7s var(--ease-out), border-color .5s; border-color: var(--line-strong); box-shadow: inset 0 0 60px rgba(0, 0, 0, .45), 0 34px 60px -28px rgba(0, 0, 0, .95); }
+
+/* a slow point of light travels around every border; each card starts at a different point */
+.eotm-inner::before {
+  content: ''; position: absolute; inset: 0; z-index: 5; border-radius: inherit; padding: 1px; pointer-events: none;
+  background: conic-gradient(from var(--spin), rgba(255, 204, 0, .12) 0deg 230deg, #ffe39a 290deg, rgba(255, 204, 0, .12) 340deg);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude;
+  animation: epBorder 8s linear infinite;
+}
+.eotm:nth-child(4n + 2) .eotm-inner::before { animation-delay: -2s; }
+.eotm:nth-child(4n + 3) .eotm-inner::before { animation-delay: -4s; }
+.eotm:nth-child(4n + 4) .eotm-inner::before { animation-delay: -6s; }
+@keyframes epBorder { to { --spin: 360deg; } }
+
+/* corner lines */
+.ep-brand, .ep-month { position: absolute; top: 5.5cqw; z-index: 3; font-size: 3.3cqw; letter-spacing: .06em; color: rgba(239, 228, 247, .72); opacity: 0; transition: opacity 1s calc(var(--d, 0s) + .9s); }
+.ep-brand { left: 6cqw; } .ep-month { right: 6cqw; }
+.eotm.in .ep-brand, .eotm.in .ep-month { opacity: 1; }
+
+/* the circle: breathing glow, rotating arc text, round photo */
+.ep-orbit { position: absolute; left: 20cqw; top: 12cqw; width: 84cqw; aspect-ratio: 1; }
+.ep-orbit::before {
+  content: ''; position: absolute; inset: 12%; border-radius: 50%;
+  background: radial-gradient(circle, rgba(170, 90, 220, .55), rgba(102, 45, 145, .22) 62%, transparent 72%);
+  animation: epBreathe 6s ease-in-out infinite;
+}
+@keyframes epBreathe { 50% { transform: scale(1.06); opacity: .75; } }
+.ep-arc { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; opacity: 0; transition: opacity 1.2s calc(var(--d, 0s) + .6s); animation: epSpin 40s linear infinite; }
+.eotm.in .ep-arc { opacity: 1; }
+.ep-arc text { font-size: 10px; font-weight: 500; letter-spacing: 5.4px; fill: rgba(239, 228, 247, .85); }
+@keyframes epSpin { to { transform: rotate(360deg); } }
+.ep-photo {
+  position: absolute; inset: 15.5%; margin: 0; border-radius: 50%; overflow: hidden; background: var(--d1);
+  box-shadow: 0 0 0 .7cqw rgba(255, 255, 255, .06), 0 4cqw 10cqw -3cqw rgba(0, 0, 0, .8);
+  opacity: 0; transform: scale(.82); transition: opacity 1s var(--ease-out) calc(var(--d, 0s) + .1s), transform 1.5s var(--ease-out) calc(var(--d, 0s) + .1s);
+}
+.eotm.in .ep-photo { opacity: 1; transform: none; }
+.ep-photo img {
+  width: 100%; height: 100%; object-fit: cover; object-position: 50% 14%; display: block;
+  filter: grayscale(1) contrast(1.08) brightness(.96); transform: scale(1.06) translate(var(--tx, 0px), var(--ty, 0px));
+  transition: filter .9s var(--ease-out), transform .8s var(--ease-out);
+}
+.eotm-inner:hover .ep-photo img { filter: none; }
+
+/* big type */
+.ep-title { position: absolute; left: 6cqw; top: 44cqw; z-index: 3; margin: 0; font-size: 7.4cqw; font-weight: 500; line-height: 1.02; color: #fff; text-shadow: 0 1cqw 4cqw rgba(0, 0, 0, .65); }
+.ep-title span, .ep-title b { display: flex; align-items: center; gap: 1.6cqw; opacity: 0; transform: translateX(-6cqw); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+.ep-title span:nth-child(1) { transition-delay: calc(var(--d, 0s) + .35s); }
+.ep-title span:nth-child(2) { transition-delay: calc(var(--d, 0s) + .45s); }
+.ep-title b { margin-top: .4cqw; font-size: 13cqw; font-weight: 700; letter-spacing: -.02em; transition-delay: calc(var(--d, 0s) + .55s); }
+.eotm.in .ep-title span, .eotm.in .ep-title b { opacity: 1; transform: none; }
+.ep-rosette { width: 6.4cqw; height: auto; transform-origin: 50% 10%; filter: drop-shadow(0 .8cqw 1.2cqw rgba(0, 0, 0, .5)); }
+.eotm.in .ep-rosette { animation: epSwing 1.6s var(--ease-out) calc(var(--d, 0s) + 1s) both, epSway 5s ease-in-out calc(var(--d, 0s) + 2.6s) infinite; }
+@keyframes epSwing { 0% { transform: rotate(-35deg) scale(.4); opacity: 0; } 45% { transform: rotate(14deg) scale(1.05); opacity: 1; } 70% { transform: rotate(-6deg); } 100% { transform: none; } }
+@keyframes epSway { 50% { transform: rotate(5deg); } }
+
+/* name, role, quote */
+.ep-foot { position: absolute; left: 6cqw; right: 6cqw; bottom: 5.5cqw; z-index: 3; }
+.ep-name, .ep-role { margin: 0; text-align: right; opacity: 0; transform: translateY(4cqw); transition: opacity .9s var(--ease-out), transform .9s var(--ease-out); }
+.ep-name { font-size: 8.6cqw; font-weight: 800; line-height: 1; letter-spacing: -.01em; color: var(--gold); text-shadow: 0 1cqw 3cqw rgba(0, 0, 0, .55); transition-delay: calc(var(--d, 0s) + .7s); }
+.ep-role { margin-top: 1.2cqw; font-size: 2.8cqw; letter-spacing: .14em; text-transform: uppercase; color: var(--muted); transition-delay: calc(var(--d, 0s) + .8s); }
+.eotm.in .ep-name, .eotm.in .ep-role { opacity: 1; transform: none; }
+.ep-quote { margin: 3cqw 0 0; padding-top: 2.6cqw; border-top: 1px solid rgba(255, 255, 255, .12); }
+.ep-quote p { margin: 0; font-family: Georgia, 'Times New Roman', serif; font-size: 3.4cqw; line-height: 1.4; font-style: italic; color: rgba(239, 228, 247, .9); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ep-quote p::before { content: '\201C'; } .ep-quote p::after { content: '\201D'; }
+.ep-quote p span { display: inline-block; white-space: pre; opacity: 0; filter: blur(4px); transform: translateY(.35em); transition: opacity .7s, filter .7s, transform .7s var(--ease-out); transition-delay: calc(var(--d, 0s) + 1s + var(--w) * 45ms); }
+.eotm.in .ep-quote p span { opacity: 1; filter: none; transform: none; }
+.ep-quote cite { display: block; margin-top: 1.2cqw; font-size: 2.6cqw; font-style: normal; letter-spacing: .05em; color: var(--muted); }
+.ep-quote cite::before { content: '- '; }
+
+/* light that follows the cursor */
+.eotm-sheen { position: absolute; inset: 0; z-index: 4; pointer-events: none; opacity: 0; transition: opacity .5s; background: radial-gradient(60cqw circle at var(--mx, 50%) var(--my, 50%), rgba(255, 236, 200, .12), transparent 45%); }
+.eotm-inner:hover .eotm-sheen { opacity: 1; }
+@media (max-width: 1100px) { .eotm-grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 900px) { .eotm-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; } }
+@media (max-width: 600px) { .eotm-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; } }
 @media (max-width: 900px) {
   .vm { grid-template-columns: 1fr; }
   .journey { grid-template-columns: 1fr; gap: 22px; }
   .journey::before { left: 7px; right: auto; top: 0; bottom: 0; width: 2px; height: auto; }
   .journey li { padding: 0 0 0 36px; }
   .journey li::before { top: 2px; }
-  .eotm-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-  .eotm-body { padding: 12px 12px 14px; }
-  .eotm-badge { left: 8px; bottom: 8px; font-size: 8.5px; padding: 4px 6px; letter-spacing: .08em; }
-  .eotm h3 { font-size: 16px; }
-  .eotm-quote p { font-size: 12.5px; }
 }
 
 .audience { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }

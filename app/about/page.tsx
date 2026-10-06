@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { CenterHead, CtaBand, PageHero, SectionHead, SolutionRows, Team } from '@/components/Blocks';
 import { ABOUT_NUMBERS, ABOUT_SECTIONS, ABOUT_TEAM, FOUNDERS, JOURNEY, MISSION, VISION } from '@/lib/content';
+import Performers from '@/components/Performers';
 import { readRecognition } from '@/lib/store';
 
 export const dynamic = 'force-dynamic'; // best performers are managed in the console
@@ -76,26 +77,10 @@ export default function AboutPage() {
         <section className="section recog" id="performers">
           <div className="wrap">
             <CenterHead eyebrow="Recognition" title="Best" accent="Performers" />
-            <div className="eotm-grid">
-              {winners.map((w, i) => (
-                <article className={`eotm reveal${i === 0 ? ' current' : ''}`} key={w.id}>
-                  <figure className="eotm-photo">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={w.photo} alt={w.name} loading={i < 4 ? undefined : 'lazy'} />
-                    {i === 0 && <span className="eotm-badge">Employee of the Month</span>}
-                  </figure>
-                  <div className="eotm-body">
-                    <span className="eotm-month">{monthLabel(w.month)}</span>
-                    <h3>{w.name}</h3>
-                    {w.role && <p className="eotm-role">{w.role}</p>}
-                    <blockquote className="eotm-quote">
-                      <p>{w.quote}</p>
-                      {w.quoteBy && <cite>{w.quoteBy}</cite>}
-                    </blockquote>
-                  </div>
-                </article>
-              ))}
-            </div>
+            <Performers items={winners.map(w => ({
+              id: w.id, name: w.name, role: w.role, photo: w.photo, quote: w.quote, quoteBy: w.quoteBy,
+              monthLabel: monthLabel(w.month),
+            }))} />
           </div>
         </section>
       )}
