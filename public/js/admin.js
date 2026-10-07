@@ -78,14 +78,24 @@
     if (!go) return;
     if (!confirmLeave()) return;
     state.dirty = false;
+    setMenu(false);
     location.hash = go.dataset.go;
   });
+
+  // mobile menu
+  function setMenu(open) {
+    $('.sidebar').classList.toggle('open', open);
+    $('#menu-toggle').setAttribute('aria-expanded', open);
+    $('#menu-toggle').textContent = open ? '✕' : '☰';
+  }
+  $('#menu-toggle').addEventListener('click', () => setMenu(!$('.sidebar').classList.contains('open')));
 
   window.addEventListener('hashchange', route);
   window.addEventListener('beforeunload', e => { if (state.dirty) { e.preventDefault(); e.returnValue = ''; } });
 
   function route() {
     if ($('#app-view').hidden) return;
+    setMenu(false);
     const [view, id] = location.hash.replace('#', '').split('/');
     $$('.side-nav [data-go]').forEach(b => b.classList.toggle('active', b.dataset.go === (view === 'edit' ? 'list' : view || 'list')));
     if (view === 'new') return openEditor(null);

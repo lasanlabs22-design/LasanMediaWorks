@@ -175,7 +175,7 @@ body.admin { background: #f6eff9; font-size: 15px; }
 
 /* toast */
 .toast {
-  position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 140%); background: var(--ink); color: var(--cream);
+  position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, calc(100% + 40px)); background: var(--ink); color: var(--cream);
   padding: 14px 22px; border-radius: 14px; font-weight: 600; box-shadow: 0 20px 40px -20px rgba(0,0,0,.5);
   transition: transform .35s var(--ease); z-index: 100; max-width: calc(100% - 32px);
 }
@@ -187,13 +187,29 @@ body.admin { background: #f6eff9; font-size: 15px; }
   .editor { grid-template-columns: 1fr; }
   .editor-side { position: static; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
 }
+.menu-toggle { display: none; }
+
 @media (max-width: 860px) {
   .console { grid-template-columns: 1fr; }
-  .sidebar { position: static; height: auto; flex-direction: row; align-items: center; flex-wrap: wrap; gap: 12px; padding: 14px 16px; }
-  .side-nav { display: flex; flex: 1; justify-content: flex-end; }
-  .side-nav button, .side-nav a { padding: 8px 10px; font-size: 13px; }
-  .side-logout { margin: 0; padding: 8px 12px; font-size: 13px; }
+  .sidebar {
+    top: 0; z-index: 50; height: auto; flex-direction: row; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 0; padding: 10px 16px; box-shadow: 0 10px 30px -20px rgba(0,0,0,.6);
+  }
+  .menu-toggle {
+    display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px;
+    border: 1px solid var(--line-dark); background: none; color: #fff; font-size: 20px; line-height: 1;
+  }
+  .side-nav, .side-logout { display: none; }
+  .sidebar.open .side-nav { display: grid; flex-basis: 100%; margin-top: 12px; }
+  .sidebar.open .side-logout { display: flex; flex-basis: 100%; margin: 10px 0 6px; }
   .console-main { padding: 24px 16px 60px; }
+  /* touch: 16px inputs stop iOS zooming in, bigger tap targets */
+  .field input, .field select, .cover-actions input, #list-search, .excerpt-input, .md-input, .job-form textarea { font-size: 16px; }
+  #list-search { max-width: none; }
+  .mini { padding: 10px 14px; font-size: 14px; }
+  .md-toolbar > button { padding: 9px 11px; }
+  .md-input { min-height: 50vh; }
+  .md-preview { max-height: none; }
   .stats { grid-template-columns: 1fr 1fr; }
   .row { grid-template-columns: 56px 1fr auto; }
   .row > :nth-child(3), .row > :nth-child(5) { display: none; }
@@ -203,8 +219,19 @@ body.admin { background: #f6eff9; font-size: 15px; }
   .md-panes[data-mode="split"] .md-preview { border-left: 0; border-top: 1px solid var(--line); }
 }
 @media (max-width: 560px) {
-  .side-nav a { display: none; }
   .editor-main { padding: 18px; }
+  .login-card { padding: 32px 22px; }
+  .login-card h1 { font-size: 36px; }
+  .console-head .btn, .head-actions .btn { padding: 11px 18px; font-size: 14px; }
+  .head-actions { width: 100%; }
+  .head-actions .btn { flex: 1; justify-content: center; }
+  .head-actions .save-state { flex-basis: 100%; }
+  .seg { width: 100%; }
+  .seg button { flex: 1; }
+  .md-toolbar .seg.small { width: 100%; }
+  .stats.two { grid-template-columns: 1fr 1fr; }
+  .sub-item { grid-template-columns: 1fr auto; row-gap: 2px; }
+  .sub-item .muted { grid-row: 2; grid-column: 1; }
 }
 
 /* job openings */
@@ -236,5 +263,5 @@ body.admin { background: #f6eff9; font-size: 15px; }
 .rec-body p { margin: 6px 0 10px; font-size: 13.5px; color: var(--text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
 .rec-body p em { color: var(--muted); }
 .rec-body .row-actions { margin-top: auto; justify-content: flex-start; }
-@media (max-width: 700px) { .rec-form-grid { grid-template-columns: 1fr; } .rec-drop { max-width: 240px; } .rec-list { grid-template-columns: 1fr; } }
+@media (max-width: 700px) { .rec-form-grid, .job-form-row.two { grid-template-columns: 1fr; } .rec-drop { max-width: 240px; } .rec-list { grid-template-columns: 1fr; } }
 @media (max-width: 900px) { .job-form-row { grid-template-columns: 1fr; } .job-row { grid-template-columns: 1fr auto; } .job-row > :nth-child(n+2):not(.row-actions) { display: none; } }
