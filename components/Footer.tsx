@@ -61,6 +61,8 @@ export default function Footer() {
             <nav className="footer-legal" aria-label="Legal">
               <Link href="/privacy-policy">Privacy Policy</Link>
               <Link href="/terms-and-conditions">Terms &amp; Conditions</Link>
+              <Link href="/refund-policy">Refund Policy</Link>
+              <Link href="/cancellation-policy">Cancellation Policy</Link>
             </nav>
             <a href="#top" className="to-top" aria-label="Back to top"><Icon name="up" /></a>
           </div>
