@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   openGraph: { siteName: 'LaSän Media Works', type: 'website', images: ['/img/brand/Unlock_Business.jpg'] },
 };
 
-export const viewport: Viewport = { themeColor: '#230039' };
+export const viewport: Viewport = { themeColor: '#3a003a' };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

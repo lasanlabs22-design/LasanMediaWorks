@@ -86,7 +86,7 @@ export default function HeroMotion() {
                   <div className="mac-chart">
                     <svg viewBox="0 0 300 90" preserveAspectRatio="none">
                       <defs>
-                        <linearGradient id="dev-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#800080" stopOpacity=".55" /><stop offset="1" stopColor="#800080" stopOpacity="0" /></linearGradient>
+                        <linearGradient id="dev-area" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stopColor="#d100d1" stopOpacity=".55" /><stop offset="1" stopColor="#d100d1" stopOpacity="0" /></linearGradient>
                       </defs>
                       <path className="mac-area" d="M0 78 C30 74 50 66 75 68 S120 52 150 50 S205 30 230 28 S275 12 300 8 L300 90 L0 90 Z" fill="url(#dev-area)" />
                       <path className="mac-line" d="M0 78 C30 74 50 66 75 68 S120 52 150 50 S205 30 230 28 S275 12 300 8" />
@@ -116,7 +116,7 @@ export default function HeroMotion() {
             <span className="iph-island" />
             <StatusBar />
             <div className="ig-top"><b>LaSän</b><span><i /><i /></span></div>
-            <div className="ig-stories">{['#ffcc00', '#800080', '#d69cf5', '#ffcc00'].map((c, i) => <i key={i} style={{ borderColor: c }} />)}</div>
+            <div className="ig-stories">{['#ffcc00', '#d100d1', '#d69cf5', '#ffcc00'].map((c, i) => <i key={i} style={{ borderColor: c }} />)}</div>
             <div className="ig-feed"><div className="ig-track">{[...FEED, FEED[0]].map((src, i) => <Post src={src} key={i} />)}</div></div>
             <div className="ios-banner b1"><i>L</i><div><b>LaSän Leads <em>now</em></b><span>New enquiry from Robo Diner</span></div></div>
             <div className="ios-banner b2"><i>L</i><div><b>LaSän Ads <em>now</em></b><span>Campaign reached 10,000 people</span></div></div>

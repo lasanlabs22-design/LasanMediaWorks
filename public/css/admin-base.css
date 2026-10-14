@@ -1,8 +1,8 @@
 /* Base styles for the Studio Console (light working surface, LaSän purples). */
 :root {
-  --purple: #800080; --violet: #720e9e; --royal: #662d91;
+  --purple: #d100d1; --violet: #9c009c; --royal: #662d91;
   --d1: #230039; --d2: #340055; --d3: #460071; --d4: #57008E;
-  --grad: linear-gradient(135deg, #57008E 0%, #720e9e 50%, #800080 100%);
+  --grad: linear-gradient(135deg, #9c009c 0%, #d100d1 100%);
   --ink: #240b33; --ink-2: #33124a; --plum: #662d91; --violet-2: #9a4cc4; --lilac: #dcb8ee;
   --sun: #f0dcf7; --cream: #fbf8fd; --paper: #fff; --night: #230039;
   --text: #240b33; --muted: #6e5a7c; --line: rgba(102, 45, 145, .16); --line-dark: rgba(255, 255, 255, .14);
