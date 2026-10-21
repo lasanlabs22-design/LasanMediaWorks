@@ -151,14 +151,13 @@ export function Clients() {
 export function HelpCards() {
   return (
     <div className="offer-cards">
-      {HELP.map((h, n) => (
+      {HELP.map(h => (
         <Link className="offer reveal" href={h.href} key={h.title}>
           <div className="offer-art">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img src={h.img} alt="" loading="lazy" />
-            <Icon name={h.icon} /><span className="num">0{n + 1}</span><span className="big">{h.title}</span>
           </div>
-          <div className="offer-body"><p>{h.text}</p><span className="more-link">Learn more <Arrow /></span></div>
+          <div className="offer-body"><h3>{h.title}</h3><p>{h.text}</p><span className="btn btn-primary btn-sm">Know more</span></div>
         </Link>
       ))}
     </div>

@@ -5,11 +5,11 @@ import HeroMotion from '@/components/HeroMotion';
 import ServiceTabs from '@/components/ServiceTabs';
 import EnquiryForm from '@/components/EnquiryForm';
 import {
-  ArticleCard, Blueprint, Cases, CenterHead, Clients, ContactList, Faq, HelpCards, Numbers, Quotes,
+  ArticleCard, Blueprint, Cases, CenterHead, Clients, ContactList, Faq, HelpCards, Quotes,
   SectionHead, Steps, Team, Values, VideoBand,
 } from '@/components/Blocks';
 import BrandName from '@/components/BrandName';
-import { INSIGHT_TYPES, MARQUEE, NUMBERS, VENTURES } from '@/lib/content';
+import { INSIGHT_TYPES, NUMBERS, VENTURES } from '@/lib/content';
 import { publishedArticles } from '@/lib/store';
 
 export const dynamic = 'force-dynamic'; // latest articles come from the admin console
@@ -25,46 +25,101 @@ export default function Home() {
           <div className="hero-inner"><HeroSlider /></div>
           <HeroMotion />
         </div>
-        <div className="wrap">
-          <dl className="hero-facts">
+      </section>
+
+      {/* OFFER BAND */}
+      <section className="offer-band">
+        <div className="wrap offer-band-inner">
+          <h2>Is your marketing bringing in customers? Get a free business audit and find out.</h2>
+          <Link href="/book-appointment?service=audit" className="btn btn-dark">Get My Free Audit <Arrow /></Link>
+        </div>
+      </section>
+
+      {/* GROW + NUMBERS */}
+      <section className="section">
+        <div className="wrap grow">
+          <div className="reveal">
+            <h2>Grow your business with <em>LaSän</em></h2>
+            <p className="grow-sub">Strategy, branding, digital and offline marketing, handled by one team.</p>
+            <p>We work with schools, hospitals, restaurants, retailers and startups across Andhra Pradesh, Karnataka and Telangana. We study your market, build a plan around your goals and run the campaigns, then report the leads and sales they bring in.</p>
+            <Link href="/book-appointment" className="btn btn-primary btn-sm">Enquire Now <Arrow /></Link>
+          </div>
+          <dl className="grow-stats reveal">
             {NUMBERS.map(n => (
-              <div key={n.label}><dt>{n.label}</dt><dd data-count={n.value} data-suffix={n.suffix}>{n.value}{n.suffix}</dd></div>
+              <div key={n.label}><dd data-count={n.value} data-suffix={n.suffix}>{n.value}{n.suffix}</dd><dt>{n.label}</dt></div>
             ))}
           </dl>
         </div>
       </section>
 
-      <div className="marquee" aria-hidden="true">
-        <div className="marquee-track">{[...MARQUEE, ...MARQUEE].map((m, i) => <span key={i}>{m}</span>)}</div>
-      </div>
+      {/* HELP */}
+      <section className="section tint">
+        <div className="wrap">
+          <CenterHead eyebrow="What we do" title="Why should your business grow with" accent="LaSän?" text="Four ways we help business owners get found, get chosen and grow." />
+          <HelpCards />
+        </div>
+      </section>
 
       {/* PROCESS */}
       <section className="section" id="process">
         <div className="wrap">
-          <SectionHead eyebrow="How we work" title="Our simple" accent="process." text="We make growth easy with our proven 4-step framework." />
+          <SectionHead eyebrow="How we work" title="From first call to" accent="first results." text="Four clear steps. You always know what we are doing and what it is bringing in." />
           <Steps />
         </div>
       </section>
 
-      {/* WHY — numbers over video */}
-      <VideoBand>
-        <SectionHead eyebrow="Why LaSän" title="Why businesses" accent="choose LaSän?" text="Numbers we're proud of — earned one client, one campaign at a time." />
-        <Numbers />
-      </VideoBand>
-
       {/* CASE STUDIES */}
+      <section className="section tint" id="work">
+        <div className="wrap">
+          <SectionHead eyebrow="Our work" title="Results our clients" accent="can measure." text="Real numbers from businesses we work with." />
+          <Cases />
+        </div>
+      </section>
+
+      {/* CLIENTS */}
+      <section className="section" id="clients">
+        <div className="wrap"><CenterHead eyebrow="Our clients" title="Trusted by" accent="200+ businesses." text="Schools, hospitals, restaurants, retailers and builders across South India." /></div>
+        <Clients />
+      </section>
+
+      {/* SERVICE SPECTRUM */}
+      <section className="section dark">
+        <div className="wrap">
+          <SectionHead eyebrow="Solutions" title="Everything your business needs," accent="online and offline." text="Integrated marketing solutions across digital and traditional platforms." />
+          <ServiceTabs />
+          <div className="svc-foot reveal"><p>Digital excellence + offline impact, under one roof.</p><Link href="/services" className="btn btn-primary">See All Solutions <Arrow /></Link></div>
+        </div>
+      </section>
+
+      {/* TESTIMONIALS */}
       <section className="section">
         <div className="wrap">
-          <SectionHead eyebrow="Case studies" title="Our success" accent="stories." text="Real results from real clients." />
-          <Cases />
+          <SectionHead eyebrow="Testimonials" title="What business owners" accent="say about us." text="Trusted by 200+ businesses across India." />
+          <Quotes />
         </div>
       </section>
 
       {/* VALUES */}
       <section className="section tint">
         <div className="wrap">
-          <SectionHead eyebrow="The DNA of success" title="The LaSän" accent="core values." text="Beyond metrics and ROI, we are driven by a set of non-negotiable principles that define our impact." />
+          <SectionHead eyebrow="Our values" title="What you can" accent="expect from us." text="Beyond metrics and ROI, we are driven by a set of non-negotiable principles that define our impact." />
           <Values />
+        </div>
+      </section>
+
+      {/* BLUEPRINT */}
+      <section className="section">
+        <div className="wrap">
+          <SectionHead eyebrow="Our approach" title="How we scale" accent="your brand." text="A calculated approach to scaling your brand in the modern digital landscape." />
+          <Blueprint />
+        </div>
+      </section>
+
+      {/* TEAM */}
+      <section className="section tint">
+        <div className="wrap">
+          <SectionHead eyebrow="Leadership" title="Meet our" accent="leadership team." text="Experts dedicated to your success." />
+          <Team />
         </div>
       </section>
 
@@ -86,67 +141,18 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CLIENTS */}
-      <section className="section" id="clients">
-        <div className="wrap"><CenterHead eyebrow="Our clients" title="Trusted by" accent="industry leaders." text="Partnering with 200+ forward-thinking brands across the globe." /></div>
-        <Clients />
-      </section>
-
-      {/* HELP */}
-      <section className="section tint">
-        <div className="wrap">
-          <SectionHead eyebrow="What we do" title="Here's how we" accent="can help.">
-            <Link href="/services" className="btn btn-ghost reveal">All services <Arrow /></Link>
-          </SectionHead>
-          <HelpCards />
-        </div>
-      </section>
-
-      {/* TEAM */}
-      <section className="section">
-        <div className="wrap">
-          <SectionHead eyebrow="Leadership" title="Meet our" accent="leadership team." text="Experts dedicated to your success." />
-          <Team />
-        </div>
-      </section>
-
-      {/* SERVICE SPECTRUM */}
-      <section className="section dark">
-        <div className="wrap">
-          <SectionHead eyebrow="Services" title="Our complete" accent="service spectrum." text="Integrated marketing solutions across digital and traditional platforms." />
-          <ServiceTabs />
-          <div className="svc-foot reveal"><p>Digital excellence + offline impact, under one roof.</p><Link href="/services" className="btn btn-primary">Get Complete Marketing Solutions <Arrow /></Link></div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="section">
-        <div className="wrap">
-          <SectionHead eyebrow="Testimonials" title="What our" accent="clients say." text="Trusted by 200+ businesses across India." />
-          <Quotes />
-        </div>
-      </section>
-
-      {/* BLUEPRINT */}
-      <section className="section tint">
-        <div className="wrap">
-          <SectionHead eyebrow="Our approach" title="Our success" accent="blueprint." text="A calculated approach to scaling your brand in the modern digital landscape." />
-          <Blueprint />
-        </div>
-      </section>
-
       {/* FAQ */}
-      <section className="section">
+      <section className="section tint">
         <div className="wrap">
-          <CenterHead eyebrow="FAQ" title="Frequently asked" accent="questions." text="Everything about digital marketing, graphic design, video editing, web design & social media." />
+          <CenterHead eyebrow="FAQ" title="Questions business owners" accent="ask us." text="Everything about digital marketing, graphic design, video editing, web design & social media." />
           <Faq />
         </div>
       </section>
 
       {/* INSIGHTS */}
-      <section className="section tint">
+      <section className="section">
         <div className="wrap">
-          <SectionHead eyebrow="Latest insights" title="Tips, trends &" accent="strategies.">
+          <SectionHead eyebrow="Insights" title="Free guides to" accent="grow your business.">
             <Link href="/articles" className="btn btn-ghost reveal">All articles <Arrow /></Link>
           </SectionHead>
           <div className="insight-types">
@@ -166,12 +172,21 @@ export default function Home() {
         </div>
       </section>
 
+      {/* CLOSING CTA over the city video */}
+      <VideoBand>
+        <div className="closing reveal">
+          <h2>Join 200+ businesses growing with LaSän</h2>
+          <p>Tell us where you want your business to be in a year. We will show you how to get there.</p>
+          <Link href="/book-appointment" className="btn btn-primary">Partner with LaSän <Arrow /></Link>
+        </div>
+      </VideoBand>
+
       {/* CONTACT */}
       <section className="section" id="contact">
         <div className="wrap contact-grid">
           <div className="contact-side reveal">
             <span className="eyebrow">Contact</span>
-            <h2>Let&apos;s talk <em>business.</em></h2>
+            <h2>Let&apos;s talk about <em>your business.</em></h2>
             <p>Ready to grow your business? We&apos;re here to help you achieve your goals.</p>
             <ContactList />
           </div>
@@ -187,8 +202,6 @@ export default function Home() {
           </EnquiryForm>
         </div>
       </section>
-
-      <div className="brand-mark reveal" aria-hidden="true"><span className="mk-p">La</span><span className="mk-y">Sän</span></div>
     </>
   );
 }

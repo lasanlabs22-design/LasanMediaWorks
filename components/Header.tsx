@@ -5,7 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import BrandName from './BrandName';
 import Icon, { Arrow } from './Icon';
-import { CONTACT, MEGA, NAV } from '@/lib/content';
+import { MEGA, NAV } from '@/lib/content';
 
 export default function Header() {
   const pathname = usePathname();
@@ -39,12 +39,10 @@ export default function Header() {
     <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
       <div className="topbar">
         <div className="wrap topbar-inner">
-          <Link href="/book-appointment" className="tb-cta"><Icon name="spark" /> Book Free Consultation</Link>
-          <div className="tb-links">
-            <a href={CONTACT.tel}><Icon name="phone" /> {CONTACT.phone}</a>
-            <a href={`mailto:${CONTACT.email}`}><Icon name="mail" /> {CONTACT.email}</a>
-            <span className="tb-item"><Icon name="pin" /> Tirupati · Bangalore · Hyderabad</span>
-          </div>
+          <nav className="tb-tabs" aria-label="Company">
+            <Link href="/careers" className={isActive('/careers') ? 'active' : undefined}>Careers</Link>
+            <Link href="/book-appointment" className={isActive('/book-appointment') ? 'active' : undefined}>Contact Us</Link>
+          </nav>
         </div>
       </div>
       <div className="wrap">
@@ -62,7 +60,7 @@ export default function Header() {
                 if (!mega) {
                   return (
                     <li key={item.key}>
-                      <Link href={item.href} className={active ? 'active' : undefined} aria-current={active ? 'page' : undefined} onClick={closeAll}>{item.label}</Link>
+                      <Link href={item.href} className={active ? 'active' : undefined} aria-current={active ? 'page' : undefined} onClick={closeAll}><Icon name={item.icon} /><span>{item.label}</span></Link>
                     </li>
                   );
                 }
@@ -70,7 +68,7 @@ export default function Header() {
                 return (
                   <li key={item.key} className={`has-mega${isOpen ? ' open' : ''}`}>
                     <Link href={item.href} className={active ? 'active' : undefined} aria-current={active ? 'page' : undefined} onClick={closeAll}>
-                      {item.label} <Icon name="chev" className="chev" />
+                      <Icon name={item.icon} /><span>{item.label}</span>
                     </Link>
                     <button type="button" className="mega-toggle" aria-expanded={isOpen} aria-controls={`mega-${item.key}`}
                       aria-label={`Show ${item.label} menu`} onClick={() => setOpenMega(isOpen ? null : item.key)}>
@@ -98,8 +96,7 @@ export default function Header() {
                 );
               })}
             </ul>
-            <a href={CONTACT.tel} className="nav-phone"><span className="ic"><Icon name="phone" /></span>{CONTACT.phone}</a>
-            <Link href="/book-appointment" className="btn btn-primary nav-cta" onClick={closeAll}>Book Appointment <Arrow /></Link>
+            <Link href="/book-appointment" className="btn btn-primary nav-cta" onClick={closeAll}>Enquire Now <Arrow /></Link>
           </div>
           <button className="nav-toggle" aria-label={open ? 'Close menu' : 'Open menu'} aria-expanded={open} aria-controls="nav-menu" onClick={() => setOpen(o => !o)}>
             <span /><span />

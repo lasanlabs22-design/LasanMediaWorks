@@ -50,8 +50,8 @@ export default function HeroSlider() {
               <Title className="slide-title"><Words text={s.title} /> <Words text={s.accent} offset={n} accent /></Title>
               <p className="hero-lede">{s.lede}</p>
               <div className="hero-actions">
-                <Link href="/book-appointment?service=audit" className="btn btn-primary" tabIndex={active ? undefined : -1}>Get FREE Audit <Arrow /></Link>
-                <Link href="/book-appointment" className="btn btn-ghost" tabIndex={active ? undefined : -1}>Book Now</Link>
+                <Link href="/book-appointment" className="btn btn-primary" tabIndex={active ? undefined : -1}>Enquire Now <Arrow /></Link>
+                <Link href="/book-appointment?service=audit" className="btn btn-ghost" tabIndex={active ? undefined : -1}>Get a Free Audit</Link>
               </div>
             </div>
           );

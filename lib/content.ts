@@ -9,13 +9,13 @@ export const CONTACT = {
   email: "lasanmediaofficial@gmail.com",
 };
 
+// main nav: what a business owner is looking for. Keys with a MEGA entry open a mega menu.
 export const NAV = [
-  { key: "home", href: "/", label: "Home" },
-  { key: "articles", href: "/articles", label: "Articles" },
-  { key: "strategy", href: "/strategy", label: "Strategy" },
-  { key: "services", href: "/services", label: "Services" },
-  { key: "about", href: "/about", label: "About" },
-  { key: "careers", href: "/careers", label: "Careers" },
+  { key: "about", href: "/about", label: "Why LaSän", icon: "star" },
+  { key: "services", href: "/services", label: "Solutions", icon: "layers" },
+  { key: "strategy", href: "/strategy", label: "Growth Strategy", icon: "target" },
+  { key: "work", href: "/#work", label: "Our Work", icon: "bar" },
+  { key: "articles", href: "/articles", label: "Insights", icon: "book" },
 ] as const;
 
 type MegaItem = { icon: IconName; title: string; desc: string; href: string };
@@ -74,9 +74,9 @@ export const MEGA: Record<
   },
   services: {
     side: {
-      title: "Need Help?",
-      text: "Explore our comprehensive service offerings.",
-      cta: "View All Services",
+      title: "Not Sure What You Need?",
+      text: "Tell us your goal. We will suggest the right mix of services.",
+      cta: "See All Solutions",
       href: "/services",
     },
     items: [
@@ -120,9 +120,9 @@ export const MEGA: Record<
   },
   about: {
     side: {
-      title: "Know More About LaSän",
-      text: "Our Growth Playbook.",
-      cta: "Watch Now",
+      title: "Why Businesses Choose LaSän",
+      text: "Who we are, how we work and the results we deliver.",
+      cta: "Know More",
       href: "/about#howwework",
     },
     items: [
@@ -168,19 +168,19 @@ export const MEGA: Record<
 
 export const SLIDES = [
   {
-    title: "Unlock Business Challenges With",
-    accent: "Winning Strategies.",
-    lede: "Strategic decision making and robust implementation frameworks designed for ROI.",
+    title: "Give Your Business The",
+    accent: "LaSän Advantage.",
+    lede: "Strategy, branding and marketing under one roof, so the money you spend on promotion brings back enquiries and sales.",
   },
   {
-    title: "Strategic Growth, Insightful Research &",
-    accent: "Digital Excellence.",
-    lede: "We partner with ambitious SMEs and startups to turn challenges into sustainable digital dominance.",
+    title: "More Enquiries. More Customers.",
+    accent: "Growth You Can Measure.",
+    lede: "SEO, social media, paid ads and websites that bring customers to you, with a monthly report that shows what worked.",
   },
   {
-    title: "Elevate Your Growth & Success With",
-    accent: "LaSän Media.",
-    lede: "We partner with businesses to drive sustainable success through data-driven campaigns.",
+    title: "One Team For Your Brand,",
+    accent: "Online And Offline.",
+    lede: "From Google and Instagram to hoardings and LED boards, we plan and run every channel your customers see.",
   },
 ];
 
