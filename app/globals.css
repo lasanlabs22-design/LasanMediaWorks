@@ -1118,8 +1118,23 @@ section { position: relative; }
 .video-band::before { background: rgba(129, 53, 136, .82); }
 .subnav { background: var(--d1); }
 
-/* bolder headings */
-h1, h2 { font-weight: 800; letter-spacing: -0.02em; }
+/* LEAD-scale type: Montserrat bold, big headings */
+body { font-size: 16px; }
+h1, h2, h3 { font-weight: 700; letter-spacing: -0.01em; }
+.slide-title { font-size: clamp(36px, 4.6vw, 64px); line-height: 1.12; }
+.hero-lede, .page-hero p { font-size: 17.5px; }
+.section-head h2, .center-head h2, .closing h2 { font-size: clamp(30px, 3.6vw, 50px); line-height: 1.15; }
+.section-head h2 { max-width: 760px; }
+.section-head p, .center-head p { font-size: 16.5px; }
+.page-hero h1 { font-size: clamp(34px, 4.4vw, 60px); }
+.grow h2 { font-size: clamp(30px, 3.6vw, 48px); }
+.grow .grow-sub { font-size: 20px; }
+.offer-band h2 { font-size: clamp(22px, 2.6vw, 34px); line-height: 1.25; }
+.step h3, .offer-body h3, .value h3, .case-over h3 { font-size: 20px; }
+.industry h3 { font-size: 22px; }
+.eyebrow { font-size: 12.5px; }
+.btn { font-size: 15px; font-weight: 700; }
+.btn-sm { font-size: 14px; }
 
 /* home hero visual: founders in a yellow circle, our promises floating around it */
 .hc { position: relative; width: min(100%, 500px); aspect-ratio: 1; margin: 0 auto; }

@@ -49,7 +49,7 @@ export default function Header() {
         <nav className={`nav${open ? ' open' : ''}`} aria-label="Main">
           <Link href="/" className="logo" aria-label="LaSän Media Works — home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/img/logo.png" alt="LaSän Media Works" width={624} height={782} />
+            <img src="/img/logo.png" alt="LaSän Media Works" width={360} height={308} />
             <span aria-hidden="true"><BrandName after=" Media Works" sub="Private Limited" className="logo-name" /></span>
           </Link>
           <div className="nav-menu" id="nav-menu">

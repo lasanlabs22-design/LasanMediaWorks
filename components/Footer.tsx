@@ -11,7 +11,7 @@ export default function Footer() {
           <div className="footer-brand">
             <Link href="/" className="logo" aria-label="LaSän Media Works — home">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/img/logo.png" alt="LaSän Media Works" width={624} height={782} loading="lazy" />
+              <img src="/img/logo.png" alt="LaSän Media Works" width={360} height={308} loading="lazy" />
               <span aria-hidden="true"><BrandName after=" Media Works" sub="Private Limited" className="logo-name" /></span>
             </Link>
             <p>A growth agency helping SMEs and startups grow through strategy, creative and technology.</p>
