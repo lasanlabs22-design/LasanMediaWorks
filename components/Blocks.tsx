@@ -122,7 +122,7 @@ export function HeroCircle() {
               <circle className="hc-dot" cx={dot} cy={y} r="4" />
               <text className="hc-text" textAnchor="end"><tspan x={dot - 14} y={y - 4}>{l1}</tspan><tspan x={dot - 14} y={y + 18}>{l2}</tspan></text>
               <circle className="hc-node" cx={x} cy={y} r="40" />
-              <svg x={x - 19} y={y - 19} width="38" height="38" viewBox="0 0 24 24" className="hc-icon" dangerouslySetInnerHTML={{ __html: PATHS[o.icon] }} />
+              <svg x={x - 21} y={y - 21} width="42" height="42" viewBox="0 0 24 24" className="hc-icon" dangerouslySetInnerHTML={{ __html: PATHS[o.icon] }} />
             </g>
           );
         })}

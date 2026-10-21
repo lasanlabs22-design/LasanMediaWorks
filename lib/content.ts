@@ -429,10 +429,10 @@ export const HELP: {
 
 // the LaSän Growth System: hero bullet list + labels on the arc around the founders' photo
 export const HERO_ORBIT: { icon: IconName; label: string }[] = [
-  { icon: "compass", label: "Business Strategy" },
-  { icon: "spark", label: "Branding & Creative" },
-  { icon: "trend", label: "Digital Marketing" },
-  { icon: "code", label: "Software & Technology" },
+  { icon: "present", label: "Business Strategy" },
+  { icon: "palette", label: "Branding & Creative" },
+  { icon: "megaphone", label: "Digital Marketing" },
+  { icon: "laptop", label: "Software & Technology" },
 ];
 
 // who we grow: the sectors on our client wall, with real client names as proof
