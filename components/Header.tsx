@@ -40,6 +40,8 @@ export default function Header() {
       <div className="topbar">
         <div className="wrap topbar-inner">
           <nav className="tb-tabs" aria-label="Company">
+            <Link href="/online-marketing" className={isActive('/online-marketing') ? 'active' : undefined}>Online Marketing</Link>
+            <Link href="/offline-marketing" className={isActive('/offline-marketing') ? 'active' : undefined}>Offline Marketing</Link>
             <Link href="/careers" className={isActive('/careers') ? 'active' : undefined}>Careers</Link>
             <Link href="/book-appointment" className={isActive('/book-appointment') ? 'active' : undefined}>Contact Us</Link>
           </nav>
