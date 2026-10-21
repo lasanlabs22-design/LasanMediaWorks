@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { CenterHead, CtaBand, PageHero, SectionHead, SolutionRows, Team } from '@/components/Blocks';
+import { CenterHead, CtaBand, PageHero, SectionHead, SolutionRows, Team, Values } from '@/components/Blocks';
 import { ABOUT_NUMBERS, ABOUT_SECTIONS, ABOUT_TEAM, FOUNDERS, JOURNEY, MISSION, VISION } from '@/lib/content';
 import Performers from '@/components/Performers';
 import { readRecognition } from '@/lib/store';
@@ -50,6 +50,10 @@ export default function AboutPage() {
           <div className="vm">
             <article className="vm-card reveal"><span className="eyebrow">Our Vision</span><p>{VISION}</p></article>
             <article className="vm-card reveal"><span className="eyebrow">Our Mission</span><p>{MISSION}</p></article>
+          </div>
+          <div className="values-block">
+            <CenterHead eyebrow="Our values" title="What you can" accent="expect from us." text="Beyond metrics and ROI, we are driven by a set of non-negotiable principles that define our impact." />
+            <Values />
           </div>
         </div>
       </section>

@@ -1,7 +1,7 @@
 // Small presentational pieces shared across pages (server components).
 import Link from 'next/link';
 import Icon, { Arrow } from './Icon';
-import { BLUEPRINT, CASES, CLIENTS_A, CLIENTS_B, CONTACT, FAQ, HELP, NUMBERS, OFFICES, PROCESS, TEAM, TESTIMONIALS, VALUES, type Client, type Solution } from '@/lib/content';
+import { BLUEPRINT, CASES, CLIENTS_A, CLIENTS_B, CONTACT, FAQ, HELP, HERO_ORBIT, INDUSTRIES, NUMBERS, OFFICES, PROCESS, TEAM, TESTIMONIALS, VALUES, type Client, type Solution } from '@/lib/content';
 import type { ArticleSummary } from '@/lib/store';
 
 export function SectionHead({ eyebrow, title, accent, text, children }: { eyebrow: string; title: string; accent?: string; text?: string; children?: React.ReactNode }) {
@@ -75,6 +75,37 @@ export function CtaBand({ title, accent, text, primary = ['Book Appointment', '/
         </div>
       </div>
     </section>
+  );
+}
+
+// home hero visual: the founders in a yellow circle, our four promises floating around it
+export function HeroCircle() {
+  return (
+    <div className="hc">
+      <div className="hc-disc" aria-hidden="true" />
+      <div className="hc-photo">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/img/about/founders.jpg" alt="LaSän founders Sree Latha and Santhosh Rokaya" />
+      </div>
+      {HERO_ORBIT.map((o, i) => (
+        <span className={`hc-badge b${i + 1}`} key={o.label} aria-hidden="true"><span className="hc-ic"><Icon name={o.icon} /></span>{o.label}</span>
+      ))}
+    </div>
+  );
+}
+
+export function Industries() {
+  return (
+    <div className="industries">
+      {INDUSTRIES.map(n => (
+        <article className="industry reveal" key={n.title}>
+          <span className="ic"><Icon name={n.icon} /></span>
+          <h3>{n.title}</h3>
+          <p>{n.text}</p>
+          <small>{n.clients}</small>
+        </article>
+      ))}
+    </div>
   );
 }
 
@@ -183,11 +214,13 @@ export function Team({ members = TEAM }: { members?: { name: string; role: strin
 export function Quotes({ count = 6 }: { count?: number }) {
   return (
     <div className="quotes">
-      {TESTIMONIALS.slice(0, count).map(t => (
+      {/* quotes with a real photo lead */}
+      {[...TESTIMONIALS].sort((a, b) => Number(!!b.photo) - Number(!!a.photo)).slice(0, count).map(t => (
         <figure className="quote reveal" key={t.name}>
           <div className="stars" aria-label="5 out of 5">★★★★★</div>
           <p>“{t.quote}”</p>
-          <footer><span className="q-av" aria-hidden="true">{t.name.replace('Dr. ', '')[0]}</span><div><b>{t.name}</b><small>{t.role}</small></div></footer>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <footer>{t.photo ? <img className="q-av" src={t.photo} alt="" loading="lazy" /> : <span className="q-av" aria-hidden="true">{t.name.replace('Dr. ', '')[0]}</span>}<div><b>{t.name}</b><small>{t.role}</small></div></footer>
         </figure>
       ))}
     </div>

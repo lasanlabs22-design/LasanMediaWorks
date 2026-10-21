@@ -5,7 +5,7 @@ import Footer from '@/components/Footer';
 import Effects from '@/components/Effects';
 import './globals.css';
 
-const sans = Source_Sans_3({ subsets: ['latin'], weight: ['400', '600', '700'], variable: '--font-sans', display: 'swap' });
+const sans = Source_Sans_3({ subsets: ['latin'], weight: ['400', '600', '700', '800'], variable: '--font-sans', display: 'swap' });
 // only used for the "Powered by Lasan Labs" signature
 const grotesk = Space_Grotesk({ subsets: ['latin'], weight: ['600'], variable: '--font-space-grotesk', display: 'swap' });
 

@@ -5,8 +5,8 @@ import HeroMotion from '@/components/HeroMotion';
 import ServiceTabs from '@/components/ServiceTabs';
 import EnquiryForm from '@/components/EnquiryForm';
 import {
-  ArticleCard, Blueprint, Cases, CenterHead, Clients, ContactList, Faq, HelpCards, Quotes,
-  SectionHead, Steps, Team, Values, VideoBand,
+  ArticleCard, Cases, CenterHead, Clients, ContactList, Faq, HelpCards, HeroCircle, Industries, Quotes,
+  SectionHead, Steps, Team, VideoBand,
 } from '@/components/Blocks';
 import BrandName from '@/components/BrandName';
 import { INSIGHT_TYPES, NUMBERS, VENTURES } from '@/lib/content';
@@ -19,11 +19,11 @@ export default function Home() {
 
   return (
     <>
-      {/* HERO — headline + looping motion graphics of what LaSän does */}
+      {/* HERO — headline + the founders with our four promises */}
       <section className="hero hero-m">
         <div className="wrap hero-m-grid">
           <div className="hero-inner"><HeroSlider /></div>
-          <HeroMotion />
+          <HeroCircle />
         </div>
       </section>
 
@@ -35,20 +35,30 @@ export default function Home() {
         </div>
       </section>
 
-      {/* GROW + NUMBERS */}
+      {/* GROW + NUMBERS, with the live campaign dashboard */}
       <section className="section">
         <div className="wrap grow">
           <div className="reveal">
             <h2>Grow your business with <em>LaSän</em></h2>
             <p className="grow-sub">Strategy, branding, digital and offline marketing, handled by one team.</p>
-            <p>We work with schools, hospitals, restaurants, retailers and startups across Andhra Pradesh, Karnataka and Telangana. We study your market, build a plan around your goals and run the campaigns, then report the leads and sales they bring in.</p>
-            <Link href="/book-appointment" className="btn btn-primary btn-sm">Enquire Now <Arrow /></Link>
+            <p>We study your market, build a plan around your goals and run the campaigns, then report the leads and sales they bring in. Every month, in numbers you can check.</p>
+            <dl className="grow-stats">
+              {NUMBERS.map(n => (
+                <div key={n.label}><dd data-count={n.value} data-suffix={n.suffix}>{n.value}{n.suffix}</dd><dt>{n.label}</dt></div>
+              ))}
+            </dl>
+            <Link href="/book-appointment" className="btn btn-primary">Enquire Now <Arrow /></Link>
           </div>
-          <dl className="grow-stats reveal">
-            {NUMBERS.map(n => (
-              <div key={n.label}><dd data-count={n.value} data-suffix={n.suffix}>{n.value}{n.suffix}</dd><dt>{n.label}</dt></div>
-            ))}
-          </dl>
+          <HeroMotion />
+        </div>
+      </section>
+
+      {/* WHO WE HELP */}
+      <section className="section sun" id="industries">
+        <div className="wrap">
+          <CenterHead eyebrow="Who we help" title="Built for businesses" accent="like yours." text="Six industries, 200+ clients across Andhra Pradesh, Karnataka and Telangana. If your business is here, we already know what works." />
+          <Industries />
+          <div className="center-cta reveal"><Link href="/book-appointment" className="btn btn-dark">Get a plan for my business <Arrow /></Link></div>
         </div>
       </section>
 
@@ -96,22 +106,6 @@ export default function Home() {
         <div className="wrap">
           <SectionHead eyebrow="Testimonials" title="What business owners" accent="say about us." text="Trusted by 200+ businesses across India." />
           <Quotes />
-        </div>
-      </section>
-
-      {/* VALUES */}
-      <section className="section tint">
-        <div className="wrap">
-          <SectionHead eyebrow="Our values" title="What you can" accent="expect from us." text="Beyond metrics and ROI, we are driven by a set of non-negotiable principles that define our impact." />
-          <Values />
-        </div>
-      </section>
-
-      {/* BLUEPRINT */}
-      <section className="section">
-        <div className="wrap">
-          <SectionHead eyebrow="Our approach" title="How we scale" accent="your brand." text="A calculated approach to scaling your brand in the modern digital landscape." />
-          <Blueprint />
         </div>
       </section>
 
@@ -182,7 +176,7 @@ export default function Home() {
       </VideoBand>
 
       {/* CONTACT */}
-      <section className="section" id="contact">
+      <section className="section tint" id="contact">
         <div className="wrap contact-grid">
           <div className="contact-side reveal">
             <span className="eyebrow">Contact</span>

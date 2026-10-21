@@ -427,6 +427,54 @@ export const HELP: {
   },
 ];
 
+// the four promises around the founders' photo in the home hero
+export const HERO_ORBIT: { icon: IconName; label: string }[] = [
+  { icon: "compass", label: "Business Strategy" },
+  { icon: "spark", label: "Branding" },
+  { icon: "trend", label: "Digital Marketing" },
+  { icon: "code", label: "Websites & Tech" },
+];
+
+// who we grow: the sectors on our client wall, with real client names as proof
+export const INDUSTRIES: { icon: IconName; title: string; text: string; clients: string }[] = [
+  {
+    icon: "cap",
+    title: "Schools & Colleges",
+    text: "Admission campaigns that fill seats before the academic year starts.",
+    clients: "Delhi Public School · Edify School · Spring Dale",
+  },
+  {
+    icon: "heart",
+    title: "Hospitals & Clinics",
+    text: "Steady patient enquiries from Google, Instagram and WhatsApp.",
+    clients: "MS Hospital · Sri Padmavathi · AJ Dental Care",
+  },
+  {
+    icon: "utensils",
+    title: "Restaurants & Hotels",
+    text: "More footfall, table bookings and five-star reviews.",
+    clients: "Robo Diner · Hotel Rajahamsa · Ignite Resto Bar",
+  },
+  {
+    icon: "bag",
+    title: "Textiles & Retail",
+    text: "Festival-season campaigns that bring buyers into your store.",
+    clients: "House of Varnam · Aakrithi Boutique · Beauty Basket",
+  },
+  {
+    icon: "building",
+    title: "Real Estate & Interiors",
+    text: "Site-visit and showroom leads for your projects.",
+    clients: "Vaarahi Developers · Lod Interiors · LS Interiors",
+  },
+  {
+    icon: "calendar",
+    title: "Events & Weddings",
+    text: "Bookings from families planning their big day.",
+    clients: "Vivaha Events · Leela Gardens · Asha Conventions",
+  },
+];
+
 export const TEAM = [
   {
     name: "Sree Latha",
@@ -515,12 +563,14 @@ export const TESTIMONIALS = [
       "Working with LaSän Media has been a game-changer for our business. Their social media strategies increased our engagement by 400% and brought us quality leads consistently.",
     name: "Latha",
     role: "Founder, Sree Ankura Fertility",
+    photo: "/img/articles/dr-latha.jpg",
   },
   {
     quote:
       "The ROI we've seen from our partnership with LaSän Media is outstanding. Their team is proactive, creative, and truly cares about our success. Best decision we ever made!",
     name: "Nagesh",
     role: "CEO, Sree Padmavathi Multispeciality Hospitals",
+    photo: "/img/articles/dr-nagesh.jpg",
   },
   {
     quote:
