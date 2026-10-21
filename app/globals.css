@@ -1,7 +1,8 @@
 /* ==========================================================
-   LaSän Media Works — solid palette (white pages, solid purple blocks)
+   LaSän Media Works — solid purple + yellow palette, no white
    Brand: #813588 · deep #2b0f2e · #3d1641 · #522058 · #682a6f
-   Accent: #ffcc00 (pill buttons, offer band)
+   Accent: #ffcc00 (pill buttons, offer band, highlights)
+   Sections alternate brand purple / deep purple; cards take the other shade.
    ========================================================== */
 
 :root {
@@ -17,19 +18,19 @@
   --grad: var(--purple);
   --grad-deep: var(--d1);
 
-  --bg: #ffffff;
-  --alt: #f7f0f8;
-  --surface: var(--purple);
-  --surface-2: var(--d3);
-  --text: #3b2e3e;
-  --muted: #6c5d70;
-  --head: #2b0f2e;
+  --bg: var(--purple);
+  --alt: var(--d1);
+  --surface: var(--d1);
+  --surface-2: var(--d0);
+  --text: #f6edf7;
+  --muted: rgba(255, 255, 255, .8);
+  --head: #ffffff;
   --gold: #ffcc00;          /* brand yellow from the logo */
   --gold-hover: #ffd633;
-  --accent: var(--purple);
+  --accent: var(--gold);
   --sun: #f0dcf7;
-  --line: rgba(129, 53, 136, .16);
-  --line-strong: rgba(129, 53, 136, .32);
+  --line: rgba(255, 255, 255, .16);
+  --line-strong: rgba(255, 255, 255, .3);
 
   --font-display: var(--font-sans), 'Segoe UI', Arial, sans-serif;
   --font-body: var(--font-sans), 'Segoe UI', Arial, sans-serif;
@@ -1030,17 +1031,13 @@ section { position: relative; }
 }
 
 /* ==========================================================
-   Solid palette: white pages, header / hero / cards / bands in solid brand purple.
-   Anything sitting on a purple block switches to the light-on-dark tokens here.
+   Solid palette overrides: sections alternate brand purple (default) and
+   deep purple (.tint), cards take the other shade.
    ========================================================== */
-.topbar, .site-header, .hero, .video-band, .dark, .page-hero, .masthead, .subnav, .site-footer, .notfound,
-.step, .value, .case, .offer, .member, .quote, .deliver > div, .insight, .office, .aud, .strat-row,
-.form-card, .job, .vm-card, .next-steps > div, .cta, .mega, .nav-menu, .glass, .eotm, .contact-list {
-  --text: #f6edf7; --muted: rgba(255, 255, 255, .8); --head: #fff; --accent: var(--gold);
-  --line: rgba(255, 255, 255, .16); --line-strong: rgba(255, 255, 255, .3);
-  color: var(--text);
-}
+.section.tint { --surface: var(--purple); --surface-2: var(--d3); }
+.dark { background: var(--d0); }
 .step, .value, .case, .member, .quote, .deliver > div, .insight, .office, .aud, .strat-row, .form-card, .next-steps > div { border-color: transparent; }
+.quote:nth-child(3n+2) { background: var(--d2); }
 
 /* pill buttons */
 .btn { border-radius: 999px; }
@@ -1053,7 +1050,7 @@ section { position: relative; }
 
 /* header: solid purple, small tabs on top, icon above each label */
 .site-header, .site-header.scrolled { background: var(--purple); border-bottom-color: transparent; }
-.site-header.scrolled { box-shadow: 0 10px 30px -18px rgba(0, 0, 0, .6); }
+.site-header.scrolled { background: var(--d1); box-shadow: 0 10px 30px -18px rgba(0, 0, 0, .6); }
 .topbar { background: var(--d1); border-bottom: 0; }
 .topbar-inner { justify-content: flex-end; padding-block: 0; }
 .tb-tabs { display: flex; gap: 4px; padding-top: 6px; }
@@ -1082,7 +1079,7 @@ section { position: relative; }
 .grow .grow-sub { margin: 8px 0 18px; font-size: 18px; color: var(--head); }
 .grow-stats { margin: 0; display: grid; gap: 18px; padding-left: 40px; border-left: 2px solid var(--line-strong); }
 .grow-stats > div { display: flex; align-items: baseline; gap: 14px; }
-.grow-stats dd { margin: 0; min-width: 96px; font-size: 32px; font-weight: 700; line-height: 1; color: var(--purple); }
+.grow-stats dd { margin: 0; min-width: 96px; font-size: 32px; font-weight: 700; line-height: 1; color: var(--gold); }
 .grow-stats dt { font-size: 14.5px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--head); }
 .video-band::before { background: rgba(129, 53, 136, .92); }
 .closing { max-width: 720px; margin: 0 auto; text-align: center; }
@@ -1104,25 +1101,16 @@ section { position: relative; }
 .deliver .i, .aud .i, .q-av { background: rgba(255, 255, 255, .14); color: var(--gold); }
 .insight .lbl, .office .hq, .value:hover .vn, .next-steps > div::before { background: var(--gold); color: var(--d0); }
 
-/* light sections: FAQ, contact list, inner page hero */
-.faq details, .faq details[open] { background: #fff; border-color: var(--line-strong); }
-.faq details[open] { border-color: var(--purple); }
-.faq summary { color: var(--head); font-weight: 600; }
-.contact-list a, .contact-list div { background: var(--purple); border-color: transparent; }
-.contact-list a:hover { background: var(--d3); }
+/* FAQ, contact list, inner page hero */
+.faq details, .faq details[open] { background: var(--surface); border-color: transparent; }
+.faq details[open] { border-color: var(--gold); }
+.faq details[open] summary::after { background: var(--gold); color: var(--d0); }
+.faq summary { font-weight: 600; }
+.contact-list a, .contact-list div { background: var(--surface); border-color: transparent; }
+.contact-list a:hover { background: var(--surface-2); }
 .contact-list .ic { background: rgba(255, 255, 255, .14); color: var(--gold); }
+/* logo files have white baked in: multiply turns that white into the lilac tile */
+.venture-tile { background: #f3e8f8; }
+.venture-tile img, .client-tile img { mix-blend-mode: multiply; }
 .page-hero::before { background: linear-gradient(90deg, rgba(129, 53, 136, .96) 0%, rgba(129, 53, 136, .88) 60%, rgba(129, 53, 136, .72) 100%); }
 .subnav { background: var(--d1); }
-
-/* text that was hard-coded white for the old dark pages */
-.venture .brand-name b { color: var(--head); }
-.venture .brand-name .mk-p { color: var(--purple); }
-.split .copy p.lead, .story-text > p:first-child, .story-text blockquote, .byline-who b, .author-box b, .pager button, .share a, .share button { color: var(--head); }
-.story-text { color: var(--text); }
-.story-dek { color: var(--muted); }
-.story-tags a, .filter, .chips li { color: var(--text); }
-.filter:hover { background: var(--alt); }
-.search input { background: #fff; color: var(--text); border-color: var(--line-strong); }
-.search input::placeholder { color: var(--muted); }
-.kicker, .card:hover h3 { color: var(--accent); }
-.journey b, .stat-band b { color: var(--purple); }
