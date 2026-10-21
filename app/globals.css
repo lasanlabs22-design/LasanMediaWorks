@@ -1161,6 +1161,7 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.01em; }
 /* who we help: a yellow section with deep purple industry cards */
 .section.sun { background: var(--gold); --head: var(--d0); --text: var(--d1); --muted: rgba(43, 15, 46, .8); --accent: var(--purple); }
 .section.sun .eyebrow::before { background: var(--purple); }
+.section.sun .value { --head: #fff; --muted: rgba(255, 255, 255, .8); --accent: var(--gold); color: #f6edf7; }
 .industries { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
 .industry { --head: #fff; --muted: rgba(255, 255, 255, .8); display: flex; flex-direction: column; padding: 30px 26px 24px; border-radius: 12px; background: var(--d1); color: #f6edf7; transition: transform .4s var(--ease), background .4s; }
 .industry:hover { transform: translateY(-4px); background: var(--purple); }

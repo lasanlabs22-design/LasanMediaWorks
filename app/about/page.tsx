@@ -52,7 +52,7 @@ export default function AboutPage() {
             <article className="vm-card reveal"><span className="eyebrow">Our Mission</span><p>{MISSION}</p></article>
           </div>
           <div className="values-block">
-            <CenterHead eyebrow="Our values" title="What you can" accent="expect from us." text="Beyond metrics and ROI, we are driven by a set of non-negotiable principles that define our impact." />
+            <CenterHead eyebrow="The DNA of success" title="The LaSän" accent="core values." text="Beyond metrics and ROI, we are driven by a set of non-negotiable principles that define our impact." />
             <Values />
           </div>
         </div>

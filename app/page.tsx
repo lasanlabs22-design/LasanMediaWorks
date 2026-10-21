@@ -5,7 +5,7 @@ import ServiceTabs from '@/components/ServiceTabs';
 import EnquiryForm from '@/components/EnquiryForm';
 import {
   ArticleCard, Cases, CenterHead, Clients, ContactList, Faq, HelpCards, HeroCircle, HeroCopy, Industries, Quotes,
-  SectionHead, Steps, Team, VideoBand,
+  SectionHead, Steps, Team, Values, VideoBand,
 } from '@/components/Blocks';
 import BrandName from '@/components/BrandName';
 import { INSIGHT_TYPES, NUMBERS, VENTURES } from '@/lib/content';
@@ -105,6 +105,14 @@ export default function Home() {
         <div className="wrap">
           <SectionHead eyebrow="Testimonials" title="What business owners" accent="say about us." text="Trusted by 200+ businesses across India." />
           <Quotes />
+        </div>
+      </section>
+
+      {/* VALUES */}
+      <section className="section sun">
+        <div className="wrap">
+          <CenterHead eyebrow="The DNA of success" title="The LaSän" accent="core values." text="Beyond metrics and ROI, we are driven by a set of non-negotiable principles that define our impact." />
+          <Values />
         </div>
       </section>
 
