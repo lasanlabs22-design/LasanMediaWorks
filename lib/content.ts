@@ -432,7 +432,7 @@ export const HERO_ORBIT: { icon: IconName; label: string }[] = [
   { icon: "compass", label: "Business Strategy" },
   { icon: "spark", label: "Branding & Creative" },
   { icon: "trend", label: "Digital Marketing" },
-  { icon: "code", label: "Websites & Technology" },
+  { icon: "code", label: "Software & Technology" },
 ];
 
 // who we grow: the sectors on our client wall, with real client names as proof

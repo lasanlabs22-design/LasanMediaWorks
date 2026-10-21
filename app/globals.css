@@ -1138,29 +1138,24 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.01em; }
 
 /* home hero, after leadschool.in: statement on the left, founders inside a yellow arc on the right,
    one icon per service sitting on the arc with its label on the left (no motion) */
-.hero-m-grid { grid-template-columns: minmax(0, 1fr) 580px; gap: 32px; }
-.hero-title { margin: 0 0 22px; font-size: clamp(32px, 3.4vw, 46px); line-height: 1.15; }
+.hero-m-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr); gap: 24px; }
+.hero-title { margin: 0 0 22px; font-size: clamp(30px, 3vw, 42px); line-height: 1.18; }
 .hero-sub { margin: 0 0 14px; font-size: clamp(18px, 1.6vw, 22px); font-weight: 500; color: #fff; }
 .hero-list { margin: 0 0 32px; padding-left: 20px; display: grid; gap: 6px; font-size: 17px; font-weight: 500; color: var(--text); }
 .hero-list li::marker { color: var(--gold); }
-.hc { position: relative; width: 360px; aspect-ratio: 1; margin: 20px 0 20px auto; }
-.hc-arc { position: absolute; inset: 0; border-radius: 50%; border: 30px solid var(--gold); border-top-color: transparent; border-right-color: transparent; transform: rotate(30deg); }
-.hc-photo { position: absolute; inset: 12%; overflow: hidden; border-radius: 50%; background: var(--d1); box-shadow: 0 0 0 8px var(--d1); }
-.hc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
-/* nodes sit on the arc's centre line (radius 46%), at 335 / 290 / 245 / 200 degrees from 12 o'clock */
-.hc-node { position: absolute; z-index: 2; width: 64px; height: 64px; margin: -32px 0 0 -32px; display: grid; place-items: center; border-radius: 50%; border: 3px solid var(--gold); background: var(--d1); color: var(--gold); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .6); }
-.hc-node .i { width: 28px; height: 28px; }
-.hc-node.n1 { left: 30.5%; top: 8.3%; }
-.hc-node.n2 { left: 6.8%; top: 34.3%; }
-.hc-node.n3 { left: 8.3%; top: 69.5%; }
-.hc-node.n4 { left: 34.3%; top: 93.2%; }
-.hc-label { position: absolute; right: calc(100% + 50px); top: 50%; width: 160px; transform: translateY(-50%); text-align: right; font-size: 14px; font-weight: 700; line-height: 1.25; letter-spacing: .04em; text-transform: uppercase; color: #fff; }
-.hc-label::after { content: ''; position: absolute; left: calc(100% + 10px); top: 50%; width: 38px; height: 2px; background: rgba(255, 255, 255, .7); }
-.hc-label::before { content: ''; position: absolute; left: calc(100% + 6px); top: calc(50% - 3px); width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+.hero-title { text-wrap: balance; }
+.hc { width: 100%; max-width: 620px; margin-left: auto; }
+.hc svg { display: block; width: 100%; height: auto; overflow: visible; }
+.hc-ring { fill: var(--gold); }
+.hc-disc { fill: #ffe066; }
+.hc-node { fill: #f3e8f8; filter: drop-shadow(0 6px 10px rgba(43, 15, 46, .35)); }
+.hc-icon { fill: none; stroke: var(--purple); stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+.hc-line { stroke: rgba(255, 255, 255, .85); stroke-width: 2; }
+.hc-dot { fill: #fff; }
+.hc-text { fill: #fff; font-family: var(--font-sans); font-size: 17px; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; }
 @media (max-width: 1060px) {
   .hero-m-grid { grid-template-columns: 1fr; }
-  .hc { width: min(100%, 340px); margin: 10px auto 30px; }
-  .hc-label { display: none; } /* the bullet list above names the four services */
+  .hc { max-width: 560px; margin: 10px auto 0; }
 }
 
 /* who we help: a yellow section with deep purple industry cards */

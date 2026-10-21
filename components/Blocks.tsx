@@ -1,6 +1,6 @@
 // Small presentational pieces shared across pages (server components).
 import Link from 'next/link';
-import Icon, { Arrow } from './Icon';
+import Icon, { Arrow, PATHS } from './Icon';
 import { BLUEPRINT, CASES, CLIENTS_A, CLIENTS_B, CONTACT, FAQ, HELP, HERO_ORBIT, INDUSTRIES, NUMBERS, OFFICES, PROCESS, TEAM, TESTIMONIALS, VALUES, type Client, type Solution } from '@/lib/content';
 import type { ArticleSummary } from '@/lib/store';
 
@@ -78,22 +78,55 @@ export function CtaBand({ title, accent, text, primary = ['Book Appointment', '/
   );
 }
 
-// home hero visual, after leadschool.in: founders' photo inside a yellow arc,
-// one icon on the arc per service, each labelled on the left
+/* Home hero visual, after leadschool.in/school-owner. One SVG (circle centre 250,250):
+   a light disc (r 150), a thin ring on the right, stepped thick segments on the left,
+   the founders' cutout clipped by the circle below its centre but free above it,
+   and one icon per service on the outer edge (r 200) with a two-line label, dot and line. */
+const HC_STEPS: [number, number, number][] = [[160, 196, 192], [196, 232, 210], [232, 270, 228], [270, 308, 212], [308, 350, 194]]; // from°, to°, outer r
+const HC_NODES = [336, 292, 248, 204]; // degrees clockwise from 12 o'clock
+const hcPoint = (r: number, deg: number) => {
+  const t = (deg * Math.PI) / 180;
+  return [250 + r * Math.sin(t), 250 - r * Math.cos(t)];
+};
+const hcSector = (r0: number, r1: number, a0: number, a1: number) => {
+  const f = (r: number, a: number) => hcPoint(r, a).map(v => v.toFixed(1)).join(' ');
+  const large = a1 - a0 > 180 ? 1 : 0;
+  return `M${f(r1, a0)}A${r1} ${r1} 0 ${large} 1 ${f(r1, a1)}L${f(r0, a1)}A${r0} ${r0} 0 ${large} 0 ${f(r0, a0)}Z`;
+};
+// "Branding & Creative" -> ["Branding &", "Creative"]: split where the two lines are most even
+const twoLines = (s: string) => {
+  const w = s.split(' ');
+  let best = 1;
+  for (let i = 1; i < w.length; i++) if (Math.abs(w.slice(0, i).join(' ').length - w.slice(i).join(' ').length) < Math.abs(w.slice(0, best).join(' ').length - w.slice(best).join(' ').length)) best = i;
+  return [w.slice(0, best).join(' '), w.slice(best).join(' ')];
+};
+
 export function HeroCircle() {
   return (
     <div className="hc">
-      <div className="hc-arc" aria-hidden="true" />
-      <div className="hc-photo">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/img/about/founders.jpg" alt="LaSän founders Sree Latha and Santhosh Rokaya" />
-      </div>
-      {HERO_ORBIT.map((o, i) => (
-        <span className={`hc-node n${i + 1}`} key={o.label} aria-hidden="true">
-          <span className="hc-label">{o.label}</span>
-          <Icon name={o.icon} />
-        </span>
-      ))}
+      <svg viewBox="-200 20 640 460" role="img" aria-label="LaSän founders Sree Latha and Santhosh Rokaya, with the four parts of the LaSän Growth System">
+        <defs>
+          <clipPath id="hc-clip"><circle cx="250" cy="250" r="172" /><rect x="-200" y="0" width="700" height="250" /></clipPath>
+        </defs>
+        {HC_STEPS.map(([a0, a1, r]) => <path key={a0} className="hc-ring" d={hcSector(148, r, a0, a1)} />)}
+        <path className="hc-ring" d={hcSector(148, 172, -14, 162)} />
+        <circle className="hc-disc" cx="250" cy="250" r="150" />
+        <image href="/img/about/founders-cut.png" x="96" y="50" width="330" height="391" clipPath="url(#hc-clip)" />
+        {HERO_ORBIT.map((o, i) => {
+          const [x, y] = hcPoint(200, HC_NODES[i]);
+          const dot = x - 112;
+          const [l1, l2] = twoLines(o.label);
+          return (
+            <g key={o.label}>
+              <line className="hc-line" x1={dot} y1={y} x2={x - 40} y2={y} />
+              <circle className="hc-dot" cx={dot} cy={y} r="4" />
+              <text className="hc-text" textAnchor="end"><tspan x={dot - 14} y={y - 4}>{l1}</tspan><tspan x={dot - 14} y={y + 18}>{l2}</tspan></text>
+              <circle className="hc-node" cx={x} cy={y} r="40" />
+              <svg x={x - 19} y={y - 19} width="38" height="38" viewBox="0 0 24 24" className="hc-icon" dangerouslySetInnerHTML={{ __html: PATHS[o.icon] }} />
+            </g>
+          );
+        })}
+      </svg>
     </div>
   );
 }
@@ -102,7 +135,7 @@ export function HeroCopy() {
   return (
     <div className="hero-inner">
       <h1 className="hero-title">Marketing solutions to make your business <em>the best one in your area</em></h1>
-      <p className="hero-sub">The LaSän Growth System grows your business through:</p>
+      <p className="hero-sub">The LaSän Growth System transforms your business through proven marketing solutions:</p>
       <ul className="hero-list">{HERO_ORBIT.map(o => <li key={o.label}>{o.label}</li>)}</ul>
       <div className="hero-actions">
         <Link href="/book-appointment" className="btn btn-primary">Enquire Now <Arrow /></Link>
