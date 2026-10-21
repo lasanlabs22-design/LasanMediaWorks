@@ -438,9 +438,9 @@ section { position: relative; }
 /* big outlined LaSän above the footer (home page): La in purple, Sän in yellow, like the logo */
 .brand-mark { margin: 0 0 -.3em; font-family: var(--font-display); font-weight: 700; font-size: clamp(72px, 15vw, 220px); line-height: 1.1; letter-spacing: -0.03em; text-align: center; white-space: nowrap; color: transparent; user-select: none; }
 .brand-mark span { transition: color .6s var(--ease); }
-.brand-mark .mk-p { -webkit-text-stroke: 2px var(--purple); }
+.brand-mark .mk-p { -webkit-text-stroke: 2px var(--purple-light); }
 .brand-mark .mk-y { -webkit-text-stroke: 2px var(--gold); }
-.brand-mark:hover .mk-p { color: rgba(209, 0, 209, .45); }
+.brand-mark:hover .mk-p { color: rgba(236, 195, 240, .35); }
 .brand-mark:hover .mk-y { color: rgba(255, 204, 0, .3); }
 @media (max-width: 620px) { .brand-mark span { -webkit-text-stroke-width: 1.5px; } }
 
