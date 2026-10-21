@@ -78,18 +78,36 @@ export function CtaBand({ title, accent, text, primary = ['Book Appointment', '/
   );
 }
 
-// home hero visual: the founders in a yellow circle, our four promises floating around it
+// home hero visual, after leadschool.in: founders' photo inside a yellow arc,
+// one icon on the arc per service, each labelled on the left
 export function HeroCircle() {
   return (
     <div className="hc">
-      <div className="hc-disc" aria-hidden="true" />
+      <div className="hc-arc" aria-hidden="true" />
       <div className="hc-photo">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img src="/img/about/founders.jpg" alt="LaSän founders Sree Latha and Santhosh Rokaya" />
       </div>
       {HERO_ORBIT.map((o, i) => (
-        <span className={`hc-badge b${i + 1}`} key={o.label} aria-hidden="true"><span className="hc-ic"><Icon name={o.icon} /></span>{o.label}</span>
+        <span className={`hc-node n${i + 1}`} key={o.label} aria-hidden="true">
+          <span className="hc-label">{o.label}</span>
+          <Icon name={o.icon} />
+        </span>
       ))}
+    </div>
+  );
+}
+
+export function HeroCopy() {
+  return (
+    <div className="hero-inner">
+      <h1 className="hero-title">Marketing solutions to make your business <em>the best one in your area</em></h1>
+      <p className="hero-sub">The LaSän Growth System grows your business through:</p>
+      <ul className="hero-list">{HERO_ORBIT.map(o => <li key={o.label}>{o.label}</li>)}</ul>
+      <div className="hero-actions">
+        <Link href="/book-appointment" className="btn btn-primary">Enquire Now <Arrow /></Link>
+        <Link href="/book-appointment?service=audit" className="btn btn-ghost">Get a Free Audit</Link>
+      </div>
     </div>
   );
 }

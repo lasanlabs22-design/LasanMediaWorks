@@ -1136,25 +1136,31 @@ h1, h2, h3 { font-weight: 700; letter-spacing: -0.01em; }
 .btn { font-size: 15px; font-weight: 700; }
 .btn-sm { font-size: 14px; }
 
-/* home hero visual: founders in a yellow circle, our promises floating around it */
-.hc { position: relative; width: min(100%, 500px); aspect-ratio: 1; margin: 0 auto; }
-.hc-disc { position: absolute; inset: 0; border-radius: 50%; background: var(--gold); box-shadow: 0 0 0 18px rgba(255, 204, 0, .18), 0 0 0 36px rgba(255, 204, 0, .08); }
-.hc-photo { position: absolute; inset: 7%; overflow: hidden; border-radius: 50%; border: 8px solid var(--d1); background: var(--d1); }
+/* home hero, after leadschool.in: statement on the left, founders inside a yellow arc on the right,
+   one icon per service sitting on the arc with its label on the left (no motion) */
+.hero-m-grid { grid-template-columns: minmax(0, 1fr) 580px; gap: 32px; }
+.hero-title { margin: 0 0 22px; font-size: clamp(32px, 3.4vw, 46px); line-height: 1.15; }
+.hero-sub { margin: 0 0 14px; font-size: clamp(18px, 1.6vw, 22px); font-weight: 500; color: #fff; }
+.hero-list { margin: 0 0 32px; padding-left: 20px; display: grid; gap: 6px; font-size: 17px; font-weight: 500; color: var(--text); }
+.hero-list li::marker { color: var(--gold); }
+.hc { position: relative; width: 360px; aspect-ratio: 1; margin: 20px 0 20px auto; }
+.hc-arc { position: absolute; inset: 0; border-radius: 50%; border: 30px solid var(--gold); border-top-color: transparent; border-right-color: transparent; transform: rotate(30deg); }
+.hc-photo { position: absolute; inset: 12%; overflow: hidden; border-radius: 50%; background: var(--d1); box-shadow: 0 0 0 8px var(--d1); }
 .hc-photo img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; }
-.hc-badge { position: absolute; z-index: 1; display: flex; align-items: center; gap: 10px; padding: 6px 18px 6px 6px; border-radius: 999px; background: var(--d1); color: #fff; font-size: 14.5px; font-weight: 700; white-space: nowrap; box-shadow: 0 14px 30px -14px rgba(0, 0, 0, .7); animation: hcFloat 6s ease-in-out infinite; }
-.hc-ic { width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center; background: var(--gold); color: var(--d0); }
-.hc-ic .i { width: 19px; height: 19px; }
-.hc-badge.b1 { top: 6%; left: -8%; }
-.hc-badge.b2 { top: 50%; left: -16%; animation-delay: -1.5s; }
-.hc-badge.b3 { top: 14%; right: -10%; animation-delay: -3s; }
-.hc-badge.b4 { bottom: 8%; right: -4%; animation-delay: -4.5s; }
-@keyframes hcFloat { 50% { transform: translateY(-8px); } }
-@media (max-width: 1060px) { .hc { width: min(100%, 420px); } }
-@media (max-width: 560px) {
-  .hc-badge { gap: 8px; padding: 4px 12px 4px 4px; font-size: 12px; }
-  .hc-ic { width: 30px; height: 30px; }
-  .hc-badge.b1, .hc-badge.b2 { left: -2%; }
-  .hc-badge.b3, .hc-badge.b4 { right: -2%; }
+/* nodes sit on the arc's centre line (radius 46%), at 335 / 290 / 245 / 200 degrees from 12 o'clock */
+.hc-node { position: absolute; z-index: 2; width: 64px; height: 64px; margin: -32px 0 0 -32px; display: grid; place-items: center; border-radius: 50%; border: 3px solid var(--gold); background: var(--d1); color: var(--gold); box-shadow: 0 10px 24px -10px rgba(0, 0, 0, .6); }
+.hc-node .i { width: 28px; height: 28px; }
+.hc-node.n1 { left: 30.5%; top: 8.3%; }
+.hc-node.n2 { left: 6.8%; top: 34.3%; }
+.hc-node.n3 { left: 8.3%; top: 69.5%; }
+.hc-node.n4 { left: 34.3%; top: 93.2%; }
+.hc-label { position: absolute; right: calc(100% + 50px); top: 50%; width: 160px; transform: translateY(-50%); text-align: right; font-size: 14px; font-weight: 700; line-height: 1.25; letter-spacing: .04em; text-transform: uppercase; color: #fff; }
+.hc-label::after { content: ''; position: absolute; left: calc(100% + 10px); top: 50%; width: 38px; height: 2px; background: rgba(255, 255, 255, .7); }
+.hc-label::before { content: ''; position: absolute; left: calc(100% + 6px); top: calc(50% - 3px); width: 8px; height: 8px; border-radius: 50%; background: #fff; }
+@media (max-width: 1060px) {
+  .hero-m-grid { grid-template-columns: 1fr; }
+  .hc { width: min(100%, 340px); margin: 10px auto 30px; }
+  .hc-label { display: none; } /* the bullet list above names the four services */
 }
 
 /* who we help: a yellow section with deep purple industry cards */

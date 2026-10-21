@@ -1,11 +1,10 @@
 import Link from 'next/link';
 import Icon, { Arrow } from '@/components/Icon';
-import HeroSlider from '@/components/HeroSlider';
 import HeroMotion from '@/components/HeroMotion';
 import ServiceTabs from '@/components/ServiceTabs';
 import EnquiryForm from '@/components/EnquiryForm';
 import {
-  ArticleCard, Cases, CenterHead, Clients, ContactList, Faq, HelpCards, HeroCircle, Industries, Quotes,
+  ArticleCard, Cases, CenterHead, Clients, ContactList, Faq, HelpCards, HeroCircle, HeroCopy, Industries, Quotes,
   SectionHead, Steps, Team, VideoBand,
 } from '@/components/Blocks';
 import BrandName from '@/components/BrandName';
@@ -19,10 +18,10 @@ export default function Home() {
 
   return (
     <>
-      {/* HERO — headline + the founders with our four promises */}
+      {/* HERO — LEAD-style statement + the founders inside the service arc */}
       <section className="hero hero-m">
         <div className="wrap hero-m-grid">
-          <div className="hero-inner"><HeroSlider /></div>
+          <HeroCopy />
           <HeroCircle />
         </div>
       </section>
