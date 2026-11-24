@@ -777,21 +777,6 @@ export const ABOUT_TEAM = [
     role: "Key Account Manager",
     photo: "/img/team/gayathri-k.png",
   },
-  { name: "Sidhu", role: "Sales Team Leader", photo: "/img/team/sidhu.png" },
-  { name: "Thahaseen Shaik", role: "Business Development Associate", photo: "/img/team/thahaseen-shaik.jpg" },
-  { name: "Aaron Amit", role: "Full Stack Software Engineer", photo: "/img/team/aaron-amit.webp" },
-  { name: "Babar", role: "Editor", photo: "/img/team/babar.png" },
-  { name: "Sasmith", role: "Videographer", photo: "/img/team/sasmith.png" },
-  {
-    name: "Susmitha",
-    role: "Graphic Designer",
-    photo: "/img/team/susmitha.png",
-  },
-  {
-    name: "Lavanya P",
-    role: "Social Media Marketing",
-    photo: "/img/team/lavanya-p.png",
-  },
 ];
 
 export const ABOUT_NUMBERS = [
